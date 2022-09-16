@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Interfaces</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="navbar-wrapper">
+            <div id="navbar" class="navbar"> 
+                <div class="container" onclick="burger(this)"> 
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div> 
+                </div>
+                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon">
+                <button id="signup" class="button">
+                    <b class="text">SIGN IN</b>
+                </button> 
+                <button id="signin" class="button">
+                    <b class="text">LOG IN</b>
+                </button>
+            </div>
+        </div>
+        <div id="main-menu"></div>
+        <div id="content" class="content">
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+            <div class="track">
+                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
+                <p class="text">XEU V.A.L.D</p>
+            </div>
+        </div>
+        <div id="controls"></div>
+        <div id="footer" class="footer">
+            <audio controls>
+                <source src="horse.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div> 
+</body>
+</html> 
+<script src="page.js"></script>
+<style >
+    .footer{
+        position: fixed;
+        bottom: 5px;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+    }
+       
+    audio {
+        border: solid;
+        border-width: 2px;
+        border-color: #00ffff90;
+        border-radius: 27px;
+        filter: invert(1);
+        width: 50vw;
+        min-width: 350px;
+        max-width: 700px;
+        border-radius: 24px;
+    }
+    @supports (-moz-appearance:none) {
+        audio {
+            filter: invert(0);
+            background-color: black;
+            border: solid;
+            border-width: 2px;
+            border-color: #ff000090;
+            border-radius: 24px;
+        }
+    }
+    .content{
+        padding: 1vmax;
+        display: flex;
+        flex-flow: wrap;
+        align-items: center;
+        justify-content: left;
+    }
+    html{
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    body{
+        padding: 0%;
+        margin: 0%;
+    }
+    @font-face {
+    font-family: 'myfont';
+    src: url("assets/Raleway-VariableFont_wght.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+    }
+    .wrapper{
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: fixed;
+        padding: 0%;
+        margin: 0%;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+    }
+    .text{
+        color: #f1f1f1;
+        font-family: "myfont";
+        font-size: medium;
+        margin: 0%;
+        margin-top: 2px;
+    }
+    @media screen and (max-width:960px) {
+        .text{
+            color: #f1f1f1;
+            font-family: "myfont";
+            font-size: large;
+            max-height: 19px;
+        }   
+    }
+    .icon{
+        margin-left: auto;
+        margin-right: auto;
+        max-height: min(5.5vmax, 8vh);
+        aspect-ratio: "16/9";
+    }
+    
+    @media screen and (max-width:1200px) and (min-width:961px) {
+        .track{
+            max-width: 18%;
+            aspect-ratio: "1/1";
+            padding: 9px;
+        } 
+    }
+    @media screen and (max-width:960px) and (min-width:769px) {
+        .track{
+            max-width: 23%;
+            aspect-ratio: "1/1";
+            padding: 7px;
+        } 
+    }
+    @media screen and (max-width:768px) {
+        .track{
+            max-width: 30%;
+            aspect-ratio: "1/1";
+            padding: 5px;
+        } 
+    }
+    @media screen and (min-width:1201px) {
+        .track{
+            max-width: 15%;
+            aspect-ratio: "1/1";
+            padding: 9px;
+        } 
+    }
+    
+    .cover{
+        width: 100%;
+        aspect-ratio: "1/1";
+    }
+    .button{
+        margin-left: 1.5vw;
+        background-color:black;
+        border-color: #f1f1f1;
+        border-width: 0px;
+        border-radius: 5px;
+    }
+    .navbar-wrapper{
+        background-color: black;
+        position: sticky;
+        top:0;
+        left: 0;
+        border: solid;
+        border-width: 0px;
+        border-bottom-width: 1px;
+        border-color: #f1f1f170;
+    }
+    .navbar{
+        margin-left: 4vw;
+        margin-right: 4vw;
+        margin-top: 1vmax;
+        display: flex;
+        align-items: center;
+        width: 92vw;
+        height: 8vh;
+        background: black;
+    }
+    .container {
+        display: inline-block;
+        cursor: pointer;
+    }
+    .bar1, .bar2, .bar3 {
+        width: max(3vmin, 32px);
+        height: 4px;
+        background-color: #f1f1f1;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+    /* Rotate first bar */
+    .change .bar1 {
+        transform: translate(0, 10px) rotate(-45deg);
+    }
+
+    /* Fade out the second bar */
+    .change .bar2 {opacity: 0;}
+
+    /* Rotate last bar */
+    .change .bar3 {
+        transform: translate(0, -10px) rotate(45deg);
+    }
+    
+    
+</style>
