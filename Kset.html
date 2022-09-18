@@ -23,72 +23,11 @@
             </div>
         </div>
         <div id="main-menu"></div>
-        <div id="content" class="content">
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-            <div class="track">
-                <img src="https://m.media-amazon.com/images/I/51kWYlG4SSL._SL1400_.jpg" alt="track cover" class="cover">
-                <p class="text">XEU V.A.L.D</p>
-            </div>
-        </div>
+        <div id="content" class="content"></div>
         <div id="controls"></div>
         <div id="footer" class="footer">
-            <audio controls>
-                <source src="horse.mp3" type="audio/mpeg">
+            <audio id="audio" controls>
+                <source id="source" src="" type="audio/mpeg">
             </audio>
         </div>
     </div> 
@@ -103,14 +42,9 @@
         display: flex;
         justify-content: center;
     }
-       
     audio {
-        border: solid;
-        border-width: 2px;
-        border-color: #00ffff90;
-        border-radius: 27px;
         filter: invert(1);
-        width: 50vw;
+        width: 60vw;
         min-width: 350px;
         max-width: 700px;
         border-radius: 24px;
@@ -128,9 +62,9 @@
     .content{
         padding: 1vmax;
         display: flex;
-        flex-flow: wrap;
+        flex-flow: row wrap;
         align-items: center;
-        justify-content: left;
+        justify-content: flex-start;
     }
     html{
         overflow-x: hidden;
@@ -141,10 +75,10 @@
         margin: 0%;
     }
     @font-face {
-    font-family: 'myfont';
-    src: url("assets/Raleway-VariableFont_wght.ttf") format("truetype");
-    font-weight: bold;
-    font-style: normal;
+        font-family: 'myfont';
+        src: url("assets/Raleway-VariableFont_wght.ttf") format("truetype");
+        font-weight: bold;
+        font-style: normal;
     }
     .wrapper{
         overflow-y: auto;
@@ -180,36 +114,31 @@
     
     @media screen and (max-width:1200px) and (min-width:961px) {
         .track{
-            max-width: 18%;
-            aspect-ratio: "1/1";
-            padding: 9px;
+            width: 18%;
+            padding: 1%;
         } 
     }
     @media screen and (max-width:960px) and (min-width:769px) {
         .track{
-            max-width: 23%;
-            aspect-ratio: "1/1";
-            padding: 7px;
+            width: 23%;
+            padding: 1%;
         } 
     }
     @media screen and (max-width:768px) {
         .track{
-            max-width: 30%;
-            aspect-ratio: "1/1";
-            padding: 5px;
+            width: 31%;
+            padding: 1.1%;
         } 
     }
     @media screen and (min-width:1201px) {
         .track{
-            max-width: 15%;
-            aspect-ratio: "1/1";
-            padding: 9px;
+            width: 15%;
+            padding: 0.83%;
         } 
     }
     
     .cover{
         width: 100%;
-        aspect-ratio: "1/1";
     }
     .button{
         margin-left: 1.5vw;
@@ -253,7 +182,6 @@
     .change .bar1 {
         transform: translate(0, 10px) rotate(-45deg);
     }
-
     /* Fade out the second bar */
     .change .bar2 {opacity: 0;}
 
@@ -261,6 +189,4 @@
     .change .bar3 {
         transform: translate(0, -10px) rotate(45deg);
     }
-    
-    
 </style>
