@@ -20,21 +20,25 @@ function createTrack(imgSrc, songSrc, title){
   track.classList.add('track');
   // create cover element
   const cover = document.createElement('img');
-  cover.setAttribute("id", songSrc);
+  cover.setAttribute("id", `${songSrc}|${imgSrc}`);
   cover.classList.add('cover');
   cover.src = `http://localhost:6969/album/cover/${imgSrc}`;
   // create the title
   const text = document.createElement('p');
-  text.classList.add('text');
+  text.classList.add('title');
   text.textContent = title
   // put cover and title inside track
   track.appendChild(cover);
   track.appendChild(text);
   // add event listener to change track
   cover.addEventListener("mousedown", (e)=> {
-    let songSrc = (e.target.id);
+    let id = (e.target.id);
+    const songSrc = id.split('|')[0];
+    const imgSrc = id.split('|')[1];
     let source = document.getElementById("source");
     source.src = `http://localhost:6969/stream/download/${songSrc}`;
+    let miniCover = document.getElementById("miniCover");
+    miniCover.src = `http://localhost:6969/album/cover/${imgSrc}`;
     let audio = document.getElementById("audio");
     audio.load()
     audio.play()

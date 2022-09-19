@@ -26,6 +26,7 @@
         <div id="content" class="content"></div>
         <div id="controls"></div>
         <div id="footer" class="footer">
+            <img id="miniCover" src="" class="miniCover">
             <audio id="audio" controls>
                 <source id="source" src="" type="audio/mpeg">
             </audio>
@@ -35,17 +36,30 @@
 </html> 
 <script src="page.js"></script>
 <style >
+    .miniCover{
+        height: 50px;
+        border: solid;
+        border-width: 2px;
+        border-color: #0E0C0B;
+        border-radius: 12px;
+    }
     .footer{
         position: fixed;
-        bottom: 5px;
-        width: 100vw;
+        background-color: #0E0C0B;
+        border-radius: 12px;
+        bottom: 0px;
         display: flex;
-        justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
+        border: solid;
+        border-width: 0px;
+        border-top-width: 2px;
+        border-color: #f1f1f190;
     }
     audio {
         filter: invert(1);
         width: 60vw;
-        min-width: 350px;
+        min-width: 300px;
         max-width: 700px;
         border-radius: 24px;
     }
@@ -60,7 +74,7 @@
         }
     }
     .content{
-        padding: 1vmax;
+        padding: 1.2vmax;
         display: flex;
         flex-flow: row wrap;
         align-items: center;
@@ -96,6 +110,18 @@
         font-size: medium;
         margin: 0%;
         margin-top: 2px;
+    }
+    .title{
+        color: #f1f1f1;
+        font-family: "myfont";
+        font-size: small;
+        margin: 0%;
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        height: 1.2em; 
+        white-space: nowrap;
+        margin-top: 1px;
+        margin-bottom: 1px;
     }
     @media screen and (max-width:960px) {
         .text{
@@ -147,6 +173,27 @@
         border-width: 0px;
         border-radius: 5px;
     }
+
+    .button:hover{
+        animation-name: underline;
+        animation-duration: 1000ms;
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes underline {
+        from {
+            border-bottom-width: 0px;
+            border-radius: 12px;
+            border-color: #ff000000;
+        }
+        to {
+            border-bottom-width: 1px;
+            border-radius: 0px;
+            border-color: #ff0000;
+        }
+    }
+
+    
+
     .navbar-wrapper{
         background-color: black;
         position: sticky;
@@ -155,7 +202,7 @@
         border: solid;
         border-width: 0px;
         border-bottom-width: 1px;
-        border-color: #f1f1f170;
+        border-color: #f1f1f190;
     }
     .navbar{
         margin-left: 4vw;
