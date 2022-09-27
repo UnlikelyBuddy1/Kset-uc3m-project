@@ -7,7 +7,7 @@
 <body>
     <div class="wrapper">
         <!-- Left Column -->
-        <div id="left_column">
+        <div id="left_column" class="left-column">
             <div id="sidebar" class="sidebar">
                 <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="logo">
                 <button class="sidebarButton">
@@ -64,13 +64,9 @@
         width: 100%;
         margin-bottom: 0.5vh;
     }
-    #left_column{
+    .left-column{
         height: 100vh;
         position: sticky;
-        border: solid;
-        border-width: 0px;
-        border-right-width: 2px;
-        border-color: #f1f1f1;
     }
     #right_column{
         overflow-y: auto;
@@ -90,26 +86,32 @@
         border-radius: 12px;
     }
     .footer{
-        position: absolute;
+        position: sticky;
         background-color: #0E0C0B;
         border-radius: 12px;
         bottom: 0px;
         width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
         display: flex;
         border: solid;
         border-width: 0px;
         border-top-width: 2px;
         border-color: #f1f1f190;
     }
-
     .sidebar{
         width: 25vw;
-        max-width: 350px;
+        max-width: 300px;
         box-sizing: border-box;
         height: 100%;
         padding: 1%;
         display: flex;
         flex-flow: column;
+        border: solid;
+        border-width: 0px;
+        border-right-width: 2px;
+        border-color: #f1f1f1;
     }
     .sidebarButton:hover{
         animation-name: underline;
@@ -302,15 +304,27 @@
         .container{
             display: inline-block;
         }
-        #left_column{
-            display: none;
-        }
         .footer{
             position: fixed;
             bottom: 0px;
             display: flex;
             left: 50%;
             transform: translateX(-50%);
+        }
+        .left-column{
+            display: none;
+        }
+        .sidebar{
+            width: 80vw;
+            box-sizing: border-box;
+            height: 92vh;
+            padding: 1%;
+            display: flex;
+            flex-flow: column;
+            position: fixed;
+            top: 8vh;
+            left: 0%;
+            background-color: black;
         }
     }
     @media screen and (max-width:768px) {
@@ -320,7 +334,6 @@
         }
         
     }
-    
     
     
     

@@ -12,7 +12,7 @@ function fill(){
         section.appendChild(section_text);
         section.classList.add('text');
         section.classList.add('section');
-        content.appendChild(section);
+        content.prepend(section);
       }
       createTrack(data[i]["cover"], data[i]["path"], data[i]["title"]);
     }
@@ -21,6 +21,15 @@ function fill(){
 
 function burger(menu) {
   menu.classList.toggle("change");
+  let sidebar = document.getElementById('left_column')
+  let footer = document.getElementById('footer')
+  if (sidebar.style.display === "block") {
+    sidebar.style.display = "none";
+    footer.style.display = "flex";
+  } else {
+    sidebar.style.display = "block";
+    footer.style.display = "none";
+  }
 } 
 
 function createTrack(imgSrc, songSrc, title){
@@ -53,5 +62,5 @@ function createTrack(imgSrc, songSrc, title){
     audio.play()
   });
   const content = document.getElementById("content");
-  content.appendChild(track);
+  content.prepend(track);
 }
