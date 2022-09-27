@@ -1,10 +1,19 @@
 fill();
 
 function fill(){
+  let content = document.getElementById("content");
   fetch('http://localhost:6969/track/?search&index=0&size=100', {method: 'GET'})
   .then((response) => response.json())
   .then((data) => {
     for(let i=0; i<data.length; i++){
+      if(i%(Math.round(data.length/3))==0){
+        const section = document.createElement('h3');
+        section_text = document.createTextNode("New Songs");
+        section.appendChild(section_text);
+        section.classList.add('text');
+        section.classList.add('section');
+        content.appendChild(section);
+      }
       createTrack(data[i]["cover"], data[i]["path"], data[i]["title"]);
     }
   })
