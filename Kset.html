@@ -27,7 +27,7 @@
             </div>
         </div>
         <!-- Right Column -->
-        <div id ="right_column">
+        <div id ="right_column" class="right_column">
             <div class="navbar-wrapper">
                 <div id="navbar" class="navbar"> 
                     <div class="container" onclick="burger(this)"> 
@@ -45,8 +45,9 @@
                 </div>
             </div>
             <div id="main-menu"></div>
+            <div class="spacer"></div>
             <div id="content" class="content">
-                
+                <div class="spacer"></div>
             </div>
             <div id="footer" class="footer">
                 <img id="miniCover" src="" class="miniCover">
@@ -60,17 +61,28 @@
 </html> 
 <script src="page.js"></script>
 <style >
+    .spacer{
+        height: 9vh;
+        width: 100%;
+    }
     .section{
         width: 100%;
         margin-bottom: 0.5vh;
     }
     .left-column{
-        height: 100vh;
+        margin-top: 9vh;
+        height: 90.5vh;
         position: sticky;
+        background-color: #1e1e1e;
+        margin-right: 0.8vw;
+        margin-left: 0.2vw;
+        border-radius: 24px;
     }
-    #right_column{
+    .right_column{
+        margin-right: 0.3vw;
         overflow-y: auto;
         overflow-x: hidden;
+        background-color: black;
     }
     .logo{ /* Bottom Border needs to be fixed */
         margin-top: 2vh;
@@ -97,7 +109,7 @@
         display: flex;
         border: solid;
         border-width: 0px;
-        border-top-width: 2px;
+        border-top-width: 1px;
         border-color: #f1f1f190;
     }
     .sidebar{
@@ -108,10 +120,6 @@
         padding: 1%;
         display: flex;
         flex-flow: column;
-        border: solid;
-        border-width: 0px;
-        border-right-width: 2px;
-        border-color: #f1f1f1;
     }
     .sidebarButton:hover{
         animation-name: underline;
@@ -142,6 +150,8 @@
         flex-flow: row wrap;
         align-items: center;
         justify-content: flex-start;
+        border-radius: 24px;
+        background-color: #1e1e1e
     }
     .category{
         display: flex;
@@ -164,7 +174,7 @@
         font-style: normal;
     }
     .wrapper{
-        overflow-y: auto;
+        overflow-y: hidden;
         overflow-x: hidden;
         position: fixed;
         padding: 0%;
@@ -191,7 +201,7 @@
     .title{
         color: #f1f1f1;
         font-family: "myfont";
-        font-size: small;
+        font-size: 1rem;
         margin: 0%;
         text-overflow: ellipsis;
         overflow: hidden; 
@@ -202,7 +212,7 @@
     }
     /* General rules for all sizes */
     .sidebarButton{
-        background-color:black;
+        background-color:#1e1e1e00;
         border-color: #f1f1f1;
         border-width: 0px;
         border-bottom-width: 2px;
@@ -212,6 +222,7 @@
     }
     .cover{
         width: 100%;
+        border-radius: 10%;
     }
     .cover:hover{
         background-color: yellow;
@@ -244,17 +255,18 @@
     }
     .navbar-wrapper{
         background-color: black;
-        position: sticky;
+        position: fixed;
         top:0;
         left: 0;
+        width: 100vw;
         border: solid;
         border-width: 0px;
         border-bottom-width: 1px;
         border-color: #f1f1f190;
+        box-shadow: 0px 3px 10px #000;
     }
     .navbar{
-        margin-right: 4vw;
-        margin-top: 1vmax;
+        padding-right: 4vw;
         display: flex;
         align-items: center;
         height: 8vh;
@@ -288,18 +300,24 @@
 
     .track{
         width: 15%;
-        padding: 0.83%;
+        padding: 0.43%;
+        margin: 0.4%;
+        box-shadow: 3px 3px 10px #000;
+        border-radius: 8%;
+        border-bottom-left-radius: 0%;
     }
     @media screen and (max-width:1408px){
         .track{
             width: 18%;
-            padding: 1%;
+            padding: 0.5%;
+            margin: 0.5%;
         } 
     }
     @media screen and (max-width:1024px) {
         .track{
             width: 23%;
-            padding: 1%;
+            padding: 0.5%;
+            margin: 0.5%;
         } 
         .container{
             display: inline-block;
@@ -310,9 +328,13 @@
             display: flex;
             left: 50%;
             transform: translateX(-50%);
+            box-shadow: 0px -4px 10px #000;
         }
         .left-column{
             display: none;
+        }
+        .content{
+            border-radius: 0px;
         }
         .sidebar{
             width: 80vw;
@@ -326,15 +348,25 @@
             left: 0%;
             background-color: black;
         }
+        .right_column{
+            background-color: #1e1e1e;
+        }
     }
     @media screen and (max-width:768px) {
         .track{
             width: 31%;
-            padding: 1.1%;
+            padding: 0.6%;
+            margin: 0.5%;
         }
         
     }
-    
-    
-    
+    ::-webkit-scrollbar {
+        width: 0.3vw;
+        max-width: 10px;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #ee0000a0;
+        border-radius: 10px;
+    }
 </style>
