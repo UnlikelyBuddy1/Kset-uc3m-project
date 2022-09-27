@@ -7,20 +7,17 @@
 <body>
     <div class="wrapper">
         <!-- Left Column -->
-        <div id="left-column" class="left-column">
+        <div id="left_column" class="left-column">
             <div id="sidebar" class="sidebar">
-                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo">
+                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="logo">
                 <button class="sidebarButton">
-                    <img src="assets/home.png" alt="an icon of a house" id="home" class="sidebarIcon">
-                    <b class = "text sidebarText">Home</b>
+                    <b class = "text sidebarText">button 1</b>
                 </button>
                 <button class="sidebarButton">
-                    <img src="assets/search.png" alt="a magnifying glass" id="search" class="sidebarIcon">
-                    <b class = "text sidebarText">Search</b>
+                    <b class = "text sidebarText">button 2</b>
                 </button>
                 <button class="sidebarButton">
-                    <img src="assets/playlist.png" alt="a playlist" id="playlist" class="sidebarIcon">
-                    <b class = "text sidebarText">Playlists</b>
+                    <b class = "text sidebarText">button 2</b>
                 </button>
                 <div class="link">
                     <a href="#" class="text">Privacy</a>
@@ -30,7 +27,7 @@
             </div>
         </div>
         <!-- Right Column -->
-        <div id ="right-column" class="right-column">
+        <div id ="right_column">
             <div class="navbar-wrapper">
                 <div id="navbar" class="navbar"> 
                     <div class="container" onclick="burger(this)"> 
@@ -71,7 +68,7 @@
         height: 100vh;
         position: sticky;
     }
-    .right-column{
+    #right_column{
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -184,12 +181,6 @@
         margin: 0%;
         margin-top: 2px;
     }
-    .icon {
-        margin-left: auto;
-        margin-right: auto;
-        max-height: min(5.5vmax, 8vh);
-        aspect-ratio: 16/9;
-    }
     .link{
         position:fixed;
         bottom: 6vh;
@@ -216,18 +207,9 @@
         border-width: 0px;
         border-bottom-width: 2px;
         padding: 1.5vmax;
-        align-items: flex-start;
-        display: flex;
         margin-right: 1vw;
         margin-left: 1vw;
     }
-    .sidebarIcon{
-        max-height: 1rem;
-        aspect-ratio: 1/1;
-        margin-left: 3.5vw;
-        margin-right: 1rem;
-    }
-    
     .cover{
         width: 100%;
     }
@@ -308,9 +290,6 @@
         width: 15%;
         padding: 0.83%;
     }
-    .track:hover{
-        background-color: gray;
-    }
     @media screen and (max-width:1408px){
         .track{
             width: 18%;
@@ -353,6 +332,7 @@
             width: 31%;
             padding: 1.1%;
         }
+        
     }
     
     

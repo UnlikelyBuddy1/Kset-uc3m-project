@@ -21,7 +21,7 @@ function fill(){
 
 function burger(menu) {
   menu.classList.toggle("change");
-  let sidebar = document.getElementById('left_column')
+  let sidebar = document.getElementById('left-column')
   let footer = document.getElementById('footer')
   if (sidebar.style.display === "block") {
     sidebar.style.display = "none";
