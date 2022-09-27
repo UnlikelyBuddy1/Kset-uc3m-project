@@ -1,7 +1,7 @@
 fill();
 
 function fill(){
-  fetch('http://localhost:6969/track/?search&index=0&size=20', {method: 'GET'})
+  fetch('http://localhost:6969/track/?search&index=0&size=100', {method: 'GET'})
   .then((response) => response.json())
   .then((data) => {
     for(let i=0; i<data.length; i++){
