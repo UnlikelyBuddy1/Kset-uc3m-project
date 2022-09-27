@@ -50,7 +50,6 @@
             <div id="main-menu"></div>
             <div class="spacer"></div>
             <div id="content" class="content">
-                <div class="spacer"></div>
             </div>
             <div id="footer" class="footer">
                 <img id="miniCover" src="" class="miniCover">
@@ -128,6 +127,7 @@
         animation-name: underline;
         animation-duration: 1000ms;
         animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation-fill-mode: forwards;
     }
 
     audio {
@@ -210,7 +210,7 @@
     .title{
         color: #f1f1f1;
         font-family: "myfont";
-        font-size: 1rem;
+        font-size: 0.8rem;
         margin: 0%;
         text-overflow: ellipsis;
         overflow: hidden; 
@@ -241,6 +241,7 @@
     .cover{
         width: 100%;
         border-radius: 10%;
+        aspect-ratio: 1/1;
     }
     .cover:hover{
         background-color: yellow;
@@ -258,6 +259,7 @@
         animation-name: underline;
         animation-duration: 1000ms;
         animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation-fill-mode: forwards;
     }
     @keyframes underline {
         from {

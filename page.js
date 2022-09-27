@@ -2,20 +2,33 @@ fill();
 
 function fill(){
   let content = document.getElementById("content");
-  fetch('http://localhost:6969/track/?search&index=0&size=100', {method: 'GET'})
+  fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
   .then((response) => response.json())
   .then((data) => {
+    data.sort(function(a, b) {
+      let keyA = a.title.toUpperCase();
+      let keyB = b.title.toUpperCase();
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
+    let prevletter = ""
     for(let i=0; i<data.length; i++){
-      if(i%(Math.round(data.length/3))==0){
+      let letter = isNaN(data[i]["title"][0])? data[i]["title"][0].toUpperCase(): "number"
+      if(prevletter != letter){
+        prevletter = letter;
         const section = document.createElement('h3');
-        section_text = document.createTextNode("New Songs");
+        section_text = document.createTextNode(`Songs starting with ${letter}`);
         section.appendChild(section_text);
         section.classList.add('text');
         section.classList.add('section');
-        content.prepend(section);
+        content.appendChild(section);
       }
       createTrack(data[i]["cover"], data[i]["path"], data[i]["title"]);
     }
+    const spacer = document.createElement('div');
+    spacer.classList.add('spacer');
+    content.appendChild(spacer);
   })
 }
 
@@ -39,8 +52,9 @@ function createTrack(imgSrc, songSrc, title){
   // create cover element
   const cover = document.createElement('img');
   cover.setAttribute("id", `${songSrc}|${imgSrc}`);
+  cover.setAttribute("loading", "lazy");
   cover.classList.add('cover');
-  cover.src = `http://localhost:6969/album/cover/${imgSrc}`;
+  cover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
   // create the title
   const text = document.createElement('p');
   text.classList.add('title');
@@ -54,13 +68,13 @@ function createTrack(imgSrc, songSrc, title){
     const songSrc = id.split('|')[0];
     const imgSrc = id.split('|')[1];
     let source = document.getElementById("source");
-    source.src = `http://localhost:6969/stream/download/${songSrc}`;
+    source.src = `https://kset.home.asidiras.dev/stream/download/${songSrc}`;
     let miniCover = document.getElementById("miniCover");
-    miniCover.src = `http://localhost:6969/album/cover/${imgSrc}`;
+    miniCover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
     let audio = document.getElementById("audio");
     audio.load()
     audio.play()
   });
   const content = document.getElementById("content");
-  content.prepend(track);
+  content.appendChild(track);
 }
