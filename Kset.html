@@ -9,7 +9,7 @@
         <!-- Left Column -->
         <div id="left-column" class="left-column">
             <div id="sidebar" class="sidebar">
-                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo">
+                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo menu-logo">
                 <button class="sidebarButton">
                     <img src="assets/home.png" alt="an icon of a house" id="home" class="sidebarIcon">
                     <b class = "text sidebarText">Home</b>
@@ -33,6 +33,7 @@
         <div id ="right_column" class="right_column">
             <div class="navbar-wrapper">
                 <div id="navbar" class="navbar"> 
+                    <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo top-logo">
                     <div class="container" onclick="burger(this)"> 
                         <div class="bar1"></div>
                         <div class="bar2"></div>
@@ -69,7 +70,8 @@
     }
     .section{
         width: 100%;
-        margin-bottom: 0.5vh;
+        padding-bottom: 1vh;
+        padding-top: 2vh;
     }
     .left-column{
         margin-top: 9vh;
@@ -89,7 +91,6 @@
     .logo{ /* Bottom Border needs to be fixed */
         margin-top: 2vh;
         margin-bottom: 3vh;
-        max-height: 10vh;
         object-fit: contain;
     }
     .miniCover{
@@ -329,12 +330,24 @@
     .track:hover{
         background-color: gray;
     }
+    .top-logo{
+        margin: 0px;
+        margin-left: 4vw;
+        margin-right: auto;
+        max-height: 90%;
+    }
+    .menu-logo{
+        display: none;
+    }
     @media screen and (max-width:1408px){
         .track{
             width: 18%;
             padding: 0.5%;
             margin: 0.5%;
         } 
+        .left-column{
+
+        }
     }
     @media screen and (max-width:1024px) {
         .track{
@@ -353,9 +366,6 @@
             transform: translateX(-50%);
             box-shadow: 0px -4px 10px #000;
         }
-        .left-column{
-            display: none;
-        }
         .content{
             border-radius: 0px;
         }
@@ -373,6 +383,12 @@
         }
         .right_column{
             background-color: #1e1e1e;
+        }
+        .top-logo{
+            display: none;
+        }
+        .menu-logo{
+            display: block;
         }
     }
     @media screen and (max-width:768px) {
