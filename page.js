@@ -55,13 +55,23 @@ function createTrack(imgSrc, songSrc, title){
   cover.setAttribute("loading", "lazy");
   cover.classList.add('cover');
   cover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
+
+  const playWrapper = document.createElement('div');
+  playWrapper.classList.add('play-wrapper');
+  const play = document.createElement('img');
+  play.setAttribute("loading", "lazy");
+  play.classList.add('play');
+  play.src = "assets/play.webp";
+  playWrapper.appendChild(play);
   // create the title
   const text = document.createElement('p');
   text.classList.add('title');
   text.textContent = title
   // put cover and title inside track
+  track.appendChild(playWrapper);
   track.appendChild(cover);
   track.appendChild(text);
+  
   // add event listener to change track
   cover.addEventListener("mousedown", (e)=> {
     let id = (e.target.id);

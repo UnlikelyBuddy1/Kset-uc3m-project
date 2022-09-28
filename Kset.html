@@ -11,15 +11,15 @@
             <div id="sidebar" class="sidebar">
                 <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo menu-logo">
                 <button class="sidebarButton">
-                    <img src="assets/home.png" alt="an icon of a house" id="home" class="sidebarIcon">
+                    <img src="assets/home.webp" alt="an icon of a house" id="home" class="sidebarIcon">
                     <b class = "text sidebarText">Home</b>
                 </button>
                 <button class="sidebarButton">
-                    <img src="assets/search.png" alt="a magnifying glass" id="search" class="sidebarIcon">
+                    <img src="assets/search.webp" alt="a magnifying glass" id="search" class="sidebarIcon">
                     <b class = "text sidebarText">Search</b>
                 </button>
                 <button class="sidebarButton">
-                    <img src="assets/playlist.png" alt="a playlist" id="playlist" class="sidebarIcon">
+                    <img src="assets/playlist.webp" alt="a playlist" id="playlist" class="sidebarIcon">
                     <b class = "text sidebarText">Playlists</b>
                 </button>
                 <div class="link">
@@ -64,6 +64,20 @@
 </html> 
 <script src="page.js"></script>
 <style >
+    .play-wrapper{
+        position: relative;
+        left: 35%;
+        width: 10%;
+        margin-bottom: -75%;
+        margin-top: 32.5%;
+        opacity: 0;
+        pointer-events: none
+    }
+    .play{
+        width: 400%;
+        filter: invert(1) drop-shadow(2px 6px 4px black);
+        pointer-events: none
+    }
     .spacer{
         height: 9vh;
         width: 100%;
@@ -328,7 +342,35 @@
         border-bottom-left-radius: 0%;
     }
     .track:hover{
-        background-color: gray;
+        animation-name: togrey;
+        animation-duration: 500ms;
+        animation-fill-mode: forwards;
+    }
+    .track:hover > .play-wrapper {
+        animation-name: show-up;
+        animation-duration: 500ms;
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation-fill-mode: forwards;
+    }
+    @keyframes show-up {
+        from {
+            opacity: 0;
+            margin-top: 42.5%;
+            margin-bottom: -85%;
+        }
+        to {
+            opacity: 1;
+            margin-bottom: -75%;
+            margin-top: 32.5%;
+        }
+    }
+    @keyframes togrey {
+        from {
+            background-color: #1e1e1e;
+        }
+        to {
+            background-color: #4e4e4e;
+        }
     }
     .top-logo{
         margin: 0px;
@@ -345,9 +387,6 @@
             padding: 0.5%;
             margin: 0.5%;
         } 
-        .left-column{
-
-        }
     }
     @media screen and (max-width:1024px) {
         .track{
@@ -385,6 +424,9 @@
             background-color: #1e1e1e;
         }
         .top-logo{
+            display: none;
+        }
+        .left-column{
             display: none;
         }
         .menu-logo{
