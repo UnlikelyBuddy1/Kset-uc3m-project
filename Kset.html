@@ -54,9 +54,13 @@
             </div>
             <div id="footer" class="footer">
                 <img id="miniCover" src="" class="miniCover">
-                <audio id="audio" controls>
-                    <source id="source" src="" type="audio/mpeg">
-                </audio>
+                <div class="bottom">
+                    <audio id="audio" controls>
+                        <source id="source" src="" type="audio/mpeg">
+                    </audio>
+
+                    <i class="signup-banner text">If you are new, consider <a href=#>signing up</a>.</i>
+                </div>
             </div>
         </div>
     </div> 
@@ -101,6 +105,9 @@
         overflow-y: auto;
         overflow-x: hidden;
         background-color: black;
+    }
+    .bottom{
+        margin-bottom: 1vh;
     }
     .logo{ /* Bottom Border needs to be fixed */
         margin-top: 2vh;
@@ -258,9 +265,6 @@
         border-radius: 10%;
         aspect-ratio: 1/1;
     }
-    .cover:hover{
-        background-color: yellow;
-    }
 
     .button{
         margin-left: 1.5vw;
@@ -386,7 +390,7 @@
             width: 18%;
             padding: 0.5%;
             margin: 0.5%;
-        } 
+        }
     }
     @media screen and (max-width:1024px) {
         .track{
