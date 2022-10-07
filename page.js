@@ -31,7 +31,15 @@ function fill(){
     content.appendChild(spacer);
   })
 }
-
+window.addEventListener('resize', function(event){
+  const width = window.innerWidth;
+  if(width>1024){
+    let sidebar = document.getElementById('left-column')
+    let footer = document.getElementById('footer')
+    sidebar.style = null;
+    footer.style = null;
+  }
+});
 function burger(menu) {
   menu.classList.toggle("change");
   let sidebar = document.getElementById('left-column')

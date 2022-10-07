@@ -26,12 +26,13 @@
     height: 90.5vh;
     position: sticky;
     background-color: #1e1e1e;
-    margin-right: 0.8vw;
-    margin-left: 0.2vw;
+    margin-right: 0vw;
+    margin-left: 0.6vw;
     border-radius: 24px;
 }
 .right_column{
     margin-right: 0.3vw;
+    margin-left: 0.6vw;
     overflow-y: auto;
     overflow-x: hidden;
     background-color: black;
@@ -325,6 +326,9 @@ body{
         background-color: #4e4e4e;
     }
 }
+.hidden{
+    display: none;
+}
 .top-logo{
     margin: 0px;
     margin-left: 4vw;
@@ -340,6 +344,9 @@ body{
         padding: 0.43%;
         margin: 0.4%;
     }
+    .hidden{
+        display: block;
+    }
 }
 @media screen and (max-width:1024px) {
     .track{
@@ -347,6 +354,9 @@ body{
         padding: 0.5%;
         margin: 0.5%;
     } 
+    .hidden{
+        display: none;
+    }
     .container{
         display: inline-block;
     }
@@ -375,11 +385,9 @@ body{
     }
     .right_column{
         background-color: #1e1e1e;
+        margin-left: 0.3vw;
     }
     .top-logo{
-        display: none;
-    }
-    .left-column{
         display: none;
     }
     .menu-logo{
