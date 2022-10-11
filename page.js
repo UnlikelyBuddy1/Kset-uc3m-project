@@ -96,3 +96,8 @@ function createTrack(imgSrc, songSrc, title){
   const content = document.getElementById("content");
   content.appendChild(track);
 }
+
+function searchMusicLibrary() {
+  let query = document.forms.searchQuery.search.value;
+  
+}
