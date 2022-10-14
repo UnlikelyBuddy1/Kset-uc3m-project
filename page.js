@@ -98,6 +98,30 @@ function createTrack(imgSrc, songSrc, title){
 }
 
 function searchMusicLibrary() {
-  let query = document.forms.searchQuery.search.value;
-  
+  // Declare variables
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("mySearch");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("content");
+  li = ul.getElementsByClassName("track");
+
+  // Remove heading if there is a search query
+  if(filter.length == 0) {
+    for (i = 0; i < ul.getElementsByClassName("section").length; i++) {
+      ul.getElementsByClassName("section")[i].style.display = "";
+    }
+  } else {
+    for (i = 0; i < ul.getElementsByClassName("section").length; i++) {
+      ul.getElementsByClassName("section")[i].style.display = "none";
+    }
+  }
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
 }

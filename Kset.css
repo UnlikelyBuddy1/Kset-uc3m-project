@@ -13,16 +13,16 @@
     pointer-events: none
 }
 .spacer{
-    height: 9vh;
+    height: 65px;
     width: 100%;
 }
 .section{
     width: 100%;
-    padding-bottom: 1vh;
-    padding-top: 2vh;
+    padding-bottom: 7px;
+    padding-top: 14px;
 }
 .left-column{
-    margin-top: 9vh;
+    margin-top: 65px;
     height: 90.5vh;
     position: sticky;
     background-color: #1e1e1e;
@@ -174,8 +174,8 @@ body{
 }
 .link{
     position:fixed;
-    bottom: 6vh;
-    left: 3vw;
+    bottom: 25px;
+    left: 25px;
     display: flex;
     flex-direction: column;
 }
@@ -197,16 +197,16 @@ body{
     border-color: #f1f1f1;
     border-width: 0px;
     border-bottom-width: 2px;
-    padding: 1.5vmax;
+    padding: 18px;
     align-items: flex-start;
     display: flex;
-    margin-right: 1vw;
-    margin-left: 1vw;
+    margin-right: 8px;
+    margin-left: 8px;
 }
 .sidebarIcon{
     max-height: 1rem;
     aspect-ratio: 1/1;
-    margin-left: 3.5vw;
+    margin-left: 40px;
     margin-right: 1rem;
 }
 
@@ -258,7 +258,7 @@ body{
     padding-right: 4vw;
     display: flex;
     align-items: center;
-    height: 8vh;
+    height: 55px;
     background: black;
     justify-content: flex-end;
 }
@@ -266,7 +266,7 @@ body{
     display: none;
     cursor: pointer;
     margin-right: auto; 
-    margin-left: 4vw;
+    margin-left: 20px;
 }
 .bar1, .bar2, .bar3 {
     width: max(3vmin, 32px);
@@ -331,14 +331,14 @@ body{
 }
 .top-logo{
     margin: 0px;
-    margin-left: 4vw;
+    margin-left: 46px;
     margin-right: auto;
     max-height: 90%;
 }
 .menu-logo{
     display: none;
 }
-@media screen and (max-width:1408px){
+@media screen and (min-width:1025px){
     .track{
         width: 15%;
         padding: 0.43%;
@@ -411,6 +411,14 @@ body{
         padding: 0.6%;
     }
 }
+@media screen and (max-height:400px) {
+    .link{
+        visibility: hidden;
+    }
+    .sidebarButton{
+        padding: 1vmax;
+    }
+}
 ::-webkit-scrollbar {
     width: 0.3vw;
     max-width: 10px;
@@ -422,7 +430,7 @@ body{
 }
 input{
     width: 30vw;
-    height: 3vh;
+    height: 20px;
     background-color: #1e1e1e;
     border-radius: 20px;
     padding: 0.3rem;

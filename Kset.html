@@ -16,12 +16,12 @@
                     <b class = "text sidebarText">Home</b>
                 </button>
                 <button class="sidebarButton">
-                    <img src="assets/search.webp" alt="a magnifying glass" id="search" class="sidebarIcon">
-                    <b class = "text sidebarText">Search</b>
+                    <img src="assets/playlist.webp" alt="a playlist" id="playlist" class="sidebarIcon">
+                    <b class = "text sidebarText">PlayLists</b>
                 </button>
                 <button class="sidebarButton">
-                    <img src="assets/playlist.webp" alt="a playlist" id="playlist" class="sidebarIcon">
-                    <b class = "text sidebarText">Playlists</b>
+                    <img src="assets/plus.webp" alt="a plus symbol" id="plus" class="sidebarIcon">
+                    <b class = "text sidebarText">New Playlist</b>
                 </button>
                 <button onclick="window.open('https://github.com/UnlikelyBuddy1/Kset-uc3m-project')" type="button" class="sidebarButton">
                     <img src="assets/github.webp" alt="github logo" id="github" class="sidebarIcon">
@@ -45,9 +45,9 @@
                         <div class="bar3"></div> 
                     </div>
                     <div class="search-bar">
-                        <form name="search" onsubmit="return searchMusicLibrary()" method="post">
-                            <input class="text" type="text" name="search">
-                        </form>
+                        <!-- <form role="search"> -->
+                        <input class="text" type="text" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
+                        <!-- </form> -->
                     </div>
                     
                     
