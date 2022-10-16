@@ -430,7 +430,8 @@ body{
 }
 input{
     width: 30vw;
-    height: 20px;
+    max-width: 400px;
+    height: 18px;
     background-color: #1e1e1e;
     border-radius: 20px;
     padding: 0.3rem;
@@ -442,4 +443,12 @@ input:hover{
 }
 input:focus{
     border: 2px solid white;
+}
+.search-bar{
+    margin-left: auto;
+    margin-right: auto;
+}
+.footerspacer{
+    height: calc(100vh - 130px);
+    width: 100%;
 }
