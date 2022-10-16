@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="Kset.css">
 </head>
 <body>
-    <div class="wrapper">
+    <div id="wrapper" class="wrapper">
         <!-- Left Column -->
         <div id="left-column" class="left-column hidden">
             <div id="sidebar" class="sidebar">
@@ -46,15 +46,15 @@
                     </div>
                     <div class="search-bar">
                         <!-- <form role="search"> -->
-                        <input class="text" type="text" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
+                        <input class="text serach-input fade" type="text" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
                         <!-- </form> -->
                     </div>
                     
                     
-                    <button id="signup" class="button">
+                    <button id="nav-signup" class="button">
                         <b class="text">SIGN UP</b>
                     </button> 
-                    <button id="signin" class="button">
+                    <button id="nav-login" class="button">
                         <b class="text">LOG IN</b>
                     </button>
                 </div>
@@ -73,9 +73,31 @@
                     </audio>   
                     <b class="signup-banner text"><a class="signup-banner text accent-color" href=#>Signing up</a> for free</b>                 
                 </div>
-            </div>
+            </div> 
         </div>
     </div> 
+    <div id="floating" class="floating">
+        <div id="login" class="sign hide-floating">
+            <img class="sign-img" src="assets/login.webp">
+            <input type="text" class="text sign-inputs fade" placeholder="username">
+            <input type="password" class="text sign-inputs fade" placeholder="password">
+            <button id="button-login" class="text sign-button fade">
+                <b class="text">LOG IN</b>
+            </button>
+        </div>
+        <div id="signup" class="sign hide-floating">
+            <img class="sign-img" src="assets/login.webp">
+            <input type="text" class="text sign-inputs fade" placeholder="username">
+            <input type="password" class="text sign-inputs fade" placeholder="password">
+            <input type="text" class="text sign-inputs fade" placeholder="name">
+            <input type="text" class="text sign-inputs fade" placeholder="email">
+            <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx">
+            <a href="#" class="text">Terms of use</a>
+            <button id="button-singin" class="text sign-button fade">
+                <b class="text">SIGN UP</b>
+            </button>
+        </div>
+    </div>
 </body>
 </html> 
 <script src="page.js"></script>

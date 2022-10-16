@@ -1,5 +1,50 @@
 fill();
 
+window.addEventListener('resize', function(event){
+  const width = window.innerWidth;
+  if(width>1024){
+    let sidebar = document.getElementById('left-column')
+    let footer = document.getElementById('footer')
+    sidebar.style = null;
+    footer.style = null;
+  }
+});
+
+document.getElementById("nav-signup").addEventListener('mouseup', function(){
+  var wrapper = document.getElementById("wrapper");
+  var signup = document.getElementById('signup');
+  wrapper.classList.toggle('unfocus');
+  signup.classList.toggle('hide-floating');
+  signup.classList.toggle('focus');
+})
+
+document.getElementById("nav-login").addEventListener('mouseup', function(){
+  var wrapper = document.getElementById("wrapper");
+  var login = document.getElementById('login');
+  wrapper.classList.toggle('unfocus');
+  login.classList.toggle('hide-floating');
+  login.classList.toggle('focus');
+})
+
+document.addEventListener('mousedown', function handleClickOutsideBox(event) {
+  var signup = document.getElementById('signup');
+  var login = document.getElementById('login');
+  var wrapper = document.getElementById('wrapper');
+  console.log(signup, login, wrapper);
+  console.log(!signup.contains(event.target) && !signup.classList.contains('hide-floating'));
+  console.log(!login.contains(event.target));
+  if (!signup.contains(event.target) && !signup.classList.contains('hide-floating')) {
+    signup.classList.toggle('hide-floating');
+    signup.classList.toggle('focus')
+    wrapper.classList.toggle('unfocus')
+  }
+  if (!login.contains(event.target) && !login.classList.contains('hide-floating')) {
+    login.classList.toggle('hide-floating');
+    login.classList.toggle('focus')
+    wrapper.classList.toggle('unfocus')
+  }
+});
+
 function fill(){
   let content = document.getElementById("content");
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
@@ -31,15 +76,7 @@ function fill(){
     content.appendChild(spacer);
   })
 }
-window.addEventListener('resize', function(event){
-  const width = window.innerWidth;
-  if(width>1024){
-    let sidebar = document.getElementById('left-column')
-    let footer = document.getElementById('footer')
-    sidebar.style = null;
-    footer.style = null;
-  }
-});
+
 function burger(menu) {
   menu.classList.toggle("change");
   let sidebar = document.getElementById('left-column')
@@ -125,3 +162,4 @@ function searchMusicLibrary() {
     }
   }
 }
+
