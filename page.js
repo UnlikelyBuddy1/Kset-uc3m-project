@@ -1,4 +1,5 @@
-fill();
+login();
+//fill();
 
 window.addEventListener('resize', function(event){
   const width = window.innerWidth;
@@ -11,39 +12,51 @@ window.addEventListener('resize', function(event){
 });
 
 document.getElementById("nav-signup").addEventListener('mouseup', function(){
-  var wrapper = document.getElementById("wrapper");
-  var signup = document.getElementById('signup');
-  wrapper.classList.toggle('unfocus');
-  signup.classList.toggle('hide-floating');
-  signup.classList.toggle('focus');
+  unfocusWrapper();
+  toggleSignup();
 })
 
 document.getElementById("nav-login").addEventListener('mouseup', function(){
-  var wrapper = document.getElementById("wrapper");
-  var login = document.getElementById('login');
-  wrapper.classList.toggle('unfocus');
-  login.classList.toggle('hide-floating');
-  login.classList.toggle('focus');
+  unfocusWrapper();
+  toggleLogin();
 })
 
 document.addEventListener('mousedown', function handleClickOutsideBox(event) {
-  var signup = document.getElementById('signup');
-  var login = document.getElementById('login');
-  var wrapper = document.getElementById('wrapper');
-  console.log(signup, login, wrapper);
-  console.log(!signup.contains(event.target) && !signup.classList.contains('hide-floating'));
-  console.log(!login.contains(event.target));
-  if (!signup.contains(event.target) && !signup.classList.contains('hide-floating')) {
-    signup.classList.toggle('hide-floating');
-    signup.classList.toggle('focus')
-    wrapper.classList.toggle('unfocus')
+  if (!document.getElementById('signup').contains(event.target) && !document.getElementById('signup').classList.contains('hide-floating')) {
+    unfocusWrapper();
+    toggleSignup();
   }
-  if (!login.contains(event.target) && !login.classList.contains('hide-floating')) {
-    login.classList.toggle('hide-floating');
-    login.classList.toggle('focus')
-    wrapper.classList.toggle('unfocus')
+  if (!document.getElementById('login').contains(event.target) && !document.getElementById('login').classList.contains('hide-floating')) {
+    unfocusWrapper();
+    toggleLogin();
   }
 });
+
+document.getElementById("button-signup").addEventListener('click', function(){
+  const username = document.getElementById("signup-username").value;
+  const password = document.getElementById("signup-password").value;
+  const data = {username, password};
+  fetch('https://kset.home.asidiras.dev/auth/signup', 
+  {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) ,
+  }).then((response) => {if(response.status == 201){
+    toggleSignup();
+    unfocusWrapper();
+    setCookie('username', username, 30);
+    setCookie('password', password, 30);
+  }})
+})
+document.getElementById("button-login").addEventListener('click', function(){
+  const username = document.getElementById("login-username").value;
+  const password = document.getElementById("login-password").value;
+  login(username, password);
+  toggleLogin();
+  unfocusWrapper();
+})
 
 function fill(){
   let content = document.getElementById("content");
@@ -163,3 +176,68 @@ function searchMusicLibrary() {
   }
 }
 
+function unfocusWrapper(){
+  const wrapper = document.getElementById('wrapper');
+  wrapper.classList.toggle('unfocus');
+}
+
+function toggleSignup(){
+  const signup = document.getElementById('signup');
+  
+  signup.classList.toggle('hide-floating');
+  signup.classList.toggle('focus')
+}
+
+function toggleLogin(){
+  const login = document.getElementById('login');
+  login.classList.toggle('hide-floating');
+  login.classList.toggle('focus')
+}
+
+function setCookie(name, value, options = {}) {
+  options = {
+    path: '/',
+    // add other defaults here if necessary
+    ...options
+  };
+  if (options.expires instanceof Date) {
+    options.expires = options.expires.toUTCString();
+  }
+  let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+  for (let optionKey in options) {
+    updatedCookie += "; " + optionKey;
+    let optionValue = options[optionKey];
+    if (optionValue !== true) {
+      updatedCookie += "=" + optionValue;
+    }
+  }
+  document.cookie = updatedCookie;
+}
+
+function getCookie(name) {
+  let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function login(username='', password=''){
+  const cookieUsername = getCookie('username');
+  const cookiePassword = getCookie('password');
+  const data = {username: username?username:cookieUsername, password: password?password:cookiePassword};
+  fetch('https://kset.home.asidiras.dev/auth/signin', 
+  {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) ,
+  }).then((response) => {if(response.status == 201){
+    fill();
+    setCookie('username', username, {secure: true, 'max-age': 3600*24*30});
+    setCookie('password', password, {secure: true, 'max-age': 3600*24*30});
+    response.json().then((value)=> {
+      setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7});
+    });
+  }})
+}
