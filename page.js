@@ -38,10 +38,9 @@ document.addEventListener('mousedown', function handleClickOutsideBox(event) {
     unfocusWrapper();
     toggleLogin();
   }
-  if (!playlist.contains(event.target) && !playlist.classList.contains('hide-floating')) {
-    playlist.classList.toggle('hide-floating');
-    playlist.classList.toggle('focus')
-    wrapper.classList.toggle('unfocus')
+  if (!document.getElementById('create-playlist').contains(event.target) && !document.getElementById('create-playlist').classList.contains('hide-floating')) {
+    unfocusWrapper();
+    togglePlaylist();
   }
 });
 
@@ -203,13 +202,18 @@ function toggleSignup(){
   const signup = document.getElementById('signup');
   
   signup.classList.toggle('hide-floating');
-  signup.classList.toggle('focus')
+  signup.classList.toggle('focus');
 }
 
 function toggleLogin(){
   const login = document.getElementById('login');
   login.classList.toggle('hide-floating');
-  login.classList.toggle('focus')
+  login.classList.toggle('focus');
+}
+function togglePlaylist(){
+  const playlist  = document.getElementById('create-playlist');
+  playlist.classList.toggle('hide-floating');
+  playlist.classList.toggle('focus');
 }
 
 function setCookie(name, value, options = {}) {
@@ -259,9 +263,6 @@ function login(username='', password=''){
     });
   }})}
 function switchContent(option) {
-  let options = ["content", "playlist-selection"]
-  for (i = 0; i < options.length; i++) {
-    document.getElementById(options[i]).style.display = "none";
-  }
-  document.getElementById(option).style.display = "";
+  document.getElementById('content').classList.toggle('hide-floating');
+  document.getElementById('playlist-section').classList.toggle('hide-floating');
 }
