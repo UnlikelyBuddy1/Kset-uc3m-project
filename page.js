@@ -22,11 +22,8 @@ document.getElementById("nav-login").addEventListener('mouseup', function(){
 })
 
 document.getElementById("new-playlist").addEventListener('mouseup', function(){
-  var wrapper = document.getElementById("wrapper");
-  var playlist = document.getElementById('create-playlist');
-  wrapper.classList.toggle('unfocus');
-  playlist.classList.toggle('hide-floating');
-  playlist.classList.toggle('focus');
+  unfocusWrapper();
+  togglePlaylist();
 })
 
 document.addEventListener('mousedown', function handleClickOutsideBox(event) {
@@ -262,7 +259,12 @@ function login(username='', password=''){
       setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7});
     });
   }})}
-function switchContent(option) {
-  document.getElementById('content').classList.toggle('hide-floating');
-  document.getElementById('playlist-section').classList.toggle('hide-floating');
+function switchContent(div) {
+  if(div == 'content'){
+    document.getElementById('playlist-selection').classList.add('hide-floating');
+    document.getElementById('content').classList.remove('hide-floating');
+  } else {
+    document.getElementById('playlist-selection').classList.remove('hide-floating');
+    document.getElementById('content').classList.add('hide-floating');
+  }
 }
