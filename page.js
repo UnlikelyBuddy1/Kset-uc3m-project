@@ -41,6 +41,20 @@ document.addEventListener('mousedown', function handleClickOutsideBox(event) {
   }
 });
 
+const signupPassword = document.getElementById("signup-password");
+signupPassword.addEventListener('keyup', function(){
+  if((!/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(signupPassword.value)) || signupPassword.value.length<8){
+    if(!signupPassword.classList.contains('sign-error')){
+      signupPassword.classList.toggle('sign-error')
+    }
+  } else {
+    if(signupPassword.classList.contains('sign-error')){
+      signupPassword.classList.toggle('sign-error')
+    }
+  }
+});
+document.getElementById("signup-password").value;
+
 document.getElementById("button-signup").addEventListener('click', function(){
   const username = document.getElementById("signup-username").value;
   const password = document.getElementById("signup-password").value;
