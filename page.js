@@ -21,6 +21,14 @@ document.getElementById("nav-login").addEventListener('mouseup', function(){
   toggleLogin();
 })
 
+document.getElementById("new-playlist").addEventListener('mouseup', function(){
+  var wrapper = document.getElementById("wrapper");
+  var playlist = document.getElementById('create-playlist');
+  wrapper.classList.toggle('unfocus');
+  playlist.classList.toggle('hide-floating');
+  playlist.classList.toggle('focus');
+})
+
 document.addEventListener('mousedown', function handleClickOutsideBox(event) {
   if (!document.getElementById('signup').contains(event.target) && !document.getElementById('signup').classList.contains('hide-floating')) {
     unfocusWrapper();
@@ -29,6 +37,11 @@ document.addEventListener('mousedown', function handleClickOutsideBox(event) {
   if (!document.getElementById('login').contains(event.target) && !document.getElementById('login').classList.contains('hide-floating')) {
     unfocusWrapper();
     toggleLogin();
+  }
+  if (!playlist.contains(event.target) && !playlist.classList.contains('hide-floating')) {
+    playlist.classList.toggle('hide-floating');
+    playlist.classList.toggle('focus')
+    wrapper.classList.toggle('unfocus')
   }
 });
 
@@ -147,6 +160,11 @@ function createTrack(imgSrc, songSrc, title){
   content.appendChild(track);
 }
 
+/* searchMusicLibrary()
+ * hides elements that do not contain inputed search query
+ *
+ * Inspiration from https://www.w3schools.com/howto/howto_js_search_menu.asp
+ */
 function searchMusicLibrary() {
   // Declare variables
   var input, filter, ul, li, a, i;
@@ -239,5 +257,11 @@ function login(username='', password=''){
     response.json().then((value)=> {
       setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7});
     });
-  }})
+  }})}
+function switchContent(option) {
+  let options = ["content", "playlist-selection"]
+  for (i = 0; i < options.length; i++) {
+    document.getElementById(options[i]).style.display = "none";
+  }
+  document.getElementById(option).style.display = "";
 }

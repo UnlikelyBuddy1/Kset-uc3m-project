@@ -175,8 +175,8 @@ body{
 }
 .link{
     position:fixed;
-    bottom: 45px;
-    left: 30px;
+    bottom: 45px; /*25px*/
+    left: 30px; /*25px*/
     display: flex;
     flex-direction: column;
 }
@@ -387,6 +387,8 @@ body{
     .right_column{
         background-color: #1e1e1e;
         margin-left: 0.3vw;
+        margin-right: 0.3vw;
+        width: 99.4vw;
     }
     .top-logo{
         display: none;
@@ -433,6 +435,8 @@ body{
     width: 30vw;
     max-width: 400px;
     height: 18px;
+    min-width: 144px;
+    height: 20px;
     background-color: #1e1e1e;
     border-radius: 20px;
     padding: 0.3rem;
@@ -523,4 +527,13 @@ body{
 }
 .hide-floating{
     display: none;
+}
+.playlist-selection{
+    padding: 1.2vmax;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 24px;
+    background-color: #1e1e1e
 }
