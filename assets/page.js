@@ -267,6 +267,7 @@ function login(username='', password=''){
     body: JSON.stringify(data) ,
   }).then((response) => {if(response.status == 201){
     fill();
+    document.getElementById('banner').style = 'display: none';
     setCookie('username', username, {secure: true, 'max-age': 3600*24*30});
     setCookie('password', password, {secure: true, 'max-age': 3600*24*30});
     response.json().then((value)=> {
