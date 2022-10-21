@@ -103,6 +103,22 @@ audio {
         background-color: #0E0C0B;
     }
 }
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+
+    audio {
+        filter: invert(0);
+    }
+}}
+.start-page{
+    padding: 1.2vmax;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    border-radius: 24px;
+    background-color: #1e1e1e;
+    height: 85vh;
+}
 .content{
     padding: 1.2vmax;
     display: flex;
@@ -110,7 +126,7 @@ audio {
     align-items: center;
     justify-content: flex-start;
     border-radius: 24px;
-    background-color: #1e1e1e
+    background-color: #1e1e1e;
 }
 .category{
     display: flex;
@@ -436,6 +452,7 @@ body{
     background-color: #1e1e1e;
     border-radius: 20px;
     padding: 0.3rem;
+    padding-left: 0.5rem;
     outline: none;
 }
 .fade:hover{
@@ -535,4 +552,7 @@ body{
     justify-content: flex-start;
     border-radius: 24px;
     background-color: #1e1e1e
+}
+.plus-img{
+    filter:invert(0.1);
 }
