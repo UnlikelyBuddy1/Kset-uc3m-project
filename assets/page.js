@@ -69,8 +69,6 @@ document.getElementById("button-signup").addEventListener('click', function(){
   }).then((response) => {if(response.status == 201){
     toggleSignup();
     unfocusWrapper();
-    setCookie('username', username, 30);
-    setCookie('password', password, 30);
   }})
 })
 document.getElementById("button-login").addEventListener('click', function(){
@@ -258,6 +256,7 @@ function login(username='', password=''){
   const cookieUsername = getCookie('username');
   const cookiePassword = getCookie('password');
   const data = {username: username?username:cookieUsername, password: password?password:cookiePassword};
+  console.log(cookieUsername, cookiePassword);
   fetch('https://kset.home.asidiras.dev/auth/signin', 
   {
     method: 'POST', 
@@ -268,10 +267,16 @@ function login(username='', password=''){
   }).then((response) => {if(response.status == 201){
     fill();
     document.getElementById('banner').style = 'display: none';
-    setCookie('username', username, {secure: true, 'max-age': 3600*24*30});
-    setCookie('password', password, {secure: true, 'max-age': 3600*24*30});
-    response.json().then((value)=> {
-      setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7});
+    const cookieUsername = getCookie('username');
+    const cookiePassword = getCookie('password');
+    if(!(cookieUsername && cookiePassword)){
+      setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+      setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+    }
+    response.json().then((value)=>{
+      if(getCookie('bearer')){
+        setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7, SameSite: 'None'});
+      }
     });
   }})}
 function switchContent(div) {
