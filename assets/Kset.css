@@ -547,12 +547,53 @@ body{
 .playlist-selection{
     padding: 1.2vmax;
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
+    flex-flow: column wrap;
     justify-content: flex-start;
     border-radius: 24px;
     background-color: #1e1e1e
 }
 .plus-img{
     filter:invert(0.1);
+}
+
+#playlist-search-bar{
+    margin-top: 1em;
+}
+.search-results{
+    width: 80%;
+    background-color: #0E0E0E;
+    border-radius: 12px;
+    padding: 1em;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+.result-item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+.item-add-img{
+    height: 1.2em;
+    margin-left: auto;
+}
+.playlist-item-play{
+    height: 1.6em;
+    filter: invert(1);
+}
+.playlist-item-cover{
+    height: 3.2em;
+    border-radius: 8px;
+}
+.playlist{
+    padding: 1em;
+}
+.playlist-song{
+    display: flex;
+    align-items: center;
+    align-content: space-between;
+    gap: 1em;
+    padding: 0.5em;
+}
+.underlined{
+    text-decoration: underline;
 }

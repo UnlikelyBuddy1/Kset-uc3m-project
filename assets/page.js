@@ -1,5 +1,8 @@
 login();
-//fill();
+fill();
+
+var playlistSongs=[];
+var bearer='';
 
 window.addEventListener('resize', function(event){
   const width = window.innerWidth;
@@ -79,6 +82,36 @@ document.getElementById("button-login").addEventListener('click', function(){
   unfocusWrapper();
 })
 
+document.getElementById('button-playlist').addEventListener('click', function(){
+  const data = {name : document.getElementById("playlist-name").value, trackIds : playlistSongs}
+  fetch('https://kset.home.asidiras.dev/playlist/', 
+  {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': bearer,
+    },
+    body: JSON.stringify(data) ,
+  }).then((response) => {if(response.status == 201){
+    playlistSongs = [];
+    togglePlaylist();
+    unfocusWrapper();
+  }})
+}
+);
+
+function searchSongs(){
+  let search = document.getElementById("playlist-search-bar").value;
+  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
+  .then((response) => response.json())
+  .then((data) => {
+    document.getElementById('search-results').innerHTML='';
+    for(let result of data){
+      createSearchResult(result.title, result.id);
+    }
+  })
+}
+
 function fill(){
   let content = document.getElementById("content");
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
@@ -110,6 +143,53 @@ function fill(){
     content.appendChild(spacer);
   })
 }
+function createPlaylist(playlist){
+  let playlistdom = document.createElement('div');
+  playlistdom.classList.add('playlist');
+  let name = document.createElement('b');
+  name.classList.add('text');
+  name.classList.add('underlined');
+  name.textContent = playlist.name;
+  let playlistSongs = document.createElement('div');
+  playlistSongs.classList.add('playlist');
+  playlistdom.appendChild(name);
+  playlistdom.appendChild(playlistSongs);
+  const myHeaders = new Headers();
+  myHeaders.append('Authorization', bearer);
+  fetch(`https://kset.home.asidiras.dev/playlist/${playlist.id}`, {method: 'GET', headers: myHeaders})
+  .then((response) => response.json())
+  .then((data) => {
+    for(let track of data.tracks){
+      let playlistSong = document.createElement('div');
+      playlistSong.classList.add('playlist-song');
+      let playbutton = document.createElement('img');
+      playbutton.src = "assets/play.webp"
+      playbutton.classList.add('playlist-item-play');
+      playbutton.addEventListener('click', ()=> {
+        let source = document.getElementById("source");
+        source.src = `https://kset.home.asidiras.dev/stream/download/${track.path}`;
+        let audio = document.getElementById("audio");
+        const footer = document.getElementById("footer");
+        if(footer.classList.contains("hide-floating")){
+          footer.classList.toggle("hide-floating");
+        }
+        audio.load()
+        audio.play()
+      })
+      let cover = document.createElement('img');
+      cover.classList.add('playlist-item-cover');
+      cover.src = `https://kset.home.asidiras.dev/album/cover/${track.cover}`;
+      let title = document.createElement('b');
+      title.classList.add('text');
+      title.textContent = track.title
+      playlistSong.appendChild(playbutton);
+      playlistSong.appendChild(cover);
+      playlistSong.appendChild(title);
+      playlistSongs.appendChild(playlistSong);
+    }
+  })
+  document.getElementById('playlist-selection').appendChild(playlistdom);
+}
 
 function burger(menu) {
   menu.classList.toggle("change");
@@ -123,6 +203,24 @@ function burger(menu) {
     footer.style.display = "none";
   }
 } 
+
+function createSearchResult(songName, songId){
+  let searchResults = document.getElementById('search-results');
+  let resultItem = document.createElement('div')
+  resultItem.classList.add('result-item');
+  let name = document.createElement('b')
+  name.classList.add('text');
+  name.textContent = songName;
+  let img = document.createElement('img')
+  img.classList.add('item-add-img');
+  img.src = "assets/plus.webp";
+  img.addEventListener('click', function(){
+    playlistSongs.push(songId);
+  });
+  resultItem.appendChild(name);
+  resultItem.appendChild(img);
+  searchResults.appendChild(resultItem);
+}
 
 function createTrack(imgSrc, songSrc, title){
   //create the track element
@@ -161,6 +259,10 @@ function createTrack(imgSrc, songSrc, title){
     let miniCover = document.getElementById("miniCover");
     miniCover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
     let audio = document.getElementById("audio");
+    const footer = document.getElementById("footer");
+    if(footer.classList.contains("hide-floating")){
+      footer.classList.toggle("hide-floating")
+    }
     audio.load()
     audio.play()
   });
@@ -265,7 +367,6 @@ function login(username='', password=''){
     },
     body: JSON.stringify(data) ,
   }).then((response) => {if(response.status == 201){
-    fill();
     document.getElementById('banner').style = 'display: none';
     const cookieUsername = getCookie('username');
     const cookiePassword = getCookie('password');
@@ -274,10 +375,23 @@ function login(username='', password=''){
       setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
     }
     response.json().then((value)=>{
-      if(getCookie('bearer')){
-        setCookie('bearer', 'Bearer '+value.accesToken, {secure: true, 'max-age': 3600*24*7, SameSite: 'None'});
+      bearer = 'Bearer '+value.accesToken;
+      const myHeaders = new Headers();
+      myHeaders.append('Authorization', bearer);
+      fetch('https://kset.home.asidiras.dev/playlist/?index=0', 
+      {
+        method: 'GET', 
+        headers: myHeaders,
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      for(let playlists of data){
+        createPlaylist(playlists);
       }
+    })
     });
+    
   }})}
 function switchContent(div) {
   if(div == 'content'){

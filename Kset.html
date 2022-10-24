@@ -62,9 +62,10 @@
             <div id="main-menu"></div>
             <div class="spacer"></div>
             <div id="content" class="content"></div>
-            <div id="playlist-selection" class="playlist-selection hide-floating"></div>
+            <div id="playlist-selection" class="playlist-selection hide-floating">
+            </div>
             <div class="footerspacer"></div>
-            <div id="footer" class="footer">
+            <div id="footer" class="footer hide-floating">
                 <img id="miniCover" src="" class="miniCover">
                 <div class="bottom">
                     <audio id="audio" controls>
@@ -97,8 +98,11 @@
             </button>
         </div>
         <div id="create-playlist" class="sign hide-floating">
-            <img class="sign-img plus-img" src="assets/plus.webp">
-            <input type="text" class="text sign-inputs fade" placeholder="Playlist Name">
+            <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name">
+            <input class="text sign-inputs fade" type="text" id="playlist-search-bar" onkeyup="searchSongs()" placeholder="Search to add songs...">
+            <div id="search-results" class="search-results">
+                
+            </div>
             <button id="button-playlist" class="text sign-button fade">
                 <b class="text">Create Playlist</b>
             </button>
