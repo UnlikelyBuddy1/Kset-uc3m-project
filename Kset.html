@@ -46,7 +46,7 @@
                     </div>
                     <div id="search-bar" class="search-bar">
                         <!-- <form role="search"> -->
-                        <input class="text serach-input fade" type="text" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
+                        <input class="text search-input fade" type="text" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
                         <!-- </form> -->
                     </div>
                     
@@ -57,13 +57,23 @@
                     <button id="nav-login" class="button">
                         <b class="text">LOG IN</b>
                     </button>
+                    <button id="profile-options" class="button hide-floating">
+                        <img src="assets/profile.webp" class="profile-icon">
+                    </button>
                 </div>
+            </div>
+            <div id="profile-menu" class="profile-menu hide-floating">
+                <ol><button id="account-button" class="button menu-button"><b class="text">Account</b></button></ol>
+                <ol><button id="profile-button" class="button menu-button"><b class="text">Profile</b></button></ol>
+                <ol><button id="logout-button" class="button menu-button"><b class="text">Log Out</b></button></ol>
             </div>
             <div id="main-menu"></div>
             <div class="spacer"></div>
             <div id="content" class="content"></div>
-            <div id="playlist-selection" class="playlist-selection hide-floating">
-            </div>
+            <div id="playlist-selection" class="playlist-selection hide-floating"><b class="text">Playlists</b></div>
+            <div id="account" class="account hide-floating"><b class="text">Your Account Information</b></div>
+            <div id="profile" class="profile hide-floating"><b class="text">Your Profile</b></div>
+            <div id="logout" class="logout hide-floating"><b class="text">Logout Page</b></div>
             <div class="footerspacer"></div>
             <div id="footer" class="footer hide-floating">
                 <img id="miniCover" src="" class="miniCover">
@@ -105,6 +115,12 @@
             </div>
             <button id="button-playlist" class="text sign-button fade">
                 <b class="text">Create Playlist</b>
+            </button>
+        </div>
+        <div id="logout-window" class="sign hide-floating">
+            <b class="text">Are you sure you want to Log Out?</b>
+            <button id="confirm-logout" class="text sign-button fade">
+                <b class="text">Yes, Log Out.</b>
             </button>
         </div>
     </div>

@@ -443,7 +443,7 @@ body{
     background: #ee0000a0;
     border-radius: 10px;
 }
-.serach-input{
+.search-input{
     width: 30vw;
     max-width: 400px;
     height: 18px;
@@ -552,6 +552,43 @@ body{
     border-radius: 24px;
     background-color: #1e1e1e
 }
+.account, .profile, .logout{
+    padding: 1.2vmax;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    border-radius: 24px;
+    background-color: #1e1e1e
+}
+.account-section{
+    padding: 20px 1vw;
+}
+/* .section-bar{
+    
+} */
+.input-bar{
+    width: 30vw;
+    max-width: 400px;
+    height: 18px;
+    min-width: 144px;
+    height: 20px;
+    background-color: #1e1e1e;
+    border-radius: 20px;
+    padding: 0.3rem;
+    padding-left: 0.5rem;
+    outline: none;
+}
+.submit-button{
+    background-color: inherit;
+}
+.submit-button:hover{
+    animation-name: togrey;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+.profile-section{
+    padding: 20px;
+}
 .plus-img{
     filter:invert(0.1);
 }
@@ -596,4 +633,42 @@ body{
 }
 .underlined{
     text-decoration: underline;
+}
+#profile-options{
+    height: 55px;
+    width: 55px;
+    filter:invert(1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none;
+}
+#profile-options:hover{
+    animation-name: togrey;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+.profile-icon{
+    aspect-ratio: 1/1;
+    height: 45px;
+}
+.profile-menu{
+    position: absolute;
+    top: 55px;
+    right: 2vw;
+    background-color: #1e1e1e;
+    border-radius: 20px;
+}
+div > ol{
+    padding: 0;
+    margin: 0;
+}
+.menu-button{
+    margin: 0;
+    background-color: #1e1e1e;
+    padding: 5px 20px;
+}
+#confirm-logout{
+    filter: drop-shadow(2px 4px 6px black);
 }
