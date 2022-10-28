@@ -97,6 +97,10 @@ document.getElementById("button-signup").addEventListener('click', function(){
   }).then((response) => {if(response.status == 201){
     toggleSignup();
     unfocusWrapper();
+  }else if(response.status == 409){
+    alert('user already exists');
+  } else{
+    alert('there has been an error in the signup procedure. try again later');
   }})
 })
 document.getElementById("button-login").addEventListener('click', function(){
