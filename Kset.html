@@ -45,9 +45,10 @@
                         <div class="bar3"></div> 
                     </div>
                     <div id="search-bar" class="search-bar">
-                        <!-- <form role="search"> -->
-                        <input class="text search-input fade" type="text" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
-                        <!-- </form> -->
+                        <form>
+                            <input type="text" class="text search-input fade" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
+                            <input id="cancel-search" type="reset" class="text clear-input" value="X">
+                        </form>
                     </div>
                     
                     
@@ -89,19 +90,40 @@
     <div id="floating" class="floating">
         <div id="login" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
-            <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username">
-            <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password">
+            <form>
+                <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
             <button id="button-login" class="text sign-button fade">
                 <b class="text">LOG IN</b>
             </button>
         </div>
         <div id="signup" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
-            <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username">
-            <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special">
-            <input type="text" class="text sign-inputs fade" placeholder="name">
-            <input type="text" class="text sign-inputs fade" placeholder="email">
-            <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx">
+            <form>
+                <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input type="text" class="text sign-inputs fade" placeholder="name">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input type="text" class="text sign-inputs fade" placeholder="email">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
             <div><input type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
             <button id="button-signup" class="text sign-button fade">
                 <b class="text">SIGN UP</b>
@@ -112,8 +134,14 @@
             
         </div>
         <div id="create-playlist" class="sign hide-floating">
-            <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name">
-            <input class="text sign-inputs fade" type="text" id="playlist-search-bar" onkeyup="searchSongs()" placeholder="Search to add songs...">
+            <form>
+                <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
+            <form>
+                <input class="text sign-inputs fade" type="text" id="playlist-search-bar" onkeyup="searchSongs()" placeholder="Search to add songs...">
+                <input type="reset" class="text clear-input" value="X">
+            </form>
             <div id="search-results" class="search-results">
                 
             </div>

@@ -34,11 +34,11 @@ document.getElementById("profile-options").addEventListener('mouseup', function(
   document.getElementById("profile-menu").classList.toggle('hide-floating');
 })
 document.getElementById("account-button").addEventListener('mouseup', function() {
-  switchContent("account-button");
+  switchContent("account");
   displayAccountInformation();
 })
 document.getElementById("profile-button").addEventListener('mouseup', function() {
-  switchContent("profile-button");
+  switchContent("profile");
   displayProfileInformation();
 })
 document.getElementById("logout-button").addEventListener('mouseup', function() {
@@ -47,7 +47,14 @@ document.getElementById("logout-button").addEventListener('mouseup', function() 
   // switchContent("logout-button");
 })
 document.getElementById("confirm-logout").addEventListener('mouseup', function() {
-  // Log Out Function
+  deleteAllCookies();
+  document.location.reload(true);
+})
+document.getElementById("cancel-search").addEventListener('mouseup', function() {
+  setTimeout(function() {
+    searchMusicLibrary();
+  }, 1)
+  
 })
 
 document.addEventListener('mousedown', function handleClickOutsideBox(event) {
@@ -126,9 +133,24 @@ document.getElementById('button-playlist').addEventListener('click', function(){
     togglePlaylist();
     unfocusWrapper();
   }})
-}
-);
+  document.getElementById("playlist-name").value = '';
+  document.getElementById("playlist-search-bar").value = '';
+})
+
 // Event Listeners ----------------------------------------------------------------------------------------
+/*
+ * https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
+*/
+function deleteAllCookies() {
+  var cookies = document.cookie.split(";");
+
+  for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+}
 
 function searchSongs(){
   let search = document.getElementById("playlist-search-bar").value;
@@ -236,20 +258,31 @@ function displayAccountInformation() {  // Still need to make functional
     
     section_bar = document.createElement('div');
     section_bar.classList.add('section-bar');
+    input_form = document.createElement('form');
     input_bar = document.createElement('input');
     input_bar.classList.add('text');
     input_bar.classList.add('input-bar');
-    if (fields[i]=="Password") {
-      input_bar.setAttribute('placeholder', getCookie(fields[i].toLowerCase()).slice(0,4) + "•••");
+    reset_btn = document.createElement('input')
+    reset_btn.setAttribute('type', 'reset');
+    reset_btn.setAttribute('value', 'X');
+    reset_btn.classList.add('text', 'clear-input');
+    if (getCookie(fields[i].toLowerCase()) == undefined) {
+      input_bar.setAttribute('placeholder', fields[i]);
     } else {
-      input_bar.setAttribute('placeholder', getCookie(fields[i].toLowerCase()));
+      if (fields[i]=="Password") {
+        input_bar.setAttribute('placeholder', getCookie(fields[i].toLowerCase()).slice(0,4) + "•••");
+      } else {
+        input_bar.setAttribute('placeholder', getCookie(fields[i].toLowerCase()));
+      }
     }
-    section_bar.appendChild(input_bar);
-    section.appendChild(section_bar);
+      input_form.appendChild(input_bar);
+      input_form.appendChild(reset_btn);
+      section_bar.appendChild(input_form);
+      section.appendChild(section_bar);
 
-    section.classList.add('text');
-    section.classList.add('account-section');
-    account.appendChild(section);
+      section.classList.add('text');
+      section.classList.add('account-section');
+      account.appendChild(section);
   }
   submit_button = document.createElement('button');
   button_text = document.createTextNode("Save");
@@ -257,6 +290,7 @@ function displayAccountInformation() {  // Still need to make functional
   submit_button.classList.add('sign-button')
   submit_button.classList.add("text");
   submit_button.classList.add("fade");
+  submit_button.classList.add('account-section');
   account.appendChild(submit_button);
 }
 
@@ -275,24 +309,12 @@ function displayProfileInformation() {  // Need to implement favorite artists, p
     
     section_bar = document.createElement('div');
     section_bar.classList.add('section-bar');
-    // input_bar = document.createElement('input');
-    // input_bar.classList.add('text');
-    // input_bar.classList.add('input-bar');
-    // input_bar.setAttribute('placeholder', 'This must be filled in with info from Back-end');
-    // section_bar.appendChild(input_bar);
     section.appendChild(section_bar);
 
     section.classList.add('text');
     section.classList.add('profile-section');
     profile.appendChild(section);
   }
-  // submit_button = document.createElement('button');
-  // button_text = document.createTextNode("Save");
-  // submit_button.appendChild(button_text);
-  // submit_button.classList.add("profile-section");
-  // submit_button.classList.add("text");
-  // submit_button.classList.add("submit-button");
-  // profile.appendChild(submit_button);
 }
 
 
@@ -438,8 +460,11 @@ function toggleLogOut(){
 }
 
 function setCookie(name, value, options = {}) {
+  var date = new Date();
+  date.setTime(date.getTime()+(60*24*60*60*1000)); // 60 days
   options = {
     path: '/',
+    expire: date,
     // add other defaults here if necessary
     ...options
   };
@@ -512,40 +537,14 @@ function login(username='', password=''){
     }
   }})}
 function switchContent(div) {
-  if(div == 'content'){
-    document.getElementById('content').classList.remove('hide-floating');
-    document.getElementById('playlist-selection').classList.add('hide-floating');
-    document.getElementById('account').classList.add('hide-floating');
-    document.getElementById('profile').classList.add('hide-floating');
-    document.getElementById('logout').classList.add('hide-floating');
+  const objects = ['content', 'playlist-selection', 'account', 'profile', 'logout'];
+  for (var i=0; i<objects.length; i++) {
+    document.getElementById(objects[i]).classList.add('hide-floating');
+  }
+  document.getElementById(objects[objects.indexOf(div)]).classList.remove('hide-floating');
+  if (div == "content") {
     document.getElementById('right_column').style.overflowY = "auto";
-  } else if(div == 'playlist-selection') {
-    document.getElementById('content').classList.add('hide-floating');
-    document.getElementById('playlist-selection').classList.remove('hide-floating');
-    document.getElementById('account').classList.add('hide-floating');
-    document.getElementById('profile').classList.add('hide-floating');
-    document.getElementById('logout').classList.add('hide-floating');
-    document.getElementById('right_column').style.overflowY = "clip";
-  } else if(div == 'account-button') {
-    document.getElementById('content').classList.add('hide-floating');
-    document.getElementById('playlist-selection').classList.add('hide-floating');
-    document.getElementById('account').classList.remove('hide-floating');
-    document.getElementById('profile').classList.add('hide-floating');
-    document.getElementById('logout').classList.add('hide-floating');
-    document.getElementById('right_column').style.overflowY = "clip";
-  } else if(div == 'profile-button') {
-    document.getElementById('content').classList.add('hide-floating');
-    document.getElementById('playlist-selection').classList.add('hide-floating');
-    document.getElementById('account').classList.add('hide-floating');
-    document.getElementById('profile').classList.remove('hide-floating');
-    document.getElementById('logout').classList.add('hide-floating');
-    document.getElementById('right_column').style.overflowY = "clip";
-  } else if(div == 'logout-button') {
-    document.getElementById('content').classList.add('hide-floating');
-    document.getElementById('playlist-selection').classList.add('hide-floating');
-    document.getElementById('account').classList.add('hide-floating');
-    document.getElementById('profile').classList.add('hide-floating');
-    document.getElementById('logout').classList.remove('hide-floating');
+  } else {
     document.getElementById('right_column').style.overflowY = "clip";
   }
 }
