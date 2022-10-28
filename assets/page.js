@@ -246,9 +246,9 @@ function displayAccountInformation() {  // Still need to make functional
   submit_button = document.createElement('button');
   button_text = document.createTextNode("Save");
   submit_button.appendChild(button_text);
-  submit_button.classList.add("account-section");
+  submit_button.classList.add('sign-button')
   submit_button.classList.add("text");
-  submit_button.classList.add("submit-button");
+  submit_button.classList.add("fade");
   account.appendChild(submit_button);
 }
 
@@ -461,7 +461,6 @@ function login(username='', password=''){
   const cookieUsername = getCookie('username');
   const cookiePassword = getCookie('password');
   const data = {username: username?username:cookieUsername, password: password?password:cookiePassword};
-  console.log(cookieUsername, cookiePassword);
   fetch('https://kset.home.asidiras.dev/auth/signin', 
   {
     method: 'POST', 
@@ -469,7 +468,8 @@ function login(username='', password=''){
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data) ,
-  }).then((response) => {if(response.status == 201){
+  }).then((response) => {
+    if(response.status == 201){
     document.getElementById("nav-signup").classList.toggle("hide-floating");
     document.getElementById("nav-login").classList.toggle("hide-floating");
     document.getElementById("profile-options").classList.toggle("hide-floating");
@@ -498,6 +498,10 @@ function login(username='', password=''){
     })
     });
     
+  } else{
+    if(username!='' && password!=''){
+      alert('Wrong email or password !');
+    }
   }})}
 function switchContent(div) {
   if(div == 'content'){
