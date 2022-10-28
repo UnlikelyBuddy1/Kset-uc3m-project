@@ -49,6 +49,12 @@
     margin-bottom: 3vh;
     object-fit: contain;
 }
+.signup-logo{
+    padding: 0.5em;
+    height: 32px;
+    width: 32px;
+    border-radius: 50px;
+}
 .miniCover{
     height: 50px;
     height: 100%;
@@ -675,4 +681,7 @@ div > ol{
 }
 #confirm-logout{
     filter: drop-shadow(2px 4px 6px black);
+}
+.sign-up-ext{
+    margin-top: 2em;
 }
