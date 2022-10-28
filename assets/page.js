@@ -239,7 +239,11 @@ function displayAccountInformation() {  // Still need to make functional
     input_bar = document.createElement('input');
     input_bar.classList.add('text');
     input_bar.classList.add('input-bar');
-    input_bar.setAttribute('placeholder', 'This must be filled in with info from Back-end');
+    if (fields[i]=="Password") {
+      input_bar.setAttribute('placeholder', getCookie(fields[i].toLowerCase()).slice(0,4) + "•••");
+    } else {
+      input_bar.setAttribute('placeholder', getCookie(fields[i].toLowerCase()));
+    }
     section_bar.appendChild(input_bar);
     section.appendChild(section_bar);
 
