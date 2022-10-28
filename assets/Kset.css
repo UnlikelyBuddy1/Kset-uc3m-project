@@ -563,6 +563,9 @@ body{
 .account-section{
     padding: 20px 1vw;
 }
+.entireHeight{
+    height: calc(90.5vh - 2.4vmax);
+}
 /* .section-bar{
     
 } */
@@ -652,6 +655,7 @@ body{
 .profile-icon{
     aspect-ratio: 1/1;
     height: 45px;
+    border-radius: 50px;
 }
 .profile-menu{
     position: absolute;
