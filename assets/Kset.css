@@ -5,12 +5,24 @@
     margin-bottom: -75%;
     margin-top: 32.5%;
     opacity: 0;
-    pointer-events: none
+    pointer-events: none;
 }
 .play{
     width: 400%;
     filter: invert(1) drop-shadow(2px 6px 4px black);
     pointer-events: none
+}
+.like-wrapper{
+    width: 10%;
+    opacity: 0;
+    height: 0;
+}
+.like{
+    width: 200%;
+    filter: invert(1) drop-shadow(2px 6px 4px black);
+    position: relative;
+    left: 750%;
+    top: 5px;
 }
 .spacer{
     height: 65px;
@@ -324,6 +336,9 @@ body{
     animation-duration: 500ms;
     animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     animation-fill-mode: forwards;
+}
+.track:hover > .like-wrapper {
+    opacity: 1;
 }
 @keyframes show-up {
     from {

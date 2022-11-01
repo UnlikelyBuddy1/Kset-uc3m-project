@@ -360,6 +360,7 @@ function createTrack(imgSrc, songSrc, title){
   cover.classList.add('cover');
   cover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
 
+  // Play Button
   const playWrapper = document.createElement('div');
   playWrapper.classList.add('play-wrapper');
   const play = document.createElement('img');
@@ -367,12 +368,32 @@ function createTrack(imgSrc, songSrc, title){
   play.classList.add('play');
   play.src = "assets/play.webp";
   playWrapper.appendChild(play);
+
+  // Like Button
+  const likeWrapper = document.createElement('div');
+  likeWrapper.classList.add('like-wrapper');
+  const like = document.createElement('img');
+  like.setAttribute("loading", "lazy");
+  like.classList.add('like');
+  like.src = "assets/unliked.webp";
+  likeWrapper.appendChild(like);
+  like.addEventListener("mouseup", function(){
+    
+    if (like.classList.contains("liked")){
+      like.src = "assets/unliked.webp";
+    } else {
+      like.src = "assets/liked.webp";
+    }
+    like.classList.toggle("liked");
+  });
+  
   // create the title
   const text = document.createElement('p');
   text.classList.add('title');
   text.textContent = title
   // put cover and title inside track
   track.appendChild(playWrapper);
+  track.appendChild(likeWrapper);
   track.appendChild(cover);
   track.appendChild(text);
   
