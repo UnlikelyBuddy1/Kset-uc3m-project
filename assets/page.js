@@ -133,26 +133,9 @@ document.getElementById('button-playlist').addEventListener('click', function(){
     togglePlaylist();
     unfocusWrapper();
   }})
-  document.getElementById("playlist-name").value = '';
-  document.getElementById("playlist-search-bar").value = '';
-})
-
-// Event Listeners ----------------------------------------------------------------------------------------
-/*
- * https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
-*/
-function deleteAllCookies() {
-  var cookies = document.cookie.split(";");
-
-  for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      var eqPos = cookie.indexOf("=");
-      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
-  }
 }
-
-function searchSongs(){
+);
+document.getElementById("playlist-search-bar").addEventListener('keyup', ()=>{
   let search = document.getElementById("playlist-search-bar").value;
   fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
   .then((response) => response.json())
@@ -162,8 +145,20 @@ function searchSongs(){
       createSearchResult(result.title, result.id);
     }
   })
-}
+})
+document.getElementById("playlist-search-bar-2").addEventListener('keyup', ()=>{
+  let search = document.getElementById("playlist-search-bar-2").value;
+  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
+  .then((response) => response.json())
+  .then((data) => {
+    document.getElementById('search-results-2').innerHTML='';
+    for(let result of data){
+      createSearchResult(result.title, result.id, '-2');
+    }
+  })
+})
 
+// Event Listeners ----------------------------------------------------------------------------------------
 function fill(){
   let content = document.getElementById("content");
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
@@ -284,6 +279,7 @@ function displayAccountInformation() {  // Still need to make functional
       section.classList.add('account-section');
       account.appendChild(section);
   }
+  
   submit_button = document.createElement('button');
   button_text = document.createTextNode("Save");
   submit_button.appendChild(button_text);
@@ -331,8 +327,8 @@ function burger(menu) {
   }
 } 
 
-function createSearchResult(songName, songId){
-  let searchResults = document.getElementById('search-results');
+function createSearchResult(songName, songId, index=''){
+  let searchResults = document.getElementById('search-results'+index);
   let resultItem = document.createElement('div')
   resultItem.classList.add('result-item');
   let name = document.createElement('b')
@@ -533,6 +529,12 @@ function login(username='', password=''){
     if(!(cookieUsername && cookiePassword)){
       setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
       setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+    }
+    if(username){
+      document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${username}.svg`
+    }
+    if(data.username){
+      document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${data.username}.svg`
     }
     response.json().then((value)=>{
       bearer = 'Bearer '+value.accesToken;
