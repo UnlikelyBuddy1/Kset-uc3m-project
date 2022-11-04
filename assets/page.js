@@ -417,46 +417,6 @@ function displayLikedSongs() {  // Display liked songs stored in a global variab
   })
 }
 
-function displayProfileInformation() {  // Need to implement favorite artists, playlists, etc...
-  const profile = document.getElementById('profile');
-  const numSections = profile.getElementsByClassName('profile-section').length;
-  for (var i=0; i<numSections; i++){
-    profile.removeChild(profile.getElementsByClassName('profile-section')[0]);
-  }
-
-  const fields = ['Your Top Artists', 'Your Top Songs', 'Liked Songs', 'Your Playlists', 'People Following You']
-  for (var i=0; i<fields.length; i++) {
-    const section = document.createElement('div');
-    section_text = document.createTextNode(fields[i].concat(': '));
-    section_bar = document.createElement('div');
-
-    switch (i) {
-      case 0:
-        // let artists = displayTopArtists();
-        // // alert(artists.length);
-        // for (var i=0; i<artists.length; i++) {
-        //   artist_name = document.createTextNode(artists[i]);
-        //   section.appendChild(artist_name);
-        // }
-        break;
-        
-      case 3:
-        section_bar.setAttribute("id", "liked-songs");
-        displayLikedSongs();
-      default:
-    }
-
-    section_bar.classList.add('section-bar');
-    section.classList.add('text');
-    section.appendChild(section_bar);
-    section.appendChild(section_text);
-    section.classList.add('profile-section');
-    section.classList.add('section');
-    profile.appendChild(section);
-  }
-}
-
-
 function burger(menu) {
   menu.classList.toggle("change");
   let sidebar = document.getElementById('left-column')
