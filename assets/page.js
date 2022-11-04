@@ -3,6 +3,8 @@ fill();   // Load content from Back-end
 
 var playlistSongs=[];
 var bearer='';
+var artists=[];
+var likedSongs=[];
 
 // Event Listeners ----------------------------------------------------------------------------------------
 window.addEventListener('resize', function(event){  // Resize Window
@@ -159,6 +161,20 @@ document.getElementById("playlist-search-bar-2").addEventListener('keyup', ()=>{
 })
 
 // Event Listeners ----------------------------------------------------------------------------------------
+/*
+ * https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
+*/
+function deleteAllCookies() {
+  var cookies = document.cookie.split(";");
+
+  for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+}
+
 function fill(){
   let content = document.getElementById("content");
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
@@ -290,25 +306,152 @@ function displayAccountInformation() {  // Still need to make functional
   account.appendChild(submit_button);
 }
 
+function displayTopArtists() {
+  // var artists = [];
+  // content = document.getElementById("content");
+  // fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+  // .then((response) => response.json())
+  // .then((data) => {
+  //   data.sort(function(a, b) {
+  //     let keyA = a.title.toUpperCase();
+  //     let keyB = b.title.toUpperCase();
+  //     if (keyA < keyB) return -1;
+  //     if (keyA > keyB) return 1;
+  //     return 0;
+  //   });
+  //   for (var i=0; i<data.length; i++) { // Add artists names from ids
+  //     let artist = data[i]["path"].substr(0,data[i]["path"].indexOf('-'));
+  //     if (!artists.includes(artist)) {artists.push(artist);} // Only add unique artists
+  //   }
+  //   alert(artists);
+  // })
+  // return artists;
+}
+
+function displayLikedSongs() {  // Display liked songs stored in a global variable likedSongs
+  fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+  .then((response) => response.json())
+  .then((data) => {
+    data.sort(function(a, b) {
+      let keyA = a.title.toUpperCase();
+      let keyB = b.title.toUpperCase();
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
+    for (var i=0; i<data.length; i++) {
+      if (likedSongs.includes(data[i]["title"])) {
+        let imgSrc = data[i]["cover"];
+        let songSrc = data[i]["data"];
+        let title = data[i]["title"];
+
+        const track = document.createElement('div');
+        track.classList.add('track');
+        // create cover element
+        const cover = document.createElement('img');
+        cover.setAttribute("id", `${songSrc}|${imgSrc}`);
+        cover.setAttribute("loading", "lazy");
+        cover.classList.add('cover');
+        cover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
+      
+        // Play Button
+        const playWrapper = document.createElement('div');
+        playWrapper.classList.add('play-wrapper');
+        const play = document.createElement('img');
+        play.setAttribute("loading", "lazy");
+        play.classList.add('play');
+        play.src = "assets/play.webp";
+        playWrapper.appendChild(play);
+      
+        // Like Button
+        const likeWrapper = document.createElement('div');
+        likeWrapper.classList.add('like-wrapper');
+        const like = document.createElement('img');
+        like.setAttribute("loading", "lazy");
+        like.classList.add('like');
+        like.src = "assets/liked.webp";
+        like.classList.add("liked");
+        likeWrapper.appendChild(like);
+        like.addEventListener("mouseup", function(){
+          if (like.classList.contains("liked")){
+            like.src = "assets/unliked.webp";
+            likedSongs.splice(likedSongs.indexOf(title),1);
+          } else {
+            like.src = "assets/liked.webp";
+            likedSongs.push(title);
+          }
+          like.classList.toggle("liked");
+        });
+        
+        // create the title
+        const text = document.createElement('p');
+        text.classList.add('title');
+        text.textContent = title
+        // put cover and title inside track
+        track.appendChild(playWrapper);
+        track.appendChild(likeWrapper);
+        track.appendChild(cover);
+        track.appendChild(text);
+        
+        // add event listener to change track
+        cover.addEventListener("mousedown", (e)=> {
+          let id = (e.target.id);
+          const songSrc = id.split('|')[0];
+          const imgSrc = id.split('|')[1];
+          let source = document.getElementById("source");
+          source.src = `https://kset.home.asidiras.dev/stream/download/${songSrc}`;
+          let miniCover = document.getElementById("miniCover");
+          miniCover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
+          let audio = document.getElementById("audio");
+          const footer = document.getElementById("footer");
+          if(footer.classList.contains("hide-floating")){
+            footer.classList.toggle("hide-floating")
+          }
+          audio.load()
+          audio.play()
+        });
+        const likes = document.getElementById("liked-songs");
+        likes.appendChild(track);
+      }
+    }
+  })
+}
+
 function displayProfileInformation() {  // Need to implement favorite artists, playlists, etc...
   const profile = document.getElementById('profile');
-  const numSections = profile.getElementsByClassName('profile-section').length
+  const numSections = profile.getElementsByClassName('profile-section').length;
   for (var i=0; i<numSections; i++){
     profile.removeChild(profile.getElementsByClassName('profile-section')[0]);
   }
 
   const fields = ['Your Top Artists', 'Your Top Songs', 'Liked Songs', 'Your Playlists', 'People Following You']
   for (var i=0; i<fields.length; i++) {
-    const section = document.createElement('h3');
+    const section = document.createElement('div');
     section_text = document.createTextNode(fields[i].concat(': '));
-    section.appendChild(section_text);
-    
     section_bar = document.createElement('div');
-    section_bar.classList.add('section-bar');
-    section.appendChild(section_bar);
 
+    switch (i) {
+      case 0:
+        // let artists = displayTopArtists();
+        // // alert(artists.length);
+        // for (var i=0; i<artists.length; i++) {
+        //   artist_name = document.createTextNode(artists[i]);
+        //   section.appendChild(artist_name);
+        // }
+        break;
+        
+      case 3:
+        section_bar.setAttribute("id", "liked-songs");
+        displayLikedSongs();
+      default:
+    }
+
+    section_bar.classList.add('section-bar');
     section.classList.add('text');
+    section.appendChild(section_bar);
+    section.appendChild(section_text);
     section.classList.add('profile-section');
+    section.classList.add('section');
     profile.appendChild(section);
   }
 }
@@ -377,8 +520,10 @@ function createTrack(imgSrc, songSrc, title){
     
     if (like.classList.contains("liked")){
       like.src = "assets/unliked.webp";
+      likedSongs.splice(likedSongs.indexOf(title),1);
     } else {
       like.src = "assets/liked.webp";
+      likedSongs.push(title);
     }
     like.classList.toggle("liked");
   });
@@ -568,6 +713,6 @@ function switchContent(div) {
   if (div == "content") {
     document.getElementById('right_column').style.overflowY = "auto";
   } else {
-    document.getElementById('right_column').style.overflowY = "clip";
+    // document.getElementById('right_column').style.overflowY = "clip";
   }
 }

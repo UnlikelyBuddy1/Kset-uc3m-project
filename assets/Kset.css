@@ -587,9 +587,10 @@ body{
 .entireHeight{
     min-height: calc(90.5vh - 2.4vmax);
 }
-/* .section-bar{
-    
-} */
+.section-bar{
+    display: flex;
+    flex-flow: row;
+}
 .input-bar{
     width: 30vw;
     max-width: 400px;
@@ -610,9 +611,9 @@ body{
     animation-duration: 500ms;
     animation-fill-mode: forwards;
 }
-.profile-section{
+/* .profile-section{
     padding: 20px;
-}
+} */
 .plus-img{
     filter:invert(0.1);
 }
