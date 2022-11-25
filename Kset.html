@@ -10,35 +10,34 @@
         <!-- Left Column -->
         <div id="left-column" class="left-column hidden">
             <div id="sidebar" class="sidebar">
-                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo menu-logo">
-                <button id="home" class="sidebarButton" onclick="switchContent('content')">
-                    <img src="assets/home.webp" alt="an icon of a house" class="sidebarIcon">
+                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo menu-logo"/>
+                <button id="home" class="sidebarButton fancy-link" onclick="switchContent('content')">
+                    <img src="assets/home.webp" alt="an icon of a house" class="sidebarIcon"/>
                     <b class = "text sidebarText">Home</b>
                 </button>
-                <button id="playlist" class="sidebarButton" onclick="switchContent('playlist-selection')">
-                    <img src="assets/playlist.webp" alt="a playlist" class="sidebarIcon">
+                <button id="playlist" class="sidebarButton fancy-link" onclick="switchContent('playlist-selection')">
+                    <img src="assets/playlist.webp" alt="a playlist" class="sidebarIcon"/>
                     <b class = "text sidebarText">PlayLists</b>
                 </button>
-                <button id="new-playlist" class="sidebarButton">
-                    <img src="assets/plus.webp" alt="a plus symbol" class="sidebarIcon">
+                <button id="new-playlist" class="sidebarButton fancy-link">
+                    <img src="assets/plus.webp" alt="a plus symbol" class="sidebarIcon"/>
                     <b class = "text sidebarText">New Playlist</b>
                 </button>
-                <button onclick="window.open('https://github.com/UnlikelyBuddy1/Kset-uc3m-project')" type="button" class="sidebarButton">
-                    <img src="assets/github.webp" alt="github logo" id="github" class="sidebarIcon">
+                <button onclick="window.open('https://github.com/UnlikelyBuddy1/Kset-uc3m-project')" type="button" class="sidebarButton fancy-link">
+                    <img src="assets/github.webp" alt="github logo" id="github" class="sidebarIcon"/>
                     <b class = "text sidebarText">GitHub</b>
                 </button>
                 <div class="link">
                     <a href="#" class="text">Privacy</a>
                     <a href="#" class="text">Cookies</a>
                 </div>
-                
             </div>
         </div>
         <!-- Right Column -->
         <div id ="right_column" class="right_column">
             <div class="navbar-wrapper">
                 <div id="navbar" class="navbar"> 
-                    <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo top-logo">
+                    <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo top-logo"/>
                     <div class="container" onclick="burger(this)"> 
                         <div class="bar1"></div>
                         <div class="bar2"></div>
@@ -46,12 +45,10 @@
                     </div>
                     <div id="search-bar" class="search-bar">
                         <form>
-                            <input type="text" class="text search-input fade" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song...">
-                            <input id="cancel-search" type="reset" class="text clear-input" value="X">
+                            <input type="text" class="text search-input fade" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song..."/>
+                            <input id="cancel-search" type="reset" class="text clear-input" value="X"/>
                         </form>
                     </div>
-                    
-                    
                     <button id="nav-signup" class="button">
                         <b class="text">SIGN UP</b>
                     </button> 
@@ -59,36 +56,41 @@
                         <b class="text">LOG IN</b>
                     </button>
                     <button id="profile-options" class="button hide-floating">
-                        <img id="profile-image" src="assets/profile.webp" class="profile-icon">
+                        <img id="profile-image" src="assets/profile.webp" class="profile-icon"/>
                     </button>
                 </div>
             </div>
             <div id="profile-menu" class="profile-menu hide-floating">
-                <ol><button id="account-button" class="button menu-button"><b class="text">Account</b></button></ol>
-                <ol><button id="profile-button" class="button menu-button"><b class="text">Profile</b></button></ol>
-                <ol><button id="logout-button" class="button menu-button"><b class="text">Log Out</b></button></ol>
+                <ol><button id="account-button" class="button menu-button fancy-link"><b class="text">Account</b></button></ol>
+                <ol><button id="profile-button" class="button menu-button fancy-link"><b class="text">Profile</b></button></ol>
+                <ol><button id="logout-button" class="button menu-button fancy-link"><b class="text">Log Out</b></button></ol>
             </div>
             <div id="main-menu"></div>
             <div class="spacer"></div>
             <div id="content" class="content"></div>
             <div id="playlist-selection" class="playlist-selection entireHeight hide-floating"><b class="text">Playlists</b>
-                <input class="text sign-inputs fade" type="text" id="playlist-search-bar-2" placeholder="Search to add songs...">
-                <div id="search-results-2" class="search-results"></div></div>
+                <input class="text sign-inputs fade" type="text" id="playlist-search-bar-2" placeholder="Search to add songs..."/>
+                <div id="search-results-2" class="search-results"></div>
+            </div>
             <div id="account" class="account entireHeight hide-floating"><b class="text">Your Account Information</b></div>
-            <div id="profile" class="profile entireHeight hide-floating"><b class="text">Your Profile</b><hr/>
-            <b class="text">Your Top Artist</b>
-            <div class="artist-wrapper">
-                <img src="assets/vald.webp" class="artist-profile"/>
-                <b class="text">Vald</b>
-                <div class="songs">
-                    <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/XEU.webp"><b class="text">Désaccordé</b></div>
-                    <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/V.webp"><b class="text">Anunnaki</b></div>
+
+            <div id="profile" class="profile entireHeight hide-floating">
+                <b class="text">Your Profile</b>
+                <hr/>
+                <b class="text">Your Top Artist</b>
+                <div class="artist-wrapper">
+                    <img src="assets/vald.webp" class="artist-profile"/>
+                    <b class="text">Vald</b>
+                    <div class="songs">
+                        <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/XEU.webp"><b class="text">Désaccordé</b></div>
+                        <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/V.webp"><b class="text">Anunnaki</b></div>
+                    </div>
                 </div>
             </div>
             <div id="logout" class="logout hide-floating"><b class="text">Logout Page</b></div>
             <div class="footerspacer"></div>
             <div id="footer" class="footer hide-floating">
-                <img id="miniCover" src="" class="miniCover">
+                <img id="miniCover" src="" class="miniCover"/>
                 <div class="bottom">
                     <audio id="audio" controls>
                         <source id="source" src="" type="audio/mpeg">
@@ -102,12 +104,10 @@
         <div id="login" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
             <form>
-                <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
-                <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <button id="button-login" class="text sign-button fade">
                 <b class="text">LOG IN</b>
@@ -119,24 +119,20 @@
         <div id="signup" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
             <form>
-                <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
-                <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="name">
-                <input type="reset" class="text clear-input" value="X">
+                <input type="text" class="text sign-inputs fade" placeholder="name"><input type="reset" class="text clear-input" value="X"></input>
+                
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="email">
-                <input type="reset" class="text clear-input" value="X">
+                <input type="text" class="text sign-inputs fade" placeholder="email"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx">
-                <input type="reset" class="text clear-input" value="X">
+                <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <div><input type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
             <button id="button-signup" class="text sign-button fade">
@@ -149,12 +145,10 @@
         </div>
         <div id="create-playlist" class="sign hide-floating">
             <form>
-                <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name">
-                <input type="reset" class="text clear-input" value="X">
+                <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
-                <input class="text sign-inputs fade" type="text" id="playlist-search-bar" onkeyup="searchSongs()" placeholder="Search to add songs...">
-                <input type="reset" class="text clear-input" value="X">
+                <input class="text sign-inputs fade" type="text" id="playlist-search-bar" onkeyup="searchSongs()" placeholder="Search to add songs..."><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <div id="search-results" class="search-results">
                 
