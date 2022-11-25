@@ -35,7 +35,7 @@
 }
 .left-column{
     margin-top: 65px;
-    height: 90.5vh;
+    height: calc(100vh - 75px);
     position: sticky;
     background-color: #1e1e1e;
     margin-right: 0vw;
@@ -395,7 +395,6 @@ body{
     .sidebar{
         width: 80vw;
         box-sizing: border-box;
-        height: calc(100vh - 55px);
         padding: 1%;
         display: flex;
         flex-flow: column;
@@ -448,7 +447,7 @@ body{
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #ee0000a0;
+    background: #de6c1a;
     border-radius: 10px;
 }
 .search-input{
