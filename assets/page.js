@@ -17,16 +17,6 @@ window.addEventListener('resize', function(event){  // Resize Window
   }
 });
 
-document.getElementById("nav-signup").addEventListener('mouseup', function(){
-  unfocusWrapper();
-  toggleSignup();
-})
-
-document.getElementById("nav-login").addEventListener('mouseup', function(){
-  unfocusWrapper();
-  toggleLogin();
-})
-
 document.getElementById("new-playlist").addEventListener('mouseup', function(){
   unfocusWrapper();
   togglePlaylist();
@@ -76,6 +66,11 @@ document.addEventListener('mousedown', function handleClickOutsideBox(event) {
     unfocusWrapper();
     toggleLogOut();
   }
+});
+
+const searchBar = document.getElementById("search-bar");
+searchBar.addEventListener('keyup', function(){
+  searchMusicLibrary();
 });
 
 const signupPassword = document.getElementById("signup-password");
@@ -235,6 +230,7 @@ function createPlaylist(playlist, location){
         const footer = document.getElementById("footer");
         if(footer.classList.contains("hide-floating")){
           footer.classList.toggle("hide-floating");
+          document.getElementById("right_column").style.height = 'calc(100% - 55px - 70px)';
         }
         audio.load()
         audio.play()
@@ -406,6 +402,7 @@ function displayLikedSongs() {  // Display liked songs stored in a global variab
           const footer = document.getElementById("footer");
           if(footer.classList.contains("hide-floating")){
             footer.classList.toggle("hide-floating")
+            document.getElementById("right_column").style.height = 'calc(100% - 55px - 70px)';
           }
           audio.load()
           audio.play()
@@ -488,6 +485,20 @@ function createSearchResult(songName, songId, index=''){
   searchResults.appendChild(resultItem);
 }
 
+audio = document.getElementById("audio");
+playPauseContainer = document.getElementById("play-pause-container");
+let cb = null;
+const seekSlider = document.getElementById('seek-slider');
+const currentTime = document.getElementById('current-time');
+const audioPlayer = document.getElementById('audio-player');
+
+const whilePlaying = () => {
+  seekSlider.value = Math.floor(audio.currentTime);
+  currentTime.textContent = calculateTime(seekSlider.value);
+  cb = requestAnimationFrame(whilePlaying);
+  audioPlayer.style.setProperty('--seek-before-width', `${seekSlider.value / seekSlider.max * 100}%`);
+}
+
 function createTrack(imgSrc, songSrc, title){
   //create the track element
   const track = document.createElement('div');
@@ -543,17 +554,24 @@ function createTrack(imgSrc, songSrc, title){
     let id = (e.target.id);
     const songSrc = id.split('|')[0];
     const imgSrc = id.split('|')[1];
-    let source = document.getElementById("source");
-    source.src = `https://kset.home.asidiras.dev/stream/download/${songSrc}`;
+    // let source = document.getElementById("source");
+    // source.src = `https://kset.home.asidiras.dev/stream/download/${songSrc}`;
+    let audio = document.getElementById("audio");
+    audio.src = `https://kset.home.asidiras.dev/stream/download/${songSrc}`;
     let miniCover = document.getElementById("miniCover");
     miniCover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
-    let audio = document.getElementById("audio");
+    // let audio = document.getElementById("audio");
     const footer = document.getElementById("footer");
     if(footer.classList.contains("hide-floating")){
       footer.classList.toggle("hide-floating")
+      document.getElementById("right_column").style.height = 'calc(100% - 55px - 70px)';
     }
-    audio.load()
-    audio.play()
+    audio.load();
+    audio.play();
+    requestAnimationFrame(whilePlaying);
+    if (!playPauseContainer.classList.contains("pause")) {playPauseContainer.classList.add("pause");}
+    document.getElementById("track-title").textContent = title;
+    document.getElementById("track-artist").textContent = "Placeholder Artist";
   });
   const content = document.getElementById("content");
   content.appendChild(track);
@@ -665,9 +683,6 @@ function login(username='', password=''){
     body: JSON.stringify(data) ,
   }).then((response) => {
     if(response.status == 201){
-    document.getElementById("nav-signup").classList.toggle("hide-floating");
-    document.getElementById("nav-login").classList.toggle("hide-floating");
-    document.getElementById("profile-options").classList.toggle("hide-floating");
     document.getElementById('banner').style = 'display: none';
     const cookieUsername = getCookie('username');
     const cookiePassword = getCookie('password');
@@ -716,3 +731,68 @@ function switchContent(div) {
     // document.getElementById('right_column').style.overflowY = "clip";
   }
 }
+let playState = null;
+playPauseContainer.addEventListener('click', () => {
+  if (playState === 'play') {
+    audio.play();
+    requestAnimationFrame(whilePlaying);
+    if (playPauseContainer.classList.contains("pause")) {playPauseContainer.classList.remove("pause");}
+    playState = 'pause';
+  } else {
+    audio.pause();
+    cancelAnimationFrame(cb);
+    if (playPauseContainer.classList.contains("pause")) {playPauseContainer.classList.add("pause");}
+    playState = 'play';
+  }
+})
+
+
+const calculateTime = (secs) => {
+  const minutes = Math.floor(secs / 60);
+  const seconds = Math.floor(secs % 60);
+  const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+  return `${minutes}:${returnedSeconds}`;
+}
+
+function displayAudioDuration(secs) {
+  duration = document.getElementById("duration");
+  duration.textContent = calculateTime(secs);
+}
+
+audio.addEventListener('loadedmetadata', () => {
+  displayAudioDuration(audio.duration);
+  setSliderMax();
+});
+
+const setSliderMax = () => {
+  seekSlider.max = Math.floor(audio.duration);
+}
+
+seekSlider.addEventListener('input', () => {
+  currentTime.textContent = calculateTime(seekSlider.value);
+  if (!audio.paused) {
+    cancelAnimationFrame(cb);
+  }
+});
+
+seekSlider.addEventListener('change', () => {
+  audio.currentTime = seekSlider.value;
+  if (!audio.paused) {
+    requestAnimationFrame(whilePlaying);
+  }
+});
+
+audio.addEventListener('timeupdate', () => {
+  currentTime.textContent = calculateTime(seekSlider.value);
+});
+
+document.getElementById('seek-slider').max = 0;
+
+playPauseContainer.addEventListener('click', () => {
+  playPauseContainer.classList.toggle('pause');
+});
+
+const volumeSlider = document.getElementById('volume-slider');
+volumeSlider.addEventListener('input', () => {
+  audio.volume = volumeSlider.value / 100;
+});

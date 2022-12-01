@@ -10,7 +10,6 @@
         <!-- Left Column -->
         <div id="left-column" class="left-column hidden">
             <div id="sidebar" class="sidebar">
-                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo menu-logo"/>
                 <button id="home" class="sidebarButton fancy-link" onclick="switchContent('content')">
                     <img src="assets/home.webp" alt="an icon of a house" class="sidebarIcon"/>
                     <b class = "text sidebarText">Home</b>
@@ -35,30 +34,22 @@
         </div>
         <!-- Right Column -->
         <div id ="right_column" class="right_column">
-            <div class="navbar-wrapper">
-                <div id="navbar" class="navbar"> 
-                    <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo top-logo"/>
-                    <div class="container" onclick="burger(this)"> 
-                        <div class="bar1"></div>
-                        <div class="bar2"></div>
-                        <div class="bar3"></div> 
-                    </div>
-                    <div id="search-bar" class="search-bar">
-                        <form>
-                            <input type="text" class="text search-input fade" id="mySearch" onkeyup="searchMusicLibrary()" placeholder="Search for a song..."/>
-                            <input id="cancel-search" type="reset" class="text clear-input" value="X"/>
-                        </form>
-                    </div>
-                    <button id="nav-signup" class="button">
-                        <b class="text">SIGN UP</b>
-                    </button> 
-                    <button id="nav-login" class="button">
-                        <b class="text">LOG IN</b>
-                    </button>
-                    <button id="profile-options" class="button hide-floating">
-                        <img id="profile-image" src="assets/profile.webp" class="profile-icon"/>
-                    </button>
+            <div id="navbar" class="navbar"> 
+                <img src="assets/icon.webp" alt="a cassette that is the logo of the app" class="icon logo top-logo"/>
+                <div class="container" onclick="burger(this)"> 
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
                 </div>
+                <div id="search-bar" class="search-bar">
+                    <form>
+                        <input type="text" class="text search-input" id="mySearch" placeholder="Search for a song..."/>
+                        <input id="cancel-search" type="reset" class="text clear-input" value="X"/>
+                    </form>
+                </div>
+                <button id="profile-options" class="button">
+                    <img id="profile-image" src="assets/profile.webp" class="profile-icon"/>
+                </button>
             </div>
             <div id="profile-menu" class="profile-menu hide-floating">
                 <ol><button id="account-button" class="button menu-button fancy-link"><b class="text">Account</b></button></ol>
@@ -66,7 +57,6 @@
                 <ol><button id="logout-button" class="button menu-button fancy-link"><b class="text">Log Out</b></button></ol>
             </div>
             <div id="main-menu"></div>
-            <div class="spacer"></div>
             <div id="content" class="content"></div>
             <div id="playlist-selection" class="playlist-selection entireHeight hide-floating"><b class="text">Playlists</b>
                 <input class="text sign-inputs fade" type="text" id="playlist-search-bar-2" placeholder="Search to add songs..."/>
@@ -90,12 +80,23 @@
             <div id="logout" class="logout hide-floating"><b class="text">Logout Page</b></div>
             <div class="footerspacer"></div>
             <div id="footer" class="footer hide-floating">
-                <img id="miniCover" src="" class="miniCover"/>
+                
                 <div class="bottom">
-                    <audio id="audio" controls>
-                        <source id="source" src="" type="audio/mpeg">
-                    </audio>   
-                    <b id="banner" class="signup-banner text"><a class="signup-banner text accent-color" href=#>Signing up</a> for free</b>                 
+                    
+                    <div id="audio-player">
+                        <img id="miniCover" src="" class="miniCover"/>
+                        <div class="track-information">
+                            <b id="track-title" class="text"></b>
+                            <a id="track-artist" class="text"></a>
+                        </div>
+                        <audio id="audio" src="" type="audio/mpeg"></audio>
+                        <div id="play-pause-container" class="play-pause-container"></div>
+                        <span id="current-time" class="text time">0:00</span>
+                        <input type="range" id="seek-slider" max="100" value="0">
+                        <span id="duration" class="text time">0:00</span>
+                        <input type="range" id="volume-slider" max="100" value="100">
+                    </div>
+                    <b id="banner" class="signup-banner text"><a class="signup-banner text accent-color" href=#>Sign up</a> for free</b>                 
                 </div>
             </div> 
         </div>
@@ -165,5 +166,5 @@
         </div>
     </div>
 </body>
-</html> 
+</html>
 <script src="assets/page.js"></script>
