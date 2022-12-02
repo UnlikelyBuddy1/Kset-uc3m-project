@@ -109,7 +109,7 @@ function fill(){
         section.classList.add('section');
         content.appendChild(section);
       }
-      createTrack(data[i]["cover"], data[i]["path"], data[i]["title"]);
+      createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
     }
     const spacer = document.createElement('div');
     // spacer.classList.add('spacer');
@@ -299,11 +299,19 @@ function displayLikedSongs() {  // Display liked songs stored in a global variab
         const text = document.createElement('p');
         text.classList.add('title');
         text.textContent = title
+        //create artist title
+        const artist_a = document.createElement('a'); 
+        artist_a.classList.add('artist-title')
+        const artist_link = document.createTextNode(artist);
+        artist_a.appendChild(artist_link); 
+        artist_a.title = "artist link"
+        artist_a.href = "../artist.html"; 
         // put cover and title inside track
         track.appendChild(playWrapper);
         track.appendChild(likeWrapper);
         track.appendChild(cover);
         track.appendChild(text);
+        track.appendChild(artist_a);
         
         // add event listener to change track
         cover.addEventListener("mousedown", (e)=> {
@@ -415,7 +423,7 @@ const whilePlaying = () => {
   audioPlayer.style.setProperty('--seek-before-width', `${seekSlider.value / seekSlider.max * 100}%`);
 }
 
-function createTrack(imgSrc, songSrc, title){
+function createTrack(imgSrc, songSrc, title, artist){
   //create the track element
   const track = document.createElement('div');
   track.classList.add('track');
@@ -459,11 +467,19 @@ function createTrack(imgSrc, songSrc, title){
   const text = document.createElement('p');
   text.classList.add('title');
   text.textContent = title
+  //create artist title
+  const artist_a = document.createElement('a'); 
+  artist_a.classList.add('artist-title')
+  const artist_link = document.createTextNode(artist);
+  artist_a.appendChild(artist_link); 
+  artist_a.title = "artist link"
+  artist_a.href = "../artist.html"; 
   // put cover and title inside track
   track.appendChild(playWrapper);
   track.appendChild(likeWrapper);
   track.appendChild(cover);
   track.appendChild(text);
+  track.appendChild(artist_a);
   
   // add event listener to change track
   cover.addEventListener("mousedown", (e)=> {
@@ -643,7 +659,7 @@ function login(username='', password=''){
   })
 }
 function switchContent(div) {
-  const objects = ['content', 'playlist-selection', 'account', 'profile'];
+  const objects = ['content', 'playlist-selection', 'account', 'artist','profile', 'logout'];
   for (var i=0; i<objects.length; i++) {
     document.getElementById(objects[i]).classList.add('hide-floating');
   }
