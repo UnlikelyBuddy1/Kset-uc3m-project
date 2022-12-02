@@ -197,7 +197,7 @@ function fill(){
       createTrack(data[i]["cover"], data[i]["path"], data[i]["title"]);
     }
     const spacer = document.createElement('div');
-    spacer.classList.add('spacer');
+    // spacer.classList.add('spacer');
     content.appendChild(spacer);
   })
 }
@@ -230,7 +230,7 @@ function createPlaylist(playlist, location){
         const footer = document.getElementById("footer");
         if(footer.classList.contains("hide-floating")){
           footer.classList.toggle("hide-floating");
-          document.getElementById("right_column").style.height = 'calc(100% - 55px - 70px)';
+          document.getElementById("right-column").style.height = 'calc(100% - 55px - 70px)';
         }
         audio.load()
         audio.play()
@@ -402,7 +402,7 @@ function displayLikedSongs() {  // Display liked songs stored in a global variab
           const footer = document.getElementById("footer");
           if(footer.classList.contains("hide-floating")){
             footer.classList.toggle("hide-floating")
-            document.getElementById("right_column").style.height = 'calc(100% - 55px - 70px)';
+            document.getElementById("right-column").style.height = 'calc(100% - 55px - 70px)';
           }
           audio.load()
           audio.play()
@@ -564,7 +564,7 @@ function createTrack(imgSrc, songSrc, title){
     const footer = document.getElementById("footer");
     if(footer.classList.contains("hide-floating")){
       footer.classList.toggle("hide-floating")
-      document.getElementById("right_column").style.height = 'calc(100% - 55px - 70px)';
+      document.getElementById("right-column").style.height = 'calc(100% - 55px - 70px)';
     }
     audio.load();
     audio.play();
@@ -683,7 +683,7 @@ function login(username='', password=''){
     body: JSON.stringify(data) ,
   }).then((response) => {
     if(response.status == 201){
-    document.getElementById('banner').style = 'display: none';
+    // document.getElementById('banner').style = 'display: none';
     const cookieUsername = getCookie('username');
     const cookiePassword = getCookie('password');
     if(!(cookieUsername && cookiePassword)){
@@ -720,15 +720,15 @@ function login(username='', password=''){
     }
   }})}
 function switchContent(div) {
-  const objects = ['content', 'playlist-selection', 'account', 'profile', 'logout'];
+  const objects = ['content', 'playlist-selection', 'account', 'profile'];
   for (var i=0; i<objects.length; i++) {
     document.getElementById(objects[i]).classList.add('hide-floating');
   }
   document.getElementById(objects[objects.indexOf(div)]).classList.remove('hide-floating');
   if (div == "content") {
-    document.getElementById('right_column').style.overflowY = "auto";
+    document.getElementById('right-column').style.overflowY = "auto";
   } else {
-    // document.getElementById('right_column').style.overflowY = "clip";
+    // document.getElementById('right-column').style.overflowY = "clip";
   }
 }
 let playState = null;
