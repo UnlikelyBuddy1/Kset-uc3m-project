@@ -6,156 +6,17 @@ var bearer='';
 var artists=[];
 var likedSongs=[];
 
-// Event Listeners ----------------------------------------------------------------------------------------
-window.addEventListener('resize', function(event){  // Resize Window
-  const width = window.innerWidth;
-  if(width>1024){
-    let sidebar = document.getElementById('left-column')
-    let footer = document.getElementById('footer')
-    sidebar.style = null;
-    footer.style = null;
-  }
-});
-
-document.getElementById("new-playlist").addEventListener('mouseup', function(){
-  unfocusWrapper();
-  togglePlaylist();
-})
-
-document.getElementById("profile-options").addEventListener('mouseup', function() {
-  document.getElementById("profile-menu").classList.toggle('hide-floating');
-})
-document.getElementById("account-button").addEventListener('mouseup', function() {
-  switchContent("account");
-  displayAccountInformation();
-})
-document.getElementById("profile-button").addEventListener('mouseup', function() {
-  switchContent("profile");
-  displayProfileInformation();
-})
-document.getElementById("logout-button").addEventListener('mouseup', function() {
-  unfocusWrapper();
-  toggleLogOut();
-  // switchContent("logout-button");
-})
-document.getElementById("confirm-logout").addEventListener('mouseup', function() {
-  deleteAllCookies();
-  document.location.reload(true);
-})
-document.getElementById("cancel-search").addEventListener('mouseup', function() {
-  setTimeout(function() {
-    searchMusicLibrary();
-  }, 1)
-  
-})
-
-document.addEventListener('mousedown', function handleClickOutsideBox(event) {
-  if (!document.getElementById('signup').contains(event.target) && !document.getElementById('signup').classList.contains('hide-floating')) {
-    unfocusWrapper();
-    toggleSignup();
-  }
-  if (!document.getElementById('login').contains(event.target) && !document.getElementById('login').classList.contains('hide-floating')) {
-    unfocusWrapper();
-    toggleLogin();
-  }
-  if (!document.getElementById('create-playlist').contains(event.target) && !document.getElementById('create-playlist').classList.contains('hide-floating')) {
-    unfocusWrapper();
-    togglePlaylist();
-  }
-  if (!document.getElementById("logout-window").contains(event.target) && !document.getElementById("logout-window").classList.contains('hide-floating')) {
-    unfocusWrapper();
-    toggleLogOut();
-  }
-});
-
 const searchBar = document.getElementById("search-bar");
-searchBar.addEventListener('keyup', function(){
-  searchMusicLibrary();
-});
-
 const signupPassword = document.getElementById("signup-password");
-signupPassword.addEventListener('keyup', function(){
-  if((!/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(signupPassword.value)) || signupPassword.value.length<8){
-    if(!signupPassword.classList.contains('sign-error')){
-      signupPassword.classList.toggle('sign-error')
-    }
-  } else {
-    if(signupPassword.classList.contains('sign-error')){
-      signupPassword.classList.toggle('sign-error')
-    }
-  }
-});
-document.getElementById("signup-password").value;
 
-document.getElementById("button-signup").addEventListener('click', function(){
-  const username = document.getElementById("signup-username").value;
-  const password = document.getElementById("signup-password").value;
-  const data = {username, password};
-  fetch('https://kset.home.asidiras.dev/auth/signup', 
-  {
-    method: 'POST', 
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data) ,
-  }).then((response) => {if(response.status == 201){
-    toggleSignup();
-    unfocusWrapper();
-  }else if(response.status == 409){
-    alert('user already exists');
-  } else{
-    alert('there has been an error in the signup procedure. try again later');
-  }})
-})
-document.getElementById("button-login").addEventListener('click', function(){
-  const username = document.getElementById("login-username").value;
-  const password = document.getElementById("login-password").value;
-  login(username, password);
-  toggleLogin();
-  unfocusWrapper();
-})
+// document.getElementById("signup-password").value;
+document.getElementById('seek-slider').max = 0;
+const volumeSlider = document.getElementById('volume-slider');
+const loginButton = document.getElementById('login-button');
+const signupButton = document.getElementById('signup-button');
+let playState = null;
 
-document.getElementById('button-playlist').addEventListener('click', function(){
-  const data = {name : document.getElementById("playlist-name").value, trackIds : playlistSongs}
-  fetch('https://kset.home.asidiras.dev/playlist/', 
-  {
-    method: 'POST', 
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': bearer,
-    },
-    body: JSON.stringify(data) ,
-  }).then((response) => {if(response.status == 201){
-    playlistSongs = [];
-    togglePlaylist();
-    unfocusWrapper();
-  }})
-}
-);
-document.getElementById("playlist-search-bar").addEventListener('keyup', ()=>{
-  let search = document.getElementById("playlist-search-bar").value;
-  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
-  .then((response) => response.json())
-  .then((data) => {
-    document.getElementById('search-results').innerHTML='';
-    for(let result of data){
-      createSearchResult(result.title, result.id);
-    }
-  })
-})
-document.getElementById("playlist-search-bar-2").addEventListener('keyup', ()=>{
-  let search = document.getElementById("playlist-search-bar-2").value;
-  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
-  .then((response) => response.json())
-  .then((data) => {
-    document.getElementById('search-results-2').innerHTML='';
-    for(let result of data){
-      createSearchResult(result.title, result.id, '-2');
-    }
-  })
-})
 
-// Event Listeners ----------------------------------------------------------------------------------------
 /*
  * https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
 */
@@ -169,7 +30,33 @@ function deleteAllCookies() {
       document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
   }
 }
-
+function signup(username, password) { // Signup Function
+  // const username = document.getElementById("signup-username").value;
+  // const password = document.getElementById("signup-password").value;
+  const data = {username, password};
+  fetch('https://kset.home.asidiras.dev/auth/signup', 
+  {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) ,
+  }).then((response) => {if(response.status == 201){
+    document.getElementById('login-page').classList.add('hide-floating');
+    document.getElementById('wrapper').classList.remove('hide-floating');
+    toggleSignup();
+  }else if(response.status == 409){
+    alert('user already exists');
+  } else{
+    alert('there has been an error in the signup procedure. try again later');
+  }})
+  if(username){
+    document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${username}.svg`
+  }
+  if(data.username){
+    document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${data.username}.svg`
+  }
+}
 function fill(){
   let content = document.getElementById("content");
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
@@ -618,7 +505,6 @@ function unfocusWrapper(){
 
 function toggleSignup(){
   const signup = document.getElementById('signup');
-  
   signup.classList.toggle('hide-floating');
   signup.classList.toggle('focus');
 }
@@ -683,20 +569,21 @@ function login(username='', password=''){
     body: JSON.stringify(data) ,
   }).then((response) => {
     if(response.status == 201){
-    // document.getElementById('banner').style = 'display: none';
-    const cookieUsername = getCookie('username');
-    const cookiePassword = getCookie('password');
-    if(!(cookieUsername && cookiePassword)){
-      setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
-      setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
-    }
-    if(username){
-      document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${username}.svg`
-    }
-    if(data.username){
-      document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${data.username}.svg`
-    }
-    response.json().then((value)=>{
+      document.getElementById('login-page').classList.add('hide-floating');
+      document.getElementById('wrapper').classList.remove('hide-floating');
+      const cookieUsername = getCookie('username');
+      const cookiePassword = getCookie('password');
+      if(!(cookieUsername && cookiePassword)){
+        setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+        setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+      }
+      if(username){
+        document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${username}.svg`
+      }
+      if(data.username){
+        document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${data.username}.svg`
+      }
+      response.json().then((value)=>{
       bearer = 'Bearer '+value.accesToken;
       const myHeaders = new Headers();
       myHeaders.append('Authorization', bearer);
@@ -725,26 +612,8 @@ function switchContent(div) {
     document.getElementById(objects[i]).classList.add('hide-floating');
   }
   document.getElementById(objects[objects.indexOf(div)]).classList.remove('hide-floating');
-  if (div == "content") {
-    document.getElementById('right-column').style.overflowY = "auto";
-  } else {
-    // document.getElementById('right-column').style.overflowY = "clip";
-  }
 }
-let playState = null;
-playPauseContainer.addEventListener('click', () => {
-  if (playState === 'play') {
-    audio.play();
-    requestAnimationFrame(whilePlaying);
-    if (playPauseContainer.classList.contains("pause")) {playPauseContainer.classList.remove("pause");}
-    playState = 'pause';
-  } else {
-    audio.pause();
-    cancelAnimationFrame(cb);
-    if (playPauseContainer.classList.contains("pause")) {playPauseContainer.classList.add("pause");}
-    playState = 'play';
-  }
-})
+
 
 
 const calculateTime = (secs) => {
@@ -759,40 +628,176 @@ function displayAudioDuration(secs) {
   duration.textContent = calculateTime(secs);
 }
 
-audio.addEventListener('loadedmetadata', () => {
-  displayAudioDuration(audio.duration);
-  setSliderMax();
-});
+
 
 const setSliderMax = () => {
   seekSlider.max = Math.floor(audio.duration);
 }
 
-seekSlider.addEventListener('input', () => {
+
+
+
+// Event Listeners ----------------------------------------------------------------------------------------
+window.addEventListener('resize', function(event){  // Resize Window
+  const width = window.innerWidth;
+  if(width>1024){
+    let sidebar = document.getElementById('left-column')
+    let footer = document.getElementById('footer')
+    sidebar.style = null;
+    footer.style = null;
+  }
+});
+
+document.getElementById("new-playlist").addEventListener('mouseup', function(){ // New Playlist Button
+  unfocusWrapper();
+  togglePlaylist();
+})
+document.getElementById("profile-options").addEventListener('mouseup', function() { // Profile Options
+  document.getElementById("profile-menu").classList.toggle('hide-floating');
+})
+document.getElementById("account-button").addEventListener('mouseup', function() { // Account Button
+  switchContent("account");
+  displayAccountInformation();
+})
+document.getElementById("profile-button").addEventListener('mouseup', function() { // Profile Button
+  switchContent("profile");
+  displayProfileInformation();
+})
+document.getElementById("logout-button").addEventListener('mouseup', function() { // Logout Button
+  unfocusWrapper();
+  toggleLogOut();
+})
+document.getElementById("confirm-logout").addEventListener('mouseup', function() { // Confirm Logout Button
+  deleteAllCookies();
+  document.location.reload(true);
+})
+document.getElementById("cancel-search").addEventListener('mouseup', function() { // Cancel Search Button
+  setTimeout(function() {
+    searchMusicLibrary();
+  }, 1)
+})
+document.addEventListener('mousedown', function handleClickOutsideBox(event) { // Unfocus Content When Floating Menu is Visible
+  if (!document.getElementById('signup').contains(event.target) && !document.getElementById('signup').classList.contains('hide-floating')) {
+    toggleSignup();
+  }
+  if (!document.getElementById('login').contains(event.target) && !document.getElementById('login').classList.contains('hide-floating')) {
+    toggleLogin();
+  }
+  if (!document.getElementById('create-playlist').contains(event.target) && !document.getElementById('create-playlist').classList.contains('hide-floating')) {
+    unfocusWrapper();
+    togglePlaylist();
+  }
+  if (!document.getElementById("logout-window").contains(event.target) && !document.getElementById("logout-window").classList.contains('hide-floating')) {
+    unfocusWrapper();
+    toggleLogOut();
+  }
+});
+searchBar.addEventListener('keyup', function(){ // Search while typing
+  searchMusicLibrary();
+});
+signupPassword.addEventListener('keyup', function(){ // Check Password Requirements
+  if((!/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(signupPassword.value)) || signupPassword.value.length<8){
+    if(!signupPassword.classList.contains('sign-error')){ // Turn Red
+      signupPassword.classList.add('sign-error')
+    }
+  } else {
+    if(signupPassword.classList.contains('sign-error')){ // Remove Red Border
+      signupPassword.classList.remove('sign-error')
+    }
+  }
+});
+document.getElementById("button-signup").addEventListener('click', function(){ // Signup Button
+  signup(document.getElementById("signup-username").value, document.getElementById("signup-password").value);
+})
+document.getElementById("button-login").addEventListener('click', function(){
+  const username = document.getElementById("login-username").value;
+  const password = document.getElementById("login-password").value;
+  login(username, password);
+  toggleLogin();
+})
+
+document.getElementById('button-playlist').addEventListener('click', function(){ // Playlist Button
+  const data = {name : document.getElementById("playlist-name").value, trackIds : playlistSongs}
+  fetch('https://kset.home.asidiras.dev/playlist/', 
+  {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': bearer,
+    },
+    body: JSON.stringify(data) ,
+  }).then((response) => {if(response.status == 201){
+    playlistSongs = [];
+    togglePlaylist();
+    unfocusWrapper();
+  }})
+}
+);
+document.getElementById("playlist-search-bar").addEventListener('keyup', ()=>{ // Song Search for Playlists
+  let search = document.getElementById("playlist-search-bar").value;
+  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
+  .then((response) => response.json())
+  .then((data) => {
+    document.getElementById('search-results').innerHTML='';
+    for(let result of data){
+      createSearchResult(result.title, result.id);
+    }
+  })
+})
+document.getElementById("playlist-search-bar-2").addEventListener('keyup', ()=>{ // Song Search for Playlists 2
+  let search = document.getElementById("playlist-search-bar-2").value;
+  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
+  .then((response) => response.json())
+  .then((data) => {
+    document.getElementById('search-results-2').innerHTML='';
+    for(let result of data){
+      createSearchResult(result.title, result.id, '-2');
+    }
+  })
+})
+playPauseContainer.addEventListener('click', () => { // Switch Play and Pause Icons
+  if (playState === 'play') {
+    audio.play();
+    requestAnimationFrame(whilePlaying);
+    if (!playPauseContainer.classList.contains("pause")) {playPauseContainer.classList.add("pause");}
+    playState = 'pause';
+  } else {
+    audio.pause();
+    cancelAnimationFrame(cb);
+    if (playPauseContainer.classList.contains("pause")) {playPauseContainer.classList.remove("pause");}
+    playState = 'play';
+  }
+})
+audio.addEventListener('loadedmetadata', () => { // Show Audio Duration
+  displayAudioDuration(audio.duration);
+  setSliderMax();
+});
+seekSlider.addEventListener('input', () => { // Change Current Time Text
   currentTime.textContent = calculateTime(seekSlider.value);
   if (!audio.paused) {
     cancelAnimationFrame(cb);
   }
 });
-
-seekSlider.addEventListener('change', () => {
+seekSlider.addEventListener('change', () => { // Seek Slider
   audio.currentTime = seekSlider.value;
   if (!audio.paused) {
     requestAnimationFrame(whilePlaying);
   }
 });
-
-audio.addEventListener('timeupdate', () => {
+audio.addEventListener('timeupdate', () => { // Move Seek Slider Every Second
   currentTime.textContent = calculateTime(seekSlider.value);
 });
-
-document.getElementById('seek-slider').max = 0;
-
-playPauseContainer.addEventListener('click', () => {
-  playPauseContainer.classList.toggle('pause');
-});
-
-const volumeSlider = document.getElementById('volume-slider');
+// playPauseContainer.addEventListener('click', () => { // 
+//   playPauseContainer.classList.toggle('pause');
+// });
 volumeSlider.addEventListener('input', () => {
   audio.volume = volumeSlider.value / 100;
 });
+loginButton.addEventListener('click', () => {
+  document.getElementById('login').classList.remove('hide-floating');
+})
+signupButton.addEventListener('click', () => {
+  document.getElementById('signup').classList.remove('hide-floating');
+})
+
+// Event Listeners ----------------------------------------------------------------------------------------

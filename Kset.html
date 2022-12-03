@@ -6,7 +6,17 @@
     <link rel="stylesheet" href="assets/Kset.css">
 </head>
 <body>
-    <div id="wrapper" class="wrapper">
+
+    <!-- Login Page -->
+    <div id="login-page" class="login-page">
+        <img id="login-kset-logo" class="login-kset-logo logo" src="assets/icon.webp" alt="a cassette that is the logo of the app">
+        <div class="entry-buttons">
+            <button id="signup-button" class="signup-button button text">Sign Up</button>
+            <button id="login-button" class="login-button button text">Log In</button>
+        </div>
+    </div>
+
+    <div id="wrapper" class="wrapper hide-floating">
 
         <!-- Left Column -->
         <div id="left-column" class="left-column hidden">
@@ -112,7 +122,6 @@
                     <span id="duration" class="duration text">0:00</span>
                     <input type="range" id="volume-slider" class="volume-slider" max="100" value="100">
                 </div>
-                <!-- <b id="banner" class="signup-banner text"><a class="signup-banner text accent-color" href=#>Sign up</a> for free</b>                  -->
             </div> 
 
         </div>

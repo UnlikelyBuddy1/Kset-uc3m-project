@@ -2,6 +2,7 @@
 Fonts
 HTML Sections
 Attributes
+Login Page
 Main Body
 Left Column
     Sidebar
@@ -95,6 +96,37 @@ body{
 }
 .underlined{
     text-decoration: underline;
+}
+
+
+/* Login Page */
+.login-page{
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(115deg, rgba(222,108,26,0.9) 0%, rgba(30,30,30,1) 110vh);
+    display: flex;
+    flex-direction: column;
+}
+.login-page > img{
+    margin: 180px auto 0 auto;
+}
+.entry-buttons{
+    margin: 50px auto 50px auto;
+    display: flex;
+    flex-direction: column;
+}
+.login-page > div > button{
+    margin: 5px 0;
+    width: 190px;
+    height: 45px;
+}
+.signup-button{
+    background-color: #1e1e1e;
+    border: #de6c1a solid 2px;
+}
+.login-button{
+    background-color: #de6c1a;
 }
 
 
@@ -580,19 +612,6 @@ input[type="range"] {
     right: 5px;
     bottom: 0;
 }
-/* .signup-banner{
-    margin-left: 1vw;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 0.8rem;
-    text-overflow: ellipsis;
-    overflow: hidden; 
-    white-space: nowrap;
-    height: 1.8rem;
-}
-.accent-color{
-    color: #ee0000;
-} */
 /* Chrome & Safari WIP */
 /* input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
@@ -888,9 +907,6 @@ input[type="range"]:active::-ms-thumb {
         margin-right: 0.3vw;
         width: 99.4vw;
     }
-    /* .signup-banner{
-        margin-left: 2vw;
-    } */
 }
 @media screen and (max-width:768px) { /* Smaller Tablet */
     .track{
