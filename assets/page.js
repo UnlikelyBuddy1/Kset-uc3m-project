@@ -517,7 +517,7 @@ function toggleLogin(){
 function togglePlaylist(){
   const playlist  = document.getElementById('create-playlist');
   playlist.classList.toggle('hide-floating');
-  playlist.classList.toggle('focus');
+  // playlist.classList.toggle('focus');
 }
 function toggleLogOut(){
   const playlist  = document.getElementById('logout-window');
@@ -556,56 +556,63 @@ function getCookie(name) {
 }
 
 function login(username='', password=''){
-  // fill();
   const cookieUsername = getCookie('username');
   const cookiePassword = getCookie('password');
   const data = {username: username?username:cookieUsername, password: password?password:cookiePassword};
-  fetch('https://kset.home.asidiras.dev/auth/signin', 
-  {
-    method: 'POST', 
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data) ,
-  }).then((response) => {
-    if(response.status == 201){
-      document.getElementById('login-page').classList.add('hide-floating');
-      document.getElementById('wrapper').classList.remove('hide-floating');
-      const cookieUsername = getCookie('username');
-      const cookiePassword = getCookie('password');
-      if(!(cookieUsername && cookiePassword)){
-        setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
-        setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+
+  return new Promise((res, rej) => {
+    fetch('https://kset.home.asidiras.dev/auth/signin', 
+    {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data) ,
+    }).then((response) => {
+      if(response.status == 201){ // Login Successful
+        document.getElementById('login-page').classList.add('hide-floating');
+        document.getElementById('wrapper').classList.remove('hide-floating');
+        const cookieUsername = getCookie('username');
+        const cookiePassword = getCookie('password');
+        if(!(cookieUsername && cookiePassword)){
+          setCookie('username', username, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+          setCookie('password', password, {secure: true, 'max-age': 3600*24*30, SameSite: 'None'});
+        }
+        if(username){
+          document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${username}.svg`
+        }
+        if(data.username){
+          document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${data.username}.svg`
+        }
+        response.json().then((value)=>{
+        bearer = 'Bearer '+value.accesToken;
+        const myHeaders = new Headers();
+        myHeaders.append('Authorization', bearer);
+        fetch('https://kset.home.asidiras.dev/playlist/?index=0', 
+        {
+          method: 'GET', 
+          headers: myHeaders,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          for(let playlists of data){
+            createPlaylist(playlists, 'playlist-selection');
+          }
+        })
+        });
+      } else{ // Unsuccessful Login
+        // if(username!='' && password!=''){
+        //   alert('Wrong email or password !');
+        // }
       }
-      if(username){
-        document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${username}.svg`
-      }
-      if(data.username){
-        document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${data.username}.svg`
-      }
-      response.json().then((value)=>{
-      bearer = 'Bearer '+value.accesToken;
-      const myHeaders = new Headers();
-      myHeaders.append('Authorization', bearer);
-      fetch('https://kset.home.asidiras.dev/playlist/?index=0', 
-      {
-        method: 'GET', 
-        headers: myHeaders,
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      for(let playlists of data){
-        createPlaylist(playlists, 'playlist-selection');
-      }
+      return response.status;
     })
-    });
-    
-  } else{
-    if(username!='' && password!=''){
-      alert('Wrong email or password !');
-    }
-  }})}
+    .then(data => {
+      return res(data)
+    })
+  })
+}
 function switchContent(div) {
   const objects = ['content', 'playlist-selection', 'account', 'profile'];
   for (var i=0; i<objects.length; i++) {
@@ -712,8 +719,18 @@ document.getElementById("button-signup").addEventListener('click', function(){ /
 document.getElementById("button-login").addEventListener('click', function(){
   const username = document.getElementById("login-username").value;
   const password = document.getElementById("login-password").value;
-  login(username, password);
-  toggleLogin();
+
+  login(username,password).then(response => {
+    console.log(`Response: ${response}`)
+    if (response == 400) {
+      document.getElementById("login-username").classList.add('sign-error');
+      document.getElementById("login-password").classList.add("sign-error");
+      document.getElementById("incorrect-field").classList.remove("hide-floating");
+    } else {
+      toggleLogin();
+    } 
+  })
+
 })
 
 document.getElementById('button-playlist').addEventListener('click', function(){ // Playlist Button

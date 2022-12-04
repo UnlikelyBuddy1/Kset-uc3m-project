@@ -133,20 +133,22 @@
         <!-- Login Window -->
         <div id="login" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
+            <b id="incorrect-field" class="text hide-floating">Inccorect username or password, please try again</b>
             <form>
                 <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
                 <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password"><input type="reset" class="text clear-input" value="X"></input>
             </form>
-            <button id="button-login" class="text sign-button fade">
+            <button id="button-login" class="login-button sign-button button text">
                 <b class="text">LOG IN</b>
             </button>
-            <b class="text sign-up-ext">Or log in with :</b>
+            <b class="sign-up-ext text">Log in with :</b>
             <div>
                 <img src="assets/facebook.webp" class="signup-logo"/>
                 <img src="assets/google.webp" class="signup-logo"/>
             </div>
+            <b class="text">Or <u>create an account</u> for free</b>
         </div>
 
         <!-- Sign Up Window -->
@@ -169,7 +171,7 @@
                 <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <div><input type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
-            <button id="button-signup" class="text sign-button fade">
+            <button id="button-signup" class="signup-button sign-button button text">
                 <b class="text">SIGN UP</b>
             </button>
             <b class="text sign-up-ext">Or sign up with :</b>
