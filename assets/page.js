@@ -33,23 +33,51 @@ function deleteAllCookies() {
 function signup(username, password) { // Signup Function
   // const username = document.getElementById("signup-username").value;
   // const password = document.getElementById("signup-password").value;
+
+  if (username == ''){ // No username entered
+    document.getElementById('signup-no-account').classList.remove('hide-floating');
+    document.getElementById('signup-username').classList.add('sign-error');
+    return 1;
+  } else document.getElementById('signup-no-account').classList.add('hide-floating');
+
+  if (password == '') { // No password entered
+    document.getElementById('signup-no-password').classList.remove('hide-floating');
+    return 1;
+  } else document.getElementById('signup-no-password').classList.add('hide-floating');
+
+  if ((document.getElementById('signup-password').classList.contains('sign-error')) && (document.getElementById('signup-password').value != '')) { // Unsatisfactory Password
+    document.getElementById('signup-password-error').classList.remove('hide-floating');
+    return 1;
+  } else document.getElementById('signup-password-error').classList.add('hide-floating');
+
+  if (!document.getElementById('signup-checkbox').checked) { // Checkbox ticked
+    document.getElementById('signup-terms-error').classList.remove('hide-floating');
+    return 1;
+  } else document.getElementById('signup-terms-error').classList.add('hide-floating');
+  
+
+
   const data = {username, password};
   fetch('https://kset.home.asidiras.dev/auth/signup', 
   {
     method: 'POST', 
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data) ,
-  }).then((response) => {if(response.status == 201){
-    document.getElementById('login-page').classList.add('hide-floating');
-    document.getElementById('wrapper').classList.remove('hide-floating');
-    toggleSignup();
-  }else if(response.status == 409){
-    alert('user already exists');
-  } else{
-    alert('there has been an error in the signup procedure. try again later');
-  }})
+  })
+  .then((response) => {
+    if(response.status == 201){ // Successful Sign up
+      document.getElementById('login-page').classList.add('hide-floating');
+      document.getElementById('wrapper').classList.remove('hide-floating');
+      toggleSignup();
+    } else if (response.status == 409){ // Account Already exists
+      // alert('An account with that username already exists');
+      document.getElementById('signup-account-error').classList.remove('hide-floating');
+      document.getElementById('signup-username').classList.add('sign-error');
+    } else { // Other Error
+      // alert('There has been an error in the signup procedure. try again later');
+      document.getElementById('signup-error').classList.remove('hide-floating');
+    }
+  })
   if(username){
     document.getElementById('profile-image').src = `https://avatars.dicebear.com/api/bottts/${username}.svg`
   }
@@ -184,7 +212,8 @@ function displayAccountInformation() {  // Still need to make functional
   submit_button.appendChild(button_text);
   submit_button.classList.add('sign-button')
   submit_button.classList.add("text");
-  submit_button.classList.add("fade");
+  submit_button.classList.add("login-button");
+  submit_button.classList.add("button");
   submit_button.classList.add('account-section');
   account.appendChild(submit_button);
 }
@@ -595,7 +624,7 @@ function login(username='', password=''){
         })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           for(let playlists of data){
             createPlaylist(playlists, 'playlist-selection');
           }
@@ -716,12 +745,15 @@ signupPassword.addEventListener('keyup', function(){ // Check Password Requireme
 document.getElementById("button-signup").addEventListener('click', function(){ // Signup Button
   signup(document.getElementById("signup-username").value, document.getElementById("signup-password").value);
 })
+document.getElementById("signup-username").addEventListener('keydown', function () {
+  document.getElementById('signup-username').classList.remove('sign-error');
+  document.getElementById('signup-account-error').classList.add('hide-floating');
+})
 document.getElementById("button-login").addEventListener('click', function(){
   const username = document.getElementById("login-username").value;
   const password = document.getElementById("login-password").value;
 
   login(username,password).then(response => {
-    console.log(`Response: ${response}`)
     if (response == 400) {
       document.getElementById("login-username").classList.add('sign-error');
       document.getElementById("login-password").classList.add("sign-error");

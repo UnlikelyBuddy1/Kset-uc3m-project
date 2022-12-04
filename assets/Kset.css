@@ -748,6 +748,12 @@ input[type="range"]:active::-ms-thumb {
     max-width: 450px;
     padding: 1em;
 }
+.error-messages{
+    color: red;
+}
+.error-messages > ul {
+    list-style-type: circle;
+}
 .sign-img{
     filter: invert(0.90);
     width: 30%;
@@ -777,6 +783,7 @@ input[type="range"]:active::-ms-thumb {
 }
 .confirm-logout{
     filter: drop-shadow(2px 4px 6px black);
+    background: #de6c1a;
 }
 
 

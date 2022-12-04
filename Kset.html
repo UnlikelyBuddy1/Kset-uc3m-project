@@ -133,7 +133,10 @@
         <!-- Login Window -->
         <div id="login" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
-            <b id="incorrect-field" class="text hide-floating">Inccorect username or password, please try again</b>
+            <ul class="error-messages text">
+                <li id="incorrect-field" class="hide-floating"><b >Incorect username or password, please try again</b></li>
+            </ul>
+            
             <form>
                 <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" value="X"></input>
             </form>
@@ -154,6 +157,15 @@
         <!-- Sign Up Window -->
         <div id="signup" class="sign hide-floating">
             <img class="sign-img" src="assets/login.webp">
+            <ul class="error-messages text">
+                <li id="signup-no-account" class="hide-floating"><b>Please enter a username</b></il>
+                <li id="signup-account-error" class="hide-floating"><b>An account with that username already exists, please try another name or <u>sign in here</u>.</b></il>
+                <li id="signup-no-password" class="hide-floating"><b>Please enter a password</b></il>
+                <li id="signup-password-error" class="hide-floating"><b>Please make sure your password has at least 8 characters, with one uppercase and one  or special character.</b></il>
+                <li id="signup-terms-error" class="hide-floating"><b>Please accept the terms and conditions.</b></il>
+                <li id="signup-error" class="hide-floating"><b>There has been an unexpected error with the signup process, please try again later.</b></il>
+            </ul>
+            
             <form>
                 <input id="signup-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" value="X"></input>
             </form>
@@ -170,7 +182,7 @@
             <form>
                 <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx"><input type="reset" class="text clear-input" value="X"></input>
             </form>
-            <div><input type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
+            <div><input id="signup-checkbox" type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
             <button id="button-signup" class="signup-button sign-button button text">
                 <b class="text">SIGN UP</b>
             </button>
@@ -198,7 +210,7 @@
         <!-- Logout Window -->
         <div id="logout-window" class="sign hide-floating">
             <b class="text">Are you sure you want to Log Out?</b>
-            <button id="confirm-logout" class="confirm-logout text sign-button fade">
+            <button id="confirm-logout" class="confirm-logout button text sign-button">
                 <b class="text">Yes, Log Out.</b>
             </button>
         </div>
