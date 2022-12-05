@@ -65,7 +65,7 @@
                 <!-- Search Bar -->
                 <form id="search-bar" class="search-bar">
                     <input type="text" class="text search-input" id="mySearch" placeholder="Search for a song..."/>
-                    <input type="reset" id="cancel-search" class="text clear-input" value="X"/>
+                    <input type="reset" id="cancel-search" class="text clear-input" tabindex="-1" value="X"/>
                 </form>
                 <!-- Profile Button -->
                 <button id="profile-options" class="profile-options button">
@@ -138,10 +138,10 @@
             </ul>
             
             <form>
-                <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" value="X"></input>
+                <input id="login-username" type="text" class="text sign-inputs fade" placeholder="username"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
             <form>
-                <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password"><input type="reset" class="text clear-input" value="X"></input>
+                <input id="login-password" type="password" class="text sign-inputs fade" placeholder="password"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
             <button id="button-login" class="login-button sign-button button text">
                 <b class="text">LOG IN</b>
@@ -173,14 +173,14 @@
                 <input id="signup-password" type="password" class="text sign-inputs fade" placeholder="password 8 char 1 special"><input type="reset" class="text clear-input" value="X"></input>
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="name"><input type="reset" class="text clear-input" value="X"></input>
+                <input type="text" class="text sign-inputs fade" placeholder="name"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
                 
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="email"><input type="reset" class="text clear-input" value="X"></input>
+                <input type="text" class="text sign-inputs fade" placeholder="email"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
             <form>
-                <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx"><input type="reset" class="text clear-input" value="X"></input>
+                <input type="text" class="text sign-inputs fade" placeholder="date of birth xx/xx/xxxx"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
             <div><input id="signup-checkbox" type="checkbox"><i class="text">I Accept the <a href="#">Terms of use</a></i></div>
             <button id="button-signup" class="signup-button sign-button button text">
@@ -194,7 +194,7 @@
         <!-- Create Playlist Window -->
         <div id="create-playlist" class="sign hide-floating">
             <form>
-                <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name"><input type="reset" class="text clear-input" value="X"></input>
+                <input id="playlist-name" type="text" class="text sign-inputs fade" placeholder="Playlist Name"><input type="reset" class="text clear-input" tabindex="-1" value="X"></input>
             </form>
             <form>
                 <input id="playlist-search-bar" class="playlist-search-bar text sign-inputs fade" type="text" onkeyup="searchSongs()" placeholder="Search to add songs..."><input type="reset" class="text clear-input" value="X"></input>

@@ -66,7 +66,7 @@ body{
 }
 .button{
     cursor: pointer;
-    margin-left: 1.5vw;
+    /* margin-left: 1.5vw; */
     background-color:black;
     border-color: #f1f1f1;
     border-width: 0px;
@@ -231,7 +231,7 @@ body{
 .logo{
     aspect-ratio: 16/9;
     margin: 0px;
-    margin-left: 46px;
+    margin-left: 24px;
     max-height: 90%;
 }
 .container { /* Menu for small screens */
@@ -257,36 +257,42 @@ body{
     transform: translate(0, -10px) rotate(45deg);
 }
 .search-bar{ /* Search Bar */
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    width: 82%;
 }
 form{
     display: flex;
     width: 100%;
 }
 .search-input{
-    width: 80vw;
+    width: 100%;
     min-width: 180px;
     height: 20px;
     background-color: #f1f1f1;
     border-radius: 20px;
-    padding: 0.3rem;
-    padding-left: 0.5rem;
+    padding: 0.3rem 0.5rem;
     outline: none;
     color:#1e1e1e;
-    margin: auto;
 }
 .clear-input{
-    margin-left: -80px;
-    margin-top: 6px;
+    margin: auto -35px;
     background-color: transparent;
     border: none;
     border-radius: 24px;
-    color: #1e1e1e;
+    color: #f1f1f1;
     height: 25px;
 }
-.search-input:hover, .clear-input:hover{
+.search-bar > .clear-input{
+    color: #1e1e1e;
+    margin-top: 6.5px;
+}
+.search-input:hover{
     animation-name: searchgrey;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+.clear-input:hover{
+    animation-name: togrey;
     animation-duration: 500ms;
     animation-fill-mode: forwards;
 }
@@ -510,8 +516,6 @@ div > ol{
 /* Audio Player */
 .footer{ /* Footer for audio Player */
     position: absolute;
-    background-color: #0E0C0B;
-    /* border-radius: 12px; */
     bottom: 0px;
     width: 78%;
     margin-left: auto;
@@ -814,7 +818,6 @@ input[type="range"]:active::-ms-thumb {
 }
 @keyframes togrey {
     from {
-        background-color: #1e1e1e;
     }
     to {
         background-color: #4e4e4e;
@@ -825,7 +828,7 @@ input[type="range"]:active::-ms-thumb {
         background-color: #f1f1f1;
     }
     to {
-        background-color: #d1d1d1;
+        background-color: #adadad;
     }
 }
 @keyframes shadow {
