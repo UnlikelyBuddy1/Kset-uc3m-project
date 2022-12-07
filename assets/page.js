@@ -661,8 +661,9 @@ function login(username='', password=''){
   })
 }
 function switchContent(div) {
-  const objects = ['content', 'playlist-selection', 'account', 'artist-profile','profile', 'logout'];
+  const objects = ['content', 'playlist-selection', 'account', 'artist-profile','profile', 'logout-window'];
   for (var i=0; i<objects.length; i++) {
+    console.log(objects[i]);
     document.getElementById(objects[i]).classList.add('hide-floating');
   }
   document.getElementById(objects[objects.indexOf(div)]).classList.remove('hide-floating');

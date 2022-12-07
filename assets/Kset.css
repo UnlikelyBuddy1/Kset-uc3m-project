@@ -524,12 +524,12 @@ div > ol{
     align-items: center;
     flex-direction: column;
 }
-.artist-profile{
+/*.artist-profile{
     margin: 2em;
     margin-bottom: 0.5em;
     height: 25vh;
     border-radius: 100%;
-}
+}*/
 
 /* Audio Player */
 .footer{ /* Footer for audio Player */
