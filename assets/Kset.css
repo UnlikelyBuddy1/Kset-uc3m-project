@@ -445,6 +445,11 @@ div > ol{
     margin-top: 1px;
     margin-bottom: 1px;
 }
+
+.artist-title:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
 .playlist-selection{ /* Playlists */
     padding: 1.2vmax;
     display: flex;
@@ -487,7 +492,7 @@ div > ol{
     gap: 1em;
     padding: 0.5em;
 }
-.account, .profile{ /* Page setup for Account & Profile */
+.account, .profile, .artist-profile{ /* Page setup for Account & Profile */
     padding: 1.2vmax;
     display: flex;
     flex-flow: column wrap;
