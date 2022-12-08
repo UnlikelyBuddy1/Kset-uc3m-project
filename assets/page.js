@@ -413,7 +413,7 @@ function displayProfileInformation(){
   rowContainer.appendChild(profileStats);
   
   const profileCasette = document.createElement('img');
-  profileCasette.src = "assets/icon.webp";
+  profileCasette.src = "assets/icon_notext.webp";
   profileCasette.classList.add('artist-casette');
   rowContainer.appendChild(profileCasette);
 
@@ -441,6 +441,8 @@ function displayProfileInformation(){
   likedTracks.classList.add('artist-stats-text');
   profile.appendChild(likedTracks);
 
+  displayLikedSongs();
+
 }
 
 function displayArtistInformation(artist){
@@ -466,24 +468,34 @@ function displayArtistInformation(artist){
   artistImg.classList.add('artist-img');
   rowContainer.appendChild(artistImg);
 
-  //listeners and followers placeholder
+  //listeners and followers/follow button placeholder
   const artistStats = document.createElement('div');
+
   const artistListeners = document.createElement('h3');
   artistListeners_text = document.createTextNode("-- listeners");
   const artistFollowers = document.createElement('h3');
   artistFollowers_text = document.createTextNode("-- followers");
+  //follow button -- needs to be linked to a follow function
+  const followButton = document.createElement('button');
+  followButton_text = document.createTextNode("Follow")
+
   artistListeners.appendChild(artistListeners_text);
   artistFollowers.appendChild(artistFollowers_text);
+  followButton.appendChild(followButton_text);
+
   artistListeners.classList.add('artist-stats-text');
   artistFollowers.classList.add('artist-stats-text');
+  followButton.classList.add('follow-button');
   artistStats.appendChild(artistListeners);
   artistStats.appendChild(artistFollowers);
+  artistStats.appendChild(followButton);
+
   artistStats.classList.add('artist-stats-container');
   rowContainer.appendChild(artistStats);
 
   //casette of artist top songs -- not functional
   const artistCasette = document.createElement('img');
-  artistCasette.src = "assets/icon.webp";
+  artistCasette.src = "assets/icon_notext.webp";
   artistCasette.classList.add('artist-casette');
   rowContainer.appendChild(artistCasette);
 

@@ -526,7 +526,7 @@ div > ol{
 .artist-name{
     color: #f1f1f1;
     font-family: "myfont";
-    font-size: 5rem;
+    font-size: 4rem;
     margin: 0%;
     margin-top: 0.1em;
     margin-bottom: 0.5em;
@@ -555,17 +555,34 @@ div > ol{
 .artist-stats-text{
     color: #f1f1f1;
     font-family: "myfont";
-    font-size: 2rem;
+    font-size: 1rem;
     margin: auto;
+}
+
+.follow-button{
+    height: 4vh;
+    width: 8vh;
+    background-color: #1e1e1e;
+    border: #de6c1a solid 2px;
+    color: #f1f1f1;
+    font-family: "myfont";
+    font-size: 1rem;
+    margin: 1em auto auto 0.5em;
+}
+
+.follow-button:hover{
+    transform:scale(1.05);
+    opacity:50%;
 }
 
 .artist-casette{
     float:right;
-    margin-right: 15em;
-    height: 20vh;
+    margin:auto 15em auto auto;
+    height: 10vh;
 }
 
 .artist-casette:hover{
+    transform: scale(1.05);
     opacity:50%;
 }
 
