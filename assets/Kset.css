@@ -531,6 +531,69 @@ div > ol{
     border-radius: 100%;
 }*/
 
+/*Artist Page*/
+.artist-profile{
+    background-image: linear-gradient(155deg, rgba(222,108,26,0.75) 50%, rgba(30,30,30,1) 100%); 
+}
+.artist-name{
+    color: #f1f1f1;
+    font-family: "myfont";
+    font-size: 5rem;
+    margin: 0%;
+    margin-top: 0.1em;
+    margin-bottom: 0.5em;
+}
+
+.artist-row-container{
+    display: flex;
+    width:100%;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-bottom: 2em;
+}
+
+.artist-img{
+    height: 20vh;
+    border-radius: 100%;
+    margin-right: 0.5em;
+}
+
+.artists-stats-container{
+    vertical-align:middle;
+}
+
+.artist-stats-text{
+    color: #f1f1f1;
+    font-family: "myfont";
+    font-size: 2rem;
+    margin: auto;
+}
+
+.artist-casette{
+    float:right;
+    margin-left: 5em;
+    height: 15vh;
+}
+
+.artist-casette:hover{
+    opacity:50%;
+}
+
+.artist-img,.artist-stats-container,.artist-casette{
+    display: inline-block;
+}
+
+.artist-content{
+    margin-top: 10px;
+    padding: 1.2vmax;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 24px;
+    min-height: 40vw;
+}
+
 /* Audio Player */
 .footer{ /* Footer for audio Player */
     position: absolute;

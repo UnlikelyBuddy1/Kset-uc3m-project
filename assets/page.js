@@ -109,7 +109,8 @@ function fill(){
         section.classList.add('section');
         content.appendChild(section);
       }
-      createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+      track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+      content.appendChild(track);
     }
     const spacer = document.createElement('div');
     // spacer.classList.add('spacer');
@@ -373,8 +374,72 @@ function displayProfileInformation() {  // Need to implement favorite artists, p
 }
 
 function displayArtistInformation(artist){
-  let artistPageTitle = document.createElement('h1');
-  artistPageTitle.textContent = artist;
+  let artistProfile = document.getElementById("artist-profile");
+  artistProfile.innerHTML= ' ';
+  //title
+  const artistName = document.createElement('h3');
+  artistName_text = document.createTextNode(artist);
+  artistName.appendChild(artistName_text);
+  artistName.classList.add('artist-name')
+  artistProfile.appendChild(artistName);
+
+  //img, listeners, followers, and casette all in one container
+  rowContainer = document.createElement('div');
+  rowContainer.classList.add('artist-row-container');
+  artistProfile.appendChild(rowContainer)
+
+  //artist img -- img from album
+  const artistImg = document.createElement('img');
+  artistImg.src = 'https://cdn-icons-png.flaticon.com/512/552/552460.png';
+  artistImg.alt = "artist image";
+  artistImg.classList.add('artist-img');
+  rowContainer.appendChild(artistImg);
+
+  //listeners and followers placeholder
+  const artistStats = document.createElement('div');
+  const artistListeners = document.createElement('h3');
+  artistListeners_text = document.createTextNode("-- listeners");
+  const artistFollowers = document.createElement('h3');
+  artistFollowers_text = document.createTextNode("-- followers");
+  artistListeners.appendChild(artistListeners_text);
+  artistFollowers.appendChild(artistFollowers_text);
+  artistListeners.classList.add('artist-stats-text');
+  artistFollowers.classList.add('artist-stats-text');
+  artistStats.appendChild(artistListeners);
+  artistStats.appendChild(artistFollowers);
+  artistStats.classList.add('artist-stats-container');
+  rowContainer.appendChild(artistStats);
+
+  //casette of artist top songs -- not functional
+  const artistCasette = document.createElement('img');
+  artistCasette.src = "assets/icon.webp";
+  artistCasette.classList.add('artist-casette');
+  rowContainer.appendChild(artistCasette);
+
+  //display all songs by artist from json
+  const section = document.createElement('h3');
+  section_text = document.createTextNode("Discography");
+  section.appendChild(section_text);
+  section.classList.add('text');
+  section.classList.add('section');
+  artistProfile.appendChild(section);
+
+  let content = document.createElement('div');
+  content.classList.add('artist-content');
+  content.appendChild(section);
+
+  artistProfile.appendChild(content);
+
+    fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+    .then((response) => response.json())
+    .then((data) => {
+      for(let i=0; i<data.length; i++){
+        if (data[i]["path"].substr(0,data[i]["path"].indexOf('-')) == artist) {
+          track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+          content.appendChild(track);
+        }
+      }
+    })
 }
 
 
@@ -505,10 +570,9 @@ function createTrack(imgSrc, songSrc, title, artist){
     requestAnimationFrame(whilePlaying);
     if (!playPauseContainer.classList.contains("pause")) {playPauseContainer.classList.add("pause");}
     document.getElementById("track-title").textContent = title;
-    document.getElementById("track-artist").textContent = "Placeholder Artist";
+    document.getElementById("track-artist").textContent = artist;
   });
-  const content = document.getElementById("content");
-  content.appendChild(track);
+  return track;
 }
 
 /* searchMusicLibrary()
