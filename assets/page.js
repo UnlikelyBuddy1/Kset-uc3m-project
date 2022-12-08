@@ -332,50 +332,122 @@ function displayLikedSongs() {  // Display liked songs stored in a global variab
   })
 }
 
-function displayProfileInformation() {  // Need to implement favorite artists, playlists, etc...
-  const profile = document.getElementById('profile');
-  const numSections = profile.getElementsByClassName('profile-section').length;
-  for (var i=0; i<numSections; i++){
-    profile.removeChild(profile.getElementsByClassName('profile-section')[0]);
-  }
+// function displayProfileInformation() {  // Need to implement favorite artists, playlists, etc...
+//   const profile = document.getElementById('profile');
+//   const numSections = profile.getElementsByClassName('profile-section').length;
+//   for (var i=0; i<numSections; i++){
+//     profile.removeChild(profile.getElementsByClassName('profile-section')[0]);
+//   }
 
-  // const fields = ['Your Top Artists', 'Your Top Songs', 'Liked Songs', 'Your Playlists', 'People Following You']
-  const fields = ['Liked Songs']
-  for (var i=0; i<fields.length; i++) {
-    const section = document.createElement('div');
-    section_text = document.createTextNode(fields[i].concat(': '));
-    section_bar = document.createElement('div');
+//   // const fields = ['Your Top Artists', 'Your Top Songs', 'Liked Songs', 'Your Playlists', 'People Following You']
+//   const fields = ['Liked Songs']
+//   for (var i=0; i<fields.length; i++) {
+//     const section = document.createElement('div');
+//     section_text = document.createTextNode(fields[i].concat(': '));
+//     section_bar = document.createElement('div');
 
-    switch (i) {
-      // case 0:
-        // let artists = displayTopArtists();
-        // // alert(artists.length);
-        // for (var i=0; i<artists.length; i++) {
-        //   artist_name = document.createTextNode(artists[i]);
-        //   section.appendChild(artist_name);
-        // }
-        // break;
+//     switch (i) {
+//       // case 0:
+//         // let artists = displayTopArtists();
+//         // // alert(artists.length);
+//         // for (var i=0; i<artists.length; i++) {
+//         //   artist_name = document.createTextNode(artists[i]);
+//         //   section.appendChild(artist_name);
+//         // }
+//         // break;
 
-      // case 3:
-      case 0:
-        section_bar.setAttribute("id", "liked-songs");
-        displayLikedSongs();
-      default:
-    }
+//       // case 3:
+//       case 0:
+//         section_bar.setAttribute("id", "liked-songs");
+//         displayLikedSongs();
+//       default:
+//     }
 
-    section_bar.classList.add('section-bar');
-    section.classList.add('text');
-    section.appendChild(section_bar);
-    section.appendChild(section_text);
-    section.classList.add('profile-section');
-    section.classList.add('section');
-    profile.appendChild(section);
-  }
+//     section_bar.classList.add('section-bar');
+//     section.classList.add('text');
+//     section.appendChild(section_bar);
+//     section.appendChild(section_text);
+//     section.classList.add('profile-section');
+//     section.classList.add('section');
+//     profile.appendChild(section);
+//   }
+// }
+
+//profile page -- use mostly the same css as artist page
+function displayProfileInformation(){
+  let profile = document.getElementById("profile");
+  profile.innerHTML= ' ';
+
+  //title -- change to include username
+  const profileName = document.createElement('h3');
+  profileName_text = document.createTextNode("Your Profile");
+  profileName.appendChild(profileName_text);
+  profileName.classList.add('artist-name')
+  profile.appendChild(profileName);
+
+  //img, listeners, followers, and casette all in one container
+  rowContainer = document.createElement('div');
+  rowContainer.classList.add('artist-row-container');
+  profile.appendChild(rowContainer)
+  
+  //profile picture
+  const profileImg = document.createElement('img');
+  profileImg.src=document.getElementById('profile-image').src
+  profileImg.alt = "artist image";
+  profileImg.classList.add('artist-img');
+  rowContainer.appendChild(profileImg);
+
+  //listening time and followers placeholder
+  const profileStats = document.createElement('div');
+  const minutesListened = document.createElement('h3');
+  minutesListened_text = document.createTextNode("-- minutes listened");
+  const profileFollowers = document.createElement('h3');
+  profileFollowers_text = document.createTextNode("-- followers");
+  minutesListened.appendChild(minutesListened_text);
+  profileFollowers.appendChild(profileFollowers_text);
+  minutesListened.classList.add('artist-stats-text');
+  profileFollowers.classList.add('artist-stats-text');
+  profileStats.appendChild(minutesListened);
+  profileStats.appendChild(profileFollowers);
+  profileStats.classList.add('artist-stats-container');
+  rowContainer.appendChild(profileStats);
+  
+  const profileCasette = document.createElement('img');
+  profileCasette.src = "assets/icon.webp";
+  profileCasette.classList.add('artist-casette');
+  rowContainer.appendChild(profileCasette);
+
+  //Your Top Artists
+  const topArtists = document.createElement('h3');
+  topArtists_text = document.createTextNode("Your Top Artists");
+  topArtists.appendChild(topArtists_text);
+  topArtists.classList.add('section');
+  topArtists.classList.add('artist-stats-text');
+  profile.appendChild(topArtists);
+
+  //your top tracks
+  const topTracks = document.createElement('h3');
+  topTracks_text = document.createTextNode("Your Top Tracks");
+  topTracks.appendChild(topTracks_text);
+  topTracks.classList.add('section');
+  topTracks.classList.add('artist-stats-text');
+  profile.appendChild(topTracks);
+
+  //your liked songs
+  const likedTracks = document.createElement('h3');
+  likedTracks_text = document.createTextNode("Your Likes");
+  likedTracks.appendChild(likedTracks_text);
+  likedTracks.classList.add('section');
+  likedTracks.classList.add('artist-stats-text');
+  profile.appendChild(likedTracks);
+
 }
 
 function displayArtistInformation(artist){
+  //clear page before loading new one
   let artistProfile = document.getElementById("artist-profile");
   artistProfile.innerHTML= ' ';
+
   //title
   const artistName = document.createElement('h3');
   artistName_text = document.createTextNode(artist);
@@ -426,7 +498,6 @@ function displayArtistInformation(artist){
   let content = document.createElement('div');
   content.classList.add('artist-content');
   content.appendChild(section);
-
   artistProfile.appendChild(content);
 
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
