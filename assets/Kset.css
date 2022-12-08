@@ -518,22 +518,10 @@ div > ol{
     padding: 0.5em;
     margin: 1em;
 }
-.artist-wrapper{ /* Artist Page */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-/*.artist-profile{
-    margin: 2em;
-    margin-bottom: 0.5em;
-    height: 25vh;
-    border-radius: 100%;
-}*/
 
 /*Artist Page*/
 .artist-profile{
-    background-image: linear-gradient(155deg, rgba(222,108,26,0.75) 50%, rgba(30,30,30,1) 100%); 
+    background-image: linear-gradient(115deg, rgba(222,108,26,0.75) 50%, rgba(30,30,30,1) 100%); 
 }
 .artist-name{
     color: #f1f1f1;
@@ -547,19 +535,21 @@ div > ol{
 .artist-row-container{
     display: flex;
     width:100%;
-    margin-left: 5em;
-    margin-right: 5em;
-    margin-bottom: 2em;
 }
 
 .artist-img{
     height: 20vh;
-    border-radius: 100%;
+    border-radius: 50%;
     margin-right: 0.5em;
+    margin-left: 5em;
+    object-fit: cover;
 }
 
-.artists-stats-container{
-    vertical-align:middle;
+.artist-stats-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:auto auto auto 0.5em;
 }
 
 .artist-stats-text{
@@ -571,8 +561,8 @@ div > ol{
 
 .artist-casette{
     float:right;
-    margin-left: 5em;
-    height: 15vh;
+    margin-right: 15em;
+    height: 20vh;
 }
 
 .artist-casette:hover{

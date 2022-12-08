@@ -390,7 +390,6 @@ function displayArtistInformation(artist){
 
   //artist img -- img from album
   const artistImg = document.createElement('img');
-  artistImg.src = 'https://cdn-icons-png.flaticon.com/512/552/552460.png';
   artistImg.alt = "artist image";
   artistImg.classList.add('artist-img');
   rowContainer.appendChild(artistImg);
@@ -420,8 +419,8 @@ function displayArtistInformation(artist){
   const section = document.createElement('h3');
   section_text = document.createTextNode("Discography");
   section.appendChild(section_text);
-  section.classList.add('text');
   section.classList.add('section');
+  section.classList.add('artist-stats-text');
   artistProfile.appendChild(section);
 
   let content = document.createElement('div');
@@ -430,15 +429,17 @@ function displayArtistInformation(artist){
 
   artistProfile.appendChild(content);
 
-    fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+  fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
     .then((response) => response.json())
     .then((data) => {
       for(let i=0; i<data.length; i++){
         if (data[i]["path"].substr(0,data[i]["path"].indexOf('-')) == artist) {
           track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
           content.appendChild(track);
+          artistImg.src = `https://kset.home.asidiras.dev/album/cover/${data[i]["cover"]}`;
         }
       }
+
     })
 }
 
