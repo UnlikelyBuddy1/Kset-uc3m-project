@@ -527,14 +527,16 @@ div > ol{
 .artist-name{
     color: #f1f1f1;
     font-family: "myfont";
-    font-size: 4rem;
+    font-size: 3rem;
     margin: 0%;
     margin-top: 0.1em;
     margin-bottom: 0.5em;
+    overflow-wrap: anywhere;
 }
 
 .artist-row-container{
     display: flex;
+    flex-wrap: wrap;
     width:100%;
 }
 
@@ -542,7 +544,8 @@ div > ol{
     height: 20vh;
     border-radius: 50%;
     margin-right: 0.5em;
-    margin-left: 5em;
+    margin-left: 1em;
+    margin-bottom: 1em;
     object-fit: cover;
 }
 
@@ -562,13 +565,14 @@ div > ol{
 
 .follow-button{
     height: 4vh;
-    width: 8vh;
+    width: 10vh;
+    border-radius: 15%;
     background-color: #1e1e1e;
     border: #de6c1a solid 2px;
     color: #f1f1f1;
     font-family: "myfont";
     font-size: 1rem;
-    margin: 1em auto auto 0.5em;
+    margin: 1em auto auto auto;
 }
 
 .follow-button:hover{
@@ -577,9 +581,10 @@ div > ol{
 }
 
 .artist-casette{
-    float:right;
-    margin:auto 15em auto auto;
-    height: 10vh;
+    margin:auto;
+    /*height: 10vh;*/
+    width: 30%;
+    min-width: 25vh;
 }
 
 .artist-casette:hover{
@@ -980,7 +985,7 @@ input[type="range"]:active::-ms-thumb {
 
 /* Size Adjustments */
 @media screen and (min-width:1025px){ /* Computers */
-    .track{
+    .track,.artist-icon{
         width: 15%;
         padding: 0.43%;
         margin: 0.4%;
@@ -990,7 +995,7 @@ input[type="range"]:active::-ms-thumb {
     }
 }
 @media screen and (max-width:1024px) { /* Tablets */
-    .track{
+    .track,.artist-icon{
         width: 18%;
         padding: 0.5%;
         margin: 0.5%;
@@ -1031,14 +1036,14 @@ input[type="range"]:active::-ms-thumb {
     }
 }
 @media screen and (max-width:768px) { /* Smaller Tablet */
-    .track{
+    .track,.artist-icon{
         width: 23%;
         padding: 0.5%;
         margin: 0.5%;
     }
 }
 @media screen and (max-width:460px) { /* Phones */
-    .track{
+    .track,.artist-icon{
         width: 31%;
         padding: 0.6%;
     }

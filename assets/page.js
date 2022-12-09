@@ -457,7 +457,7 @@ function displayProfileInformation(){
         track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
         topTracksContent.appendChild(track);
       }
-      for(let i=48; i<55; i++){
+      for(let i=48; i<54; i++){
         artistIcon = createArtistIcon(data[i]["cover"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
         topArtistsContent.appendChild(artistIcon);
       }
@@ -477,18 +477,9 @@ function displayProfileInformation(){
   likedTrackContent.classList.add('artist-content');
   profile.appendChild(likedTrackContent);
 
-  console.log(likedSongs);
-
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
   .then((response) => response.json())
   .then((data) => {
-    data.sort(function(a, b) {
-      let keyA = a.title.toUpperCase();
-      let keyB = b.title.toUpperCase();
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
-      return 0;
-    });
     for (var i=0; i<data.length; i++) {
       if (likedSongs.includes(data[i]["title"])) {
           likedTrack = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
@@ -565,6 +556,7 @@ function displayArtistInformation(artist){
   content.classList.add('artist-content');
   artistProfile.appendChild(content);
 
+  //similar artists section -- implement using genre when updated json file is on server
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
     .then((response) => response.json())
     .then((data) => {
@@ -575,8 +567,25 @@ function displayArtistInformation(artist){
           artistImg.src = `https://kset.home.asidiras.dev/album/cover/${data[i]["cover"]}`;
         }
       }
+      for(let i=48; i<54; i++){
+        artistIcon = createArtistIcon(data[i]["cover"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+        similarArtistsContent.appendChild(artistIcon);
+      }
 
     })
+
+  const similarArtistsSection = document.createElement('h3');
+  similarArtistsSection_text = document.createTextNode("Similar Artists");
+  similarArtistsSection.appendChild(similarArtistsSection_text);
+  similarArtistsSection.classList.add('section');
+  similarArtistsSection.classList.add('artist-stats-text');
+  artistProfile.appendChild(similarArtistsSection);
+
+  let similarArtistsContent = document.createElement('div');
+  similarArtistsContent.classList.add('artist-content');
+  artistProfile.appendChild(similarArtistsContent);
+
+
 }
 
 function createArtistIcon(imgSrc, artist){
@@ -592,7 +601,8 @@ function createArtistIcon(imgSrc, artist){
   const artist_text = document.createElement('p'); 
   artist_text.classList.add('title');
   artist_text.textContent = artist;
-  artist_text.addEventListener("click",function(){
+  
+  artistProfileIcon.addEventListener("click",function(){
     switchContent("artist-profile");
     displayArtistInformation(artist);
   })
