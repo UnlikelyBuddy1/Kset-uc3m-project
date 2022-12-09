@@ -519,8 +519,9 @@ div > ol{
     margin: 1em;
 }
 
-/*Artist Page*/
-.artist-profile{
+/*Artist Page, also used for profile page*/
+
+.artist-profile,.profile{
     background-image: linear-gradient(115deg, rgba(222,108,26,0.75) 50%, rgba(30,30,30,1) 100%); 
 }
 .artist-name{

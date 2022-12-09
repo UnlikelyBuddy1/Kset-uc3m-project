@@ -448,7 +448,8 @@ function displayProfileInformation(){
   topTracksContent.classList.add('artist-content');
   profile.appendChild(topTracksContent);
 
-  //fake top tracks and artists by grabbing first 5 in the json
+
+  //fake top tracks and artists by grabbing from range in json
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
     .then((response) => response.json())
     .then((data) => {
@@ -456,7 +457,7 @@ function displayProfileInformation(){
         track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
         topTracksContent.appendChild(track);
       }
-      for(let i=49; i<55; i++){
+      for(let i=48; i<55; i++){
         artistIcon = createArtistIcon(data[i]["cover"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
         topArtistsContent.appendChild(artistIcon);
       }
