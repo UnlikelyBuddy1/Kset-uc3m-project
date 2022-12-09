@@ -241,96 +241,97 @@ function displayTopArtists() {
   // return artists;
 }
 
-function displayLikedSongs() {  // Display liked songs stored in a global variable likedSongs
-  fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
-  .then((response) => response.json())
-  .then((data) => {
-    data.sort(function(a, b) {
-      let keyA = a.title.toUpperCase();
-      let keyB = b.title.toUpperCase();
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
-      return 0;
-    });
-    for (var i=0; i<data.length; i++) {
-      if (likedSongs.includes(data[i]["title"])) {
-        let imgSrc = data[i]["cover"];
-        let songSrc = data[i]["data"];
-        let title = data[i]["title"];
+// function displayLikedSongs() {  // Display liked songs stored in a global variable likedSongs
+//   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+//   .then((response) => response.json())
+//   .then((data) => {
+//     data.sort(function(a, b) {
+//       let keyA = a.title.toUpperCase();
+//       let keyB = b.title.toUpperCase();
+//       if (keyA < keyB) return -1;
+//       if (keyA > keyB) return 1;
+//       return 0;
+//     });
+//     for (var i=0; i<data.length; i++) {
+//       if (likedSongs.includes(data[i]["title"])) {
+//           likedTrack = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+        // let imgSrc = data[i]["cover"];
+        // let songSrc = data[i]["data"];
+        // let title = data[i]["title"];
 
-        const track = document.createElement('div');
-        track.classList.add('track');
-        // create cover element
-        const cover = document.createElement('img');
-        cover.setAttribute("id", `${songSrc}|${imgSrc}`);
-        cover.setAttribute("loading", "lazy");
-        cover.classList.add('cover');
-        cover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
+        // const track = document.createElement('div');
+        // track.classList.add('track');
+        // // create cover element
+        // const cover = document.createElement('img');
+        // cover.setAttribute("id", `${songSrc}|${imgSrc}`);
+        // cover.setAttribute("loading", "lazy");
+        // cover.classList.add('cover');
+        // cover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
       
-        // Play Button
-        const playWrapper = document.createElement('div');
-        playWrapper.classList.add('play-wrapper');
-        const play = document.createElement('img');
-        play.setAttribute("loading", "lazy");
-        play.classList.add('play');
-        play.src = "assets/play.webp";
-        playWrapper.appendChild(play);
+        // // Play Button
+        // const playWrapper = document.createElement('div');
+        // playWrapper.classList.add('play-wrapper');
+        // const play = document.createElement('img');
+        // play.setAttribute("loading", "lazy");
+        // play.classList.add('play');
+        // play.src = "assets/play.webp";
+        // playWrapper.appendChild(play);
       
-        // Like Button
-        const likeWrapper = document.createElement('div');
-        likeWrapper.classList.add('like-wrapper');
-        const like = document.createElement('img');
-        like.setAttribute("loading", "lazy");
-        like.classList.add('like');
-        like.src = "assets/liked.webp";
-        like.classList.add("liked");
-        likeWrapper.appendChild(like);
-        like.addEventListener("mouseup", function(){
-          if (like.classList.contains("liked")){
-            like.src = "assets/unliked.webp";
-            likedSongs.splice(likedSongs.indexOf(title),1);
-          } else {
-            like.src = "assets/liked.webp";
-            likedSongs.push(title);
-          }
-          like.classList.toggle("liked");
-        });
+        // // Like Button
+        // const likeWrapper = document.createElement('div');
+        // likeWrapper.classList.add('like-wrapper');
+        // const like = document.createElement('img');
+        // like.setAttribute("loading", "lazy");
+        // like.classList.add('like');
+        // like.src = "assets/liked.webp";
+        // like.classList.add("liked");
+        // likeWrapper.appendChild(like);
+        // like.addEventListener("mouseup", function(){
+        //   if (like.classList.contains("liked")){
+        //     like.src = "assets/unliked.webp";
+        //     likedSongs.splice(likedSongs.indexOf(title),1);
+        //   } else {
+        //     like.src = "assets/liked.webp";
+        //     likedSongs.push(title);
+        //   }
+        //   like.classList.toggle("liked");
+        // });
         
-        // create the title
-        const text = document.createElement('p');
-        text.classList.add('title');
-        text.textContent = title
+        // // create the title
+        // const text = document.createElement('p');
+        // text.classList.add('title');
+        // text.textContent = title
       
-        // put cover and title inside track
-        track.appendChild(playWrapper);
-        track.appendChild(likeWrapper);
-        track.appendChild(cover);
-        track.appendChild(text);
+        // // put cover and title inside track
+        // track.appendChild(playWrapper);
+        // track.appendChild(likeWrapper);
+        // track.appendChild(cover);
+        // track.appendChild(text);
         
-        // add event listener to change track
-        cover.addEventListener("mousedown", (e)=> {
-          let id = (e.target.id);
-          const songSrc = id.split('|')[0];
-          const imgSrc = id.split('|')[1];
-          let source = document.getElementById("source");
-          source.src = `https://kset.home.asidiras.dev/stream/download/${songSrc}`;
-          let miniCover = document.getElementById("miniCover");
-          miniCover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
-          let audio = document.getElementById("audio");
-          const footer = document.getElementById("footer");
-          if(footer.classList.contains("hide-floating")){
-            footer.classList.toggle("hide-floating")
-            document.getElementById("right-column").style.height = 'calc(100% - 55px - 70px)';
-          }
-          audio.load()
-          audio.play()
-        });
-        const likes = document.getElementById("liked-songs");
-        likes.appendChild(track);
-      }
-    }
-  })
-}
+        // // add event listener to change track
+        // cover.addEventListener("mousedown", (e)=> {
+        //   let id = (e.target.id);
+        //   const songSrc = id.split('|')[0];
+        //   const imgSrc = id.split('|')[1];
+        //   let source = document.getElementById("source");
+        //   source.src = `https://kset.home.asidiras.dev/stream/download/${songSrc}`;
+        //   let miniCover = document.getElementById("miniCover");
+        //   miniCover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
+        //   let audio = document.getElementById("audio");
+        //   const footer = document.getElementById("footer");
+        //   if(footer.classList.contains("hide-floating")){
+        //     footer.classList.toggle("hide-floating")
+        //     document.getElementById("right-column").style.height = 'calc(100% - 55px - 70px)';
+        //   }
+        //   audio.load()
+        //   audio.play()
+        // });
+        //const likes = document.getElementById("liked-songs");
+        //likes.appendChild(track);
+//       }
+//     }
+//   })
+// }
 
 // function displayProfileInformation() {  // Need to implement favorite artists, playlists, etc...
 //   const profile = document.getElementById('profile');
@@ -373,17 +374,21 @@ function displayLikedSongs() {  // Display liked songs stored in a global variab
 //   }
 // }
 
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
 //profile page -- use mostly the same css as artist page
 function displayProfileInformation(){
   let profile = document.getElementById("profile");
   profile.innerHTML= ' ';
 
   //title -- change to include username
-  const profileName = document.createElement('h3');
-  profileName_text = document.createTextNode("Your Profile");
-  profileName.appendChild(profileName_text);
-  profileName.classList.add('artist-name')
-  profile.appendChild(profileName);
+  // const profileName = document.createElement('h3');
+  // profileName_text = document.createTextNode("Your Profile");
+  // profileName.appendChild(profileName_text);
+  // profileName.classList.add('artist-name')
+  // profile.appendChild(profileName);
 
   //img, listeners, followers, and casette all in one container
   rowContainer = document.createElement('div');
@@ -417,6 +422,8 @@ function displayProfileInformation(){
   profileCasette.classList.add('artist-casette');
   rowContainer.appendChild(profileCasette);
 
+
+
   //Your Top Artists
   const topArtists = document.createElement('h3');
   topArtists_text = document.createTextNode("Your Top Artists");
@@ -424,6 +431,10 @@ function displayProfileInformation(){
   topArtists.classList.add('section');
   topArtists.classList.add('artist-stats-text');
   profile.appendChild(topArtists);
+
+  let topArtistsContent = document.createElement('div');
+  topArtistsContent.classList.add('artist-content');
+  profile.appendChild(topArtistsContent);
 
   //your top tracks
   const topTracks = document.createElement('h3');
@@ -433,6 +444,26 @@ function displayProfileInformation(){
   topTracks.classList.add('artist-stats-text');
   profile.appendChild(topTracks);
 
+  let topTracksContent = document.createElement('div');
+  topTracksContent.classList.add('artist-content');
+  profile.appendChild(topTracksContent);
+
+  //fake top tracks and artists by grabbing first 5 in the json
+  fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+    .then((response) => response.json())
+    .then((data) => {
+      for(let i=0; i<6; i++){
+        track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+        topTracksContent.appendChild(track);
+      }
+      for(let i=49; i<55; i++){
+        artistIcon = createArtistIcon(data[i]["cover"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+        topArtistsContent.appendChild(artistIcon);
+      }
+    })
+
+
+
   //your liked songs
   const likedTracks = document.createElement('h3');
   likedTracks_text = document.createTextNode("Your Likes");
@@ -441,7 +472,29 @@ function displayProfileInformation(){
   likedTracks.classList.add('artist-stats-text');
   profile.appendChild(likedTracks);
 
-  displayLikedSongs();
+  let likedTrackContent = document.createElement('div');
+  likedTrackContent.classList.add('artist-content');
+  profile.appendChild(likedTrackContent);
+
+  console.log(likedSongs);
+
+  fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+  .then((response) => response.json())
+  .then((data) => {
+    data.sort(function(a, b) {
+      let keyA = a.title.toUpperCase();
+      let keyB = b.title.toUpperCase();
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
+    for (var i=0; i<data.length; i++) {
+      if (likedSongs.includes(data[i]["title"])) {
+          likedTrack = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+          likedTrackContent.appendChild(likedTrack);
+      }
+    }
+  })
 
 }
 
@@ -509,7 +562,6 @@ function displayArtistInformation(artist){
 
   let content = document.createElement('div');
   content.classList.add('artist-content');
-  content.appendChild(section);
   artistProfile.appendChild(content);
 
   fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
@@ -526,7 +578,28 @@ function displayArtistInformation(artist){
     })
 }
 
+function createArtistIcon(imgSrc, artist){
 
+  const artistProfileIcon = document.createElement('div');
+  artistProfileIcon.classList.add('artist-icon')
+
+  const artistIcon = document.createElement('img');
+  artistIcon.setAttribute("loading", "lazy");
+  artistIcon.classList.add('artist-icon-cover');
+  artistIcon.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
+
+  const artist_text = document.createElement('p'); 
+  artist_text.classList.add('title');
+  artist_text.textContent = artist;
+  artist_text.addEventListener("click",function(){
+    switchContent("artist-profile");
+    displayArtistInformation(artist);
+  })
+
+  artistProfileIcon.appendChild(artistIcon);
+  artistProfileIcon.appendChild(artist_text);
+  return artistProfileIcon;
+}
 
 function burger(menu) {
   menu.classList.toggle("change");
