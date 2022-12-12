@@ -148,6 +148,7 @@ body{
 
 /* Left Column */
 .left-column{
+    width: 25vw;
     margin-top: 65px;
     height: calc(100vh - 75px);
     position: sticky;
@@ -159,7 +160,7 @@ body{
 
 /* Sidebar */
 .sidebar{
-    width: 25vw;
+    width: 100%;
     max-width: 300px;
     box-sizing: border-box;
     height: 100%;
@@ -236,7 +237,6 @@ body{
 .container { /* Menu for small screens */
     display: none;
     cursor: pointer;
-    margin-right: auto; 
     margin-left: 20px;
 }
 .bar1, .bar2, .bar3 {
@@ -256,7 +256,7 @@ body{
     transform: translate(0, -10px) rotate(45deg);
 }
 .search-bar{ /* Search Bar */
-    margin: auto;
+    margin: auto 30px auto 20px;
     width: 82%;
 }
 form{
@@ -931,12 +931,14 @@ input[type="range"]:active::-ms-thumb {
         display: inline-block;
     }
     .footer{
+        width: 100vw;
         position: fixed;
-        bottom: 0px;
-        display: flex;
-        left: 50%;
-        transform: translateX(-50%);
+        /* left: 50%;
+        transform: translateX(-50%); */
         box-shadow: 0px -4px 10px #000;
+    }
+    .seek-slider {
+        width: 82%;
     }
     .content{
         border-radius: 0px;
@@ -958,6 +960,9 @@ input[type="range"]:active::-ms-thumb {
         margin-right: 0.3vw;
         width: 99.4vw;
     }
+    .logo {
+        display: none;
+    }
 }
 @media screen and (max-width:768px) { /* Smaller Tablet */
     .track{
@@ -965,11 +970,17 @@ input[type="range"]:active::-ms-thumb {
         padding: 0.5%;
         margin: 0.5%;
     }
+    .seek-slider {
+        margin: 0 0 0 5%;
+    }
 }
 @media screen and (max-width:460px) { /* Phones */
     .track{
         width: 31%;
         padding: 0.6%;
+    }
+    .seek-slider {
+        margin: 0 0 0 10px;
     }
 }
 @media screen and (max-height:400px) { /* Landscape Phone*/
