@@ -65,6 +65,7 @@ body{
     flex-direction: column;
 }
 .button{
+    transition: 66ms;
     cursor: pointer;
     /* margin-left: 1.5vw; */
     background-color:black;
@@ -84,6 +85,9 @@ body{
 }
 .fade:focus{
     border: 2px solid white;
+}
+button:hover{
+    transform: scale(1.05);
 }
 .focus{
     animation-name: zoom;
@@ -105,10 +109,40 @@ body{
     background-color: black;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(115deg, rgba(222,108,26,0.9) 0%, rgba(30,30,30,1) 110vh);
+    background: linear-gradient(115deg, rgba(30,30,30,1) 50vw, rgba(222,108,26,0.9) 100vw, rgba(30,30,30,1) 350vw);
     display: flex;
     flex-direction: column;
+    animation: moveGradientAndAngle 10000ms ease-in-out;
+    animation-direction: reverse;
+    background-size: 500% 500%;
+    animation-fill-mode: forwards;
 }
+
+@keyframes moveGradientAndAngle {
+    0% {
+        background-position: 30% 0%;
+    }
+    100% {
+        background-position: 90% 0%;
+    }
+}
+.login-kset-logo{
+    animation: glowup 10000ms ease-in-out;
+    animation-fill-mode: forwards;
+
+}
+@keyframes glowup {
+    0% {
+        filter: brightness(0.75);
+    }
+    20% {
+        filter: brightness(0.75);
+    }
+    50% {
+        filter: brightness(1);
+    }
+}
+
 .login-page > img{
     margin: 180px auto 0 auto;
 }
@@ -121,6 +155,7 @@ body{
     margin: 5px 0;
     width: 190px;
     height: 45px;
+    transition: 66ms;
 }
 .signup-button{
     background-color: #1e1e1e;
@@ -159,8 +194,7 @@ body{
 
 /* Sidebar */
 .sidebar{
-    width: 25vw;
-    max-width: 300px;
+    width: 250px;
     box-sizing: border-box;
     height: 100%;
     padding: 1%;
@@ -258,7 +292,7 @@ body{
 }
 .search-bar{ /* Search Bar */
     margin: auto;
-    width: 82%;
+    display: flex;
 }
 form{
     display: flex;
@@ -266,13 +300,21 @@ form{
 }
 .search-input{
     width: 100%;
-    min-width: 180px;
+    min-width: 140px;
     height: 20px;
     background-color: #f1f1f1;
     border-radius: 20px;
     padding: 0.3rem 0.5rem;
     outline: none;
     color:#1e1e1e;
+    margin-left: 2em;
+    margin-right: 5vw;
+}
+#search-bar > .clear-input{
+    margin: auto 0px;
+    width: 30px;
+    position: relative;
+    left: -8vw;
 }
 .clear-input{
     margin: auto -35px;
@@ -433,8 +475,7 @@ div > ol{
     margin-bottom: 1px;
 }
 .artist-title{
-    color: #f1f1f1;
-    opacity: 50%;
+    color: #f1f1f190;
     font-family: "myfont";
     font-size: 0.8rem;
     margin: 0%;
@@ -634,7 +675,7 @@ div > ol{
 .footer{ /* Footer for audio Player */
     position: absolute;
     bottom: 0px;
-    width: 78%;
+    width: calc(98.5vw - 250px);
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -645,6 +686,7 @@ div > ol{
     height: 70px;
     flex-direction: column-reverse;
 }
+
 .audio-player {
     width: 100vw;
     min-width: 300px;
@@ -1003,6 +1045,9 @@ input[type="range"]:active::-ms-thumb {
     .hidden{
         display: none;
     }
+    .footer{
+        width: 100vw;
+    }
     .container{
         display: inline-block;
     }
@@ -1016,6 +1061,9 @@ input[type="range"]:active::-ms-thumb {
     }
     .content{
         border-radius: 0px;
+    }
+    #search-bar > .clear-input{
+        left: -10vw;
     }
     .sidebar{
         width: 80vw;
@@ -1041,11 +1089,17 @@ input[type="range"]:active::-ms-thumb {
         padding: 0.5%;
         margin: 0.5%;
     }
+    #search-bar > .clear-input{
+        left: -12vw;
+    }
 }
 @media screen and (max-width:460px) { /* Phones */
     .track,.artist-icon{
         width: 31%;
         padding: 0.6%;
+    }
+    .navbar > .logo{
+        display: none;
     }
 }
 @media screen and (max-height:400px) { /* Landscape Phone*/

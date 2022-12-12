@@ -795,6 +795,7 @@ function toggleLogin(){
 }
 function togglePlaylist(){
   const playlist  = document.getElementById('create-playlist');
+  playlist.classList.toggle('focus')
   playlist.classList.toggle('hide-floating');
   // playlist.classList.toggle('focus');
 }
@@ -1094,10 +1095,10 @@ volumeSlider.addEventListener('input', () => {
   audio.volume = volumeSlider.value / 100;
 });
 loginButton.addEventListener('click', () => {
-  document.getElementById('login').classList.remove('hide-floating');
+  toggleLogin();
 })
 signupButton.addEventListener('click', () => {
-  document.getElementById('signup').classList.remove('hide-floating');
+  toggleSignup();
 })
 
 // Event Listeners ----------------------------------------------------------------------------------------
