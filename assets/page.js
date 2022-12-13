@@ -88,36 +88,28 @@ function signup(username, password) { // Signup Function
 }
 function fill(){
   let content = document.getElementById("content");
-  fetch('https://kset.home.asidiras.dev/track/?search&index=0&size=999', {method: 'GET'})
+  fetch('https://kset.home.asidiras.dev/genre/?search&index=0&size=99', {method: 'GET'})
   .then((response) => response.json())
-  .then((data) => {
-    data.sort(function(a, b) {
-      let keyA = a.title.toUpperCase();
-      let keyB = b.title.toUpperCase();
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
-      return 0;
+  .then((genres) => {
+    genres.map((genre) => {
+      let section = document.createElement('h3');
+      section_text = document.createTextNode(genre.name);
+      section.appendChild(section_text);
+      section.classList.add('text');
+      section.classList.add('section');
+      content.appendChild(section);
+      console.log(genre);
+      genre.tracks.map((track) => {
+          let artists = (track.artists.map((artist) => {return artist.name})).join(', ');
+          let DOM_track = createTrack(track["cover"], track["path"], track["title"], artists);
+          content.appendChild(DOM_track);
+        });
+        const spacer = document.createElement('div');
+        content.appendChild(spacer);
+      });
     });
-    let prevletter = ""
-    for(let i=0; i<data.length; i++){
-      let letter = isNaN(data[i]["title"][0])? data[i]["title"][0].toUpperCase(): "number"
-      if(prevletter != letter){
-        prevletter = letter;
-        const section = document.createElement('h3');
-        section_text = document.createTextNode(`Songs starting with ${letter}`);
-        section.appendChild(section_text);
-        section.classList.add('text');
-        section.classList.add('section');
-        content.appendChild(section);
-      }
-      track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
-      content.appendChild(track);
-    }
-    const spacer = document.createElement('div');
-    // spacer.classList.add('spacer');
-    content.appendChild(spacer);
-  })
-}
+  }
+
 function createPlaylist(playlist, location){
   let playlistdom = document.createElement('div');
   playlistdom.classList.add('playlist');
