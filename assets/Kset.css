@@ -65,6 +65,7 @@ body{
     flex-direction: column;
 }
 .button{
+    transition: 66ms;
     cursor: pointer;
     /* margin-left: 1.5vw; */
     background-color:black;
@@ -84,6 +85,9 @@ body{
 }
 .fade:focus{
     border: 2px solid white;
+}
+button:hover{
+    transform: scale(1.05);
 }
 .focus{
     animation-name: zoom;
@@ -105,10 +109,40 @@ body{
     background-color: black;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(115deg, rgba(222,108,26,0.9) 0%, rgba(30,30,30,1) 110vh);
+    background: linear-gradient(115deg, rgba(30,30,30,1) 50vw, rgba(222,108,26,0.9) 100vw, rgba(30,30,30,1) 350vw);
     display: flex;
     flex-direction: column;
+    animation: moveGradientAndAngle 10000ms ease-in-out;
+    animation-direction: reverse;
+    background-size: 500% 500%;
+    animation-fill-mode: forwards;
 }
+
+@keyframes moveGradientAndAngle {
+    0% {
+        background-position: 30% 0%;
+    }
+    100% {
+        background-position: 90% 0%;
+    }
+}
+.login-kset-logo{
+    animation: glowup 10000ms ease-in-out;
+    animation-fill-mode: forwards;
+
+}
+@keyframes glowup {
+    0% {
+        filter: brightness(0.75);
+    }
+    20% {
+        filter: brightness(0.75);
+    }
+    50% {
+        filter: brightness(1);
+    }
+}
+
 .login-page > img{
     margin: 180px auto 0 auto;
 }
@@ -121,6 +155,7 @@ body{
     margin: 5px 0;
     width: 190px;
     height: 45px;
+    transition: 66ms;
 }
 .signup-button{
     background-color: #1e1e1e;
@@ -265,13 +300,21 @@ form{
 }
 .search-input{
     width: 100%;
-    min-width: 180px;
+    min-width: 140px;
     height: 20px;
     background-color: #f1f1f1;
     border-radius: 20px;
     padding: 0.3rem 0.5rem;
     outline: none;
     color:#1e1e1e;
+    margin-left: 2em;
+    margin-right: 5vw;
+}
+#search-bar > .clear-input{
+    margin: auto 0px;
+    width: 30px;
+    position: relative;
+    left: -8vw;
 }
 .clear-input{
     margin: auto -35px;
@@ -431,6 +474,23 @@ div > ol{
     margin-top: 1px;
     margin-bottom: 1px;
 }
+.artist-title{
+    color: #f1f1f190;
+    font-family: "myfont";
+    font-size: 0.8rem;
+    margin: 0%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    height: 1.2em; 
+    white-space: nowrap;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.artist-title:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
 .playlist-selection{ /* Playlists */
     padding: 1.2vmax;
     display: flex;
@@ -473,7 +533,7 @@ div > ol{
     gap: 1em;
     padding: 0.5em;
 }
-.account, .profile{ /* Page setup for Account & Profile */
+.account, .profile, .artist-profile{ /* Page setup for Account & Profile */
     padding: 1.2vmax;
     display: flex;
     flex-flow: column wrap;
@@ -499,24 +559,123 @@ div > ol{
     padding: 0.5em;
     margin: 1em;
 }
-.artist-wrapper{ /* Artist Page */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+
+/*Artist Page, also used for profile page*/
+
+.artist-profile,.profile{
+    background-image: linear-gradient(115deg, rgba(222,108,26,0.75) 50%, rgba(30,30,30,1) 100%); 
 }
-.artist-profile{
-    margin: 2em;
+.artist-name{
+    color: #f1f1f1;
+    font-family: "myfont";
+    font-size: 3rem;
+    margin: 0%;
+    margin-top: 0.1em;
     margin-bottom: 0.5em;
-    height: 25vh;
-    border-radius: 100%;
+    overflow-wrap: anywhere;
+}
+
+.artist-row-container{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+}
+
+.artist-img{
+    height: 20vh;
+    border-radius: 50%;
+    margin-right: 0.5em;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    object-fit: cover;
+}
+
+.artist-stats-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:auto auto auto 0.5em;
+}
+
+.artist-stats-text{
+    color: #f1f1f1;
+    font-family: "myfont";
+    font-size: 1rem;
+    margin: 0;
+}
+
+.follow-button{
+    height: 4vh;
+    width: 10vh;
+    border-radius: 15%;
+    background-color: #1e1e1e;
+    border: #de6c1a solid 2px;
+    color: #f1f1f1;
+    font-family: "myfont";
+    font-size: 1rem;
+    margin: 1em auto auto auto;
+}
+
+.follow-button:hover{
+    transform:scale(1.05);
+    opacity:50%;
+}
+
+.artist-casette{
+    margin:auto;
+    /*height: 10vh;*/
+    width: 30%;
+    min-width: 25vh;
+}
+
+.artist-casette:hover{
+    transform: scale(1.05);
+    opacity:50%;
+}
+
+.artist-img,.artist-stats-container,.artist-casette{
+    display: inline-block;
+}
+
+.artist-content{
+    width:100%;
+    margin-top: 0;
+    padding: 1.2vmax;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 24px;
+}
+
+.artist-icon{
+    width: 12.6%;
+    padding: 0.44%;
+    margin: 0.4%;
+    box-shadow: 3px 3px 10px #000;
+    background-color: #1e1e1e;
+    border-radius: 50%;
+    border-bottom-left-radius: 0%;
+}
+
+.artist-icon:hover{
+    transform: scale(1.05);
+    animation-name: togrey;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+
+.artist-icon-cover{
+    width: 100%;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
 }
 
 /* Audio Player */
 .footer{ /* Footer for audio Player */
     position: absolute;
     bottom: 0px;
-    width: 78%;
+    width: calc(98.5vw - 250px);
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -527,6 +686,7 @@ div > ol{
     height: 70px;
     flex-direction: column-reverse;
 }
+
 .audio-player {
     width: 100vw;
     min-width: 300px;
@@ -611,10 +771,24 @@ input[type="range"] {
     bottom: 57px;
     margin-left: 53px;
 }
-.volume-slider{
+.volume-controls{
+    position: absolute;
     width: 10%;
-    right: 5px;
+    padding: 0;
+    right: 30px;
     bottom: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+.speaker{
+    height: 16px;
+    aspect-ratio: 16/15;
+    margin: 0;
+}
+.volume-slider{
+    width: 100%;
+    margin-left: 25px;
 }
 /* Chrome & Safari */
 input[type="range"] {
@@ -909,7 +1083,7 @@ input[type="range"]:active::-ms-thumb {
 
 /* Size Adjustments */
 @media screen and (min-width:1025px){ /* Computers */
-    .track{
+    .track,.artist-icon{
         width: 15%;
         padding: 0.43%;
         margin: 0.4%;
@@ -919,13 +1093,16 @@ input[type="range"]:active::-ms-thumb {
     }
 }
 @media screen and (max-width:1024px) { /* Tablets */
-    .track{
+    .track,.artist-icon{
         width: 18%;
         padding: 0.5%;
         margin: 0.5%;
     } 
     .hidden{
         display: none;
+    }
+    .footer{
+        width: 100vw;
     }
     .container{
         display: inline-block;
@@ -942,6 +1119,9 @@ input[type="range"]:active::-ms-thumb {
     }
     .content{
         border-radius: 0px;
+    }
+    #search-bar > .clear-input{
+        left: -10vw;
     }
     .sidebar{
         width: 80vw;
@@ -965,7 +1145,7 @@ input[type="range"]:active::-ms-thumb {
     }
 }
 @media screen and (max-width:768px) { /* Smaller Tablet */
-    .track{
+    .track,.artist-icon{
         width: 23%;
         padding: 0.5%;
         margin: 0.5%;
@@ -975,7 +1155,7 @@ input[type="range"]:active::-ms-thumb {
     }
 }
 @media screen and (max-width:460px) { /* Phones */
-    .track{
+    .track,.artist-icon{
         width: 31%;
         padding: 0.6%;
     }

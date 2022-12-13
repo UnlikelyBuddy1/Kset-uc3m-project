@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Interfaces</title>
+    <link class = "favicon" rel="icon" href="assets/icon_notext.webp" type="image/webp">
     <link rel="stylesheet" href="assets/Kset.css">
 </head>
 <body>
@@ -92,20 +93,10 @@
             <!-- Account Page -->
             <div id="account" class="account entireHeight hide-floating"><b class="text">Your Account Information</b></div>
             <!-- Profile Page -->
-            <div id="profile" class="profile entireHeight hide-floating">
-                <b class="text">Your Profile</b>
-                <b class="text">Your Top Artist</b>
-                <div class="artist-wrapper">
-            
-                    <!-- Start of Static Artist Page -->
-                    <img src="assets/vald.webp" class="artist-profile"/>
-                    <b class="text">Vald</b>
-                    <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/XEU.webp"><b class="text">Désaccordé</b></div>
-                    <div class="playlist-song"><img src="assets/play.webp" class="playlist-item-play"><img class="playlist-item-cover" src="assets/V.webp"><b class="text">Anunnaki</b></div>
-                    <!-- End of Static Artist Page -->
+            <div id="profile" class="profile entireHeight hide-floating"></div>
 
-                </div>
-            </div>
+            <!-- Artist Page-->
+            <div id="artist-profile" class="artist-profile entireHeight hide-floating"></div>
 
             <!-- Audio Player Footer -->
             <div id="footer" class="footer hide-floating"> 
@@ -120,7 +111,13 @@
                     <span id="current-time" class="current-time text">0:00</span>
                     <input type="range" id="seek-slider" class="seek-slider" max="100" value="0">
                     <span id="duration" class="duration text">0:00</span>
-                    <input type="range" id="volume-slider" class="volume-slider" max="100" value="100">
+                    <div class="volume-controls">
+                        <div id="speaker-icon">
+                            <img id="unmuted-speaker" src="assets/speaker.webp" alt="an icon of a speaker" class="speaker logo">
+                            <img id="muted-speaker" src="assets/muted_speaker.webp" alt="an icon of a speaker" class="speaker logo hide-floating">
+                        </div>
+                        <input type="range" id="volume-slider" class="volume-slider" max="100" value="100">
+                    </div>
                 </div>
             </div> 
 
@@ -202,7 +199,7 @@
             <div id="search-results" class="search-results">
                 
             </div>
-            <button id="button-playlist" class="text sign-button fade">
+            <button id="button-playlist" class="text sign-button">
                 <b class="text">Create Playlist</b>
             </button>
         </div>
