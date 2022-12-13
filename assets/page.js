@@ -658,6 +658,7 @@ function createTrack(imgSrc, songSrc, title, artist){
   const cover = document.createElement('img');
   cover.setAttribute("id", `${songSrc}|${imgSrc}`);
   cover.setAttribute("loading", "lazy");
+  cover.setAttribute("alt", `${title} by ${artist}`);
   cover.classList.add('cover');
   cover.src = `https://kset.home.asidiras.dev/album/cover/${imgSrc}`;
 
