@@ -12,8 +12,7 @@ const signupPassword = document.getElementById("signup-password");
 // document.getElementById("signup-password").value;
 document.getElementById('seek-slider').max = 0;
 const volumeSlider = document.getElementById('volume-slider');
-const loginButton = document.getElementById('login-button');
-const signupButton = document.getElementById('signup-button');
+
 let playState = null;
 let volume = 100;
 
@@ -112,9 +111,10 @@ function fill(){
 
 function createPlaylist(playlist, location){
   let playlistdom = document.createElement('div');
-  playlistdom.classList.add('playlist');
+  playlistdom.classList.add('playlist-wrapper');
   let name = document.createElement('b');
   name.classList.add('text');
+  name.classList.add('big-text');
   name.classList.add('underlined');
   name.textContent = playlist.name;
   let playlistSongs = document.createElement('div');
@@ -1027,28 +1027,28 @@ document.getElementById('button-playlist').addEventListener('click', function(){
   }})
 }
 );
-document.getElementById("playlist-search-bar").addEventListener('keyup', ()=>{ // Song Search for Playlists
-  let search = document.getElementById("playlist-search-bar").value;
-  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
-  .then((response) => response.json())
-  .then((data) => {
-    document.getElementById('search-results').innerHTML='';
-    for(let result of data){
-      createSearchResult(result.title, result.id);
-    }
-  })
-})
-document.getElementById("playlist-search-bar-2").addEventListener('keyup', ()=>{ // Song Search for Playlists 2
-  let search = document.getElementById("playlist-search-bar-2").value;
-  fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
-  .then((response) => response.json())
-  .then((data) => {
-    document.getElementById('search-results-2').innerHTML='';
-    for(let result of data){
-      createSearchResult(result.title, result.id, '-2');
-    }
-  })
-})
+// document.getElementById("playlist-search-bar").addEventListener('keyup', ()=>{ // Song Search for Playlists
+//   let search = document.getElementById("playlist-search-bar").value;
+//   fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
+//   .then((response) => response.json())
+//   .then((data) => {
+//     document.getElementById('search-results').innerHTML='';
+//     for(let result of data){
+//       createSearchResult(result.title, result.id);
+//     }
+//   })
+// })
+// document.getElementById("playlist-search-bar-2").addEventListener('keyup', ()=>{ // Song Search for Playlists 2
+//   let search = document.getElementById("playlist-search-bar-2").value;
+//   fetch(`https://kset.home.asidiras.dev/track/?search=${search}&index=0&size=999`, {method: 'GET'})
+//   .then((response) => response.json())
+//   .then((data) => {
+//     document.getElementById('search-results-2').innerHTML='';
+//     for(let result of data){
+//       createSearchResult(result.title, result.id, '-2');
+//     }
+//   })
+// })
 playPauseContainer.addEventListener('click', () => { // Switch Play and Pause Icons
   if (playState === 'play') {
     audio.play();
@@ -1093,10 +1093,10 @@ volumeSlider.addEventListener('input', () => {
     document.getElementById("unmuted-speaker").classList.toggle("hide-floating");
   }
 });
-loginButton.addEventListener('click', () => {
+document.getElementById('login-button').addEventListener('click', () => {
   toggleLogin();
 })
-signupButton.addEventListener('click', () => {
+document.getElementById('signup-button').addEventListener('click', () => {
   toggleSignup();
 })
 document.getElementById("speaker-icon").addEventListener('click', () => {
