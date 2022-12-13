@@ -749,14 +749,14 @@ div > ol{
     color:#4e4e4e;
     padding: 0 5px;
     position: absolute;
-    top: 0;
+    top: 5px;
     font-size: 0.75rem;
 }
 .current-time{
     left: 70px;
 }
 .duration{
-    right: 0;
+    right: 35px;
 }
 input[type="range"] {
     position: absolute;
@@ -775,7 +775,7 @@ input[type="range"] {
     position: absolute;
     width: 10%;
     padding: 0;
-    right: 30px;
+    right: 65px;
     bottom: 0;
     padding: 0;
     display: flex;
@@ -1152,6 +1152,12 @@ input[type="range"]:active::-ms-thumb {
     }
     .seek-slider {
         margin: 0 0 0 5%;
+    }
+    .track-title, .track-artist{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 145px;
     }
 }
 @media screen and (max-width:460px) { /* Phones */
