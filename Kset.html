@@ -111,7 +111,13 @@
                     <span id="current-time" class="current-time text">0:00</span>
                     <input type="range" id="seek-slider" class="seek-slider" max="100" value="0">
                     <span id="duration" class="duration text">0:00</span>
-                    <input type="range" id="volume-slider" class="volume-slider" max="100" value="100">
+                    <div class="volume-controls">
+                        <div id="speaker-icon">
+                            <img id="unmuted-speaker" src="assets/speaker.webp" alt="an icon of a speaker" class="speaker logo">
+                            <img id="muted-speaker" src="assets/muted_speaker.webp" alt="an icon of a speaker" class="speaker logo hide-floating">
+                        </div>
+                        <input type="range" id="volume-slider" class="volume-slider" max="100" value="100">
+                    </div>
                 </div>
             </div> 
 

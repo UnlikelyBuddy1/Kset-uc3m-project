@@ -15,6 +15,7 @@ const volumeSlider = document.getElementById('volume-slider');
 const loginButton = document.getElementById('login-button');
 const signupButton = document.getElementById('signup-button');
 let playState = null;
+let volume = 100;
 
 
 /*
@@ -1093,12 +1094,32 @@ audio.addEventListener('timeupdate', () => { // Move Seek Slider Every Second
 // });
 volumeSlider.addEventListener('input', () => {
   audio.volume = volumeSlider.value / 100;
+
+  muted = document.getElementById("unmuted-speaker").classList.contains("hide-floating");
+  if (muted) {
+    document.getElementById("muted-speaker").classList.toggle("hide-floating");
+    document.getElementById("unmuted-speaker").classList.toggle("hide-floating");
+  }
 });
 loginButton.addEventListener('click', () => {
   toggleLogin();
 })
 signupButton.addEventListener('click', () => {
   toggleSignup();
+})
+document.getElementById("speaker-icon").addEventListener('click', () => {
+  document.getElementById("muted-speaker").classList.toggle("hide-floating");
+  document.getElementById("unmuted-speaker").classList.toggle("hide-floating");
+
+  muted = document.getElementById("unmuted-speaker").classList.contains("hide-floating");
+  if (muted) {
+    volume = volumeSlider.value;
+    audio.volume = 0;
+    volumeSlider.value = 0;
+  } else {
+    audio.volume = volume / 100;
+    volumeSlider.value = volume;
+  }
 })
 
 // Event Listeners ----------------------------------------------------------------------------------------

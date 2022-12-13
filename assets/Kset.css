@@ -770,10 +770,24 @@ input[type="range"] {
     bottom: 57px;
     margin-left: 53px;
 }
-.volume-slider{
+.volume-controls{
+    position: absolute;
     width: 10%;
-    right: 5px;
+    padding: 0;
+    right: 30px;
     bottom: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+.speaker{
+    height: 16px;
+    aspect-ratio: 16/15;
+    margin: 0;
+}
+.volume-slider{
+    width: 100%;
+    margin-left: 25px;
 }
 /* Chrome & Safari WIP */
 /* input[type="range"]::-webkit-slider-runnable-track {
