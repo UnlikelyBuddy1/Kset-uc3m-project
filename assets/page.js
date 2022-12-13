@@ -554,8 +554,8 @@ function displayArtistInformation(artist){
     .then((response) => response.json())
     .then((data) => {
       for(let i=0; i<data.length; i++){
-        if (data[i]["path"].substr(0,data[i]["path"].indexOf('-')) == artist) {
-          track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
+        if (data[i]["path"].substr(0,data[i]["path"].indexOf('-')) == artist.replace(/\s+/g, '')) {
+          track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], artist);
           content.appendChild(track);
           artistImg.src = `https://kset.home.asidiras.dev/album/cover/${data[i]["cover"]}`;
         }
@@ -564,8 +564,34 @@ function displayArtistInformation(artist){
         artistIcon = createArtistIcon(data[i]["cover"], data[i]["path"].substr(0,data[i]["path"].indexOf('-')));
         similarArtistsContent.appendChild(artistIcon);
       }
+  })
 
-    })
+  // fetch('https://kset.home.asidiras.dev/artist/?search&index=0&size=99', {method: 'GET'})
+  // .then((response) => response.json())
+  // .then((artists) => {
+  //   for(let i=0; i<artists.length; i++){
+  //         if (artists[i]["name"] == artist) {
+  //           for(let j=0; j<artists[i].albums.length; j++){
+  //             fetch(`https://kset.home.asidiras.dev/album/${artists[i].albums[j]}`, {method: 'GET'})
+  //             .then((response) => response.json())
+  //             .then((albums) => {
+  //               for(let k=0; k<albums.length; k++){
+  //                 fetch(`https://kset.home.asidiras.dev/track/${album[j].tracks[k]}`, {method: 'GET'})
+  //                 .then((response) => response.json())
+  //                 .then((tracks) => {
+  //                   track = createTrack(tracks[k]["cover"], tracks[k]["path"], tracks[k]["title"], artist);
+  //                   content.appendChild(track);
+  //                   artistImg.src = `https://kset.home.asidiras.dev/album/cover/${tracks[i]["cover"]}`;
+  //                 })
+  //               }
+  //             })
+  //           }
+  //         }
+  //           //track = createTrack(data[i]["cover"], data[i]["path"], data[i]["title"], artist);
+  //           //content.appendChild(track);
+  //           //artistImg.src = `https://kset.home.asidiras.dev/album/cover/${data[i]["cover"]}`;
+  //       }
+  // })
 
   const similarArtistsSection = document.createElement('h3');
   similarArtistsSection_text = document.createTextNode("Similar Artists");
